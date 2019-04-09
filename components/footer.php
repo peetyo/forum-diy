@@ -7,7 +7,7 @@
 <!-- Footer -->
 <footer class="page-footer font-small unique-color-dark">
 
-    <div style="background-color: #6351ce;">
+    <div class="footer-social">
         <div class="container">
 
             <!-- Grid row-->
