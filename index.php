@@ -19,7 +19,7 @@ require_once ('components/header.php');
              -->
             <div class="card card-1">
                 <div class="bottom-text">
-                    <span>Category name</span>
+                    <h2>Category name</h2>
                 </div>
             </div>
         </div>

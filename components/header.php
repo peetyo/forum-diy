@@ -18,6 +18,7 @@
 </head>
 <body>
 
+<!-- TODO: Style the navigation bar according to the wireframes -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-color">
     <a class="navbar-brand" href="#">Forum DIY</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,7 +39,7 @@
     <div class="container">
 
         <!-- Grid row-->
-        <div class="row py-4 d-flex align-items-center">
+        <div class="row py-4 d-flex flex-row-reverse">
 
             <!-- Grid column -->
             <div class="col-md-6 col-lg-5 text-center text-md-right mb-4 mb-md-0">
