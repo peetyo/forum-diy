@@ -68,6 +68,3 @@ fabric.properties
 
 .gitignore
 .idea/workspace.xml
-api/
-css/
-js/
