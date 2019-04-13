@@ -1,7 +1,8 @@
 <?php
 
 class Controller {
-    public static function CreateView() {
-        echo 'CHUJ W DUPE';
+    public static function CreateView($viewName) {
+        require "./views/$viewName.php";
+
     }
 }
