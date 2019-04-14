@@ -5,7 +5,7 @@ Route::set('index.php', function (){
 });
 
 Route::set('home', function (){
-    Home::CreateView('Home');
+    Home::CreateView('Home', 'css', 'js');
 });
 
 // TODO: 404 and other error handling

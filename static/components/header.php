@@ -13,8 +13,7 @@
     <!-- Main CSS -->
     <!-- TODO: Q: Should we include SRI? -->
     <link rel="stylesheet" href="static/css/main.css">
-    <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="   css/<?=$pageCss?>">
+    <link rel="stylesheet" href="static/css/<?=$pageCss?>">
 
 </head>
 <body>

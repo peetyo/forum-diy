@@ -133,8 +133,8 @@
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.js"
         integrity="sha256-pl1bSrtlqtN/MCyW8XUTYuJCKohp9/iJESVW1344SBM=" crossorigin="anonymous"></script>
-<script src="js/main.js"></script>
-<script src="js/<?=$pageJs?>"></script>
+<script src="static/js/main.js"></script>
+<script src="static/js/<?=$pageJs?>"></script>
 
 </body>
 </html>
