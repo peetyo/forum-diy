@@ -1,3 +1,5 @@
+# Hey, before you start!
+## Read this one.
 Here is a quick explanation of what 
 tis small MVC app does and how to start using it. 
 
@@ -28,3 +30,6 @@ So here you have to include your css (please use SCSS), and js.
 
 
 Questions? 
+
+## Remember to comment 
+and remember to use /TODO: xxxx for questions, tasks, etc. 
