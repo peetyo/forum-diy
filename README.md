@@ -1,45 +1,35 @@
-**Edit a file, create a new file, and clone from Bitbucket in under 2 minutes**
+# Hey, before you start!
+## Read this one.
+Here is a quick explanation of what 
+tis small MVC app does and how to start using it. 
 
-When you're done, you can delete the content in this README and update the file with details for others getting started with your repository.
+The main folder is divided into two folders - _includes_ and _static_
+Besides that you find _.htaccess_, _index.php_, and _Routes.php_ in the main 
+folder. 
 
-*We recommend that you open this README in another tab as you perform the tasks below. You can [watch our video](https://youtu.be/0ocf7u76WSo) for a full demo of all the steps in this tutorial. Open the video in a new tab to avoid leaving Bitbucket.*
+Let's break it down;
 
----
+1. _index.php_  Please do not change anything there. User always lands on index.php 
+no matter what they type as the URL. From that index.php loads all the classes, 
+included routing. And that can handle the user's request. 
 
-## Edit a file
+2. _Routes.php_ That takes the user's request and points to the correct controller. 
+You have to make a route whenever you creating a new page. 
 
-You’ll start by editing this README file to learn how to edit a file in Bitbucket.
+3. _includes_ holds _classes_, _Controllers_, and _views_. 
+I hope it's kinda self explanatory, Most of the time, you don't touch 
+_classes_. 
+Whenever you want to mke a new page, create a controller and a view with
+the same name. Controller needs to extend the _Controller_ class. And all the 
+logic is included there, for example crud operations, sessions, etc. 
+Then, in the view you just write the _body_ part. Header and footer is always
+included. 
 
-1. Click **Source** on the left side.
-2. Click the README.md link from the list of files.
-3. Click the **Edit** button.
-4. Delete the following text: *Delete this line to make a change to the README from Bitbucket.*
-5. After making your change, click **Commit** and then **Commit** again in the dialog. The commit page will open and you’ll see the change you just made.
-6. Go back to the **Source** page.
+4. _static_ holds css, and js files. (All the other are going to be moved lol)
+So here you have to include your css (please use SCSS), and js. 
 
----
 
-## Create a file
+Questions? 
 
-Next, you’ll add a new file to this repository.
-
-1. Click the **New file** button at the top of the **Source** page.
-2. Give the file a filename of **contributors.txt**.
-3. Enter your name in the empty file space.
-4. Click **Commit** and then **Commit** again in the dialog.
-5. Go back to the **Source** page.
-
-Before you move on, go ahead and explore the repository. You've already seen the **Source** page, but check out the **Commits**, **Branches**, and **Settings** pages.
-
----
-
-## Clone a repository
-
-Use these steps to clone from SourceTree, our client for using the repository command-line free. Cloning allows you to work on your files locally. If you don't yet have SourceTree, [download and install first](https://www.sourcetreeapp.com/). If you prefer to clone from the command line, see [Clone a repository](https://confluence.atlassian.com/x/4whODQ).
-
-1. You’ll see the clone button under the **Source** heading. Click that button.
-2. Now click **Check out in SourceTree**. You may need to create a SourceTree account or log in.
-3. When you see the **Clone New** dialog in SourceTree, update the destination path and name if you’d like to and then click **Clone**.
-4. Open the directory you just created to see your repository’s files.
-
-Now that you're more familiar with your Bitbucket repository, go ahead and add a new file locally. You can [push your change back to Bitbucket with SourceTree](https://confluence.atlassian.com/x/iqyBMg), or you can [add, commit,](https://confluence.atlassian.com/x/8QhODQ) and [push from the command line](https://confluence.atlassian.com/x/NQ0zDQ).
+## Remember to comment 
+and remember to use /TODO: xxxx for questions, tasks, etc. 
