@@ -13,8 +13,12 @@
     <!-- Main CSS -->
     <!-- TODO: Q: Should we include SRI? -->
     <link rel="stylesheet" href="static/css/main.css">
-    <link rel="stylesheet" href="static/css/<?=$pageCss?>">
-
+    <!-- <link rel="stylesheet" href="static/css/<?=$pageCss?>"> -->
+    <?php 
+    if(!empty($pageCss)){
+        echo '<link rel="stylesheet" href="static/css/'.$pageCss.'">';
+    }
+    ?>
 </head>
 <body>
 

@@ -4,7 +4,7 @@
 // to be honest I don't understand why we pass more than just the name of the view we need
 // Should be disccussed
 Route::set('index.php', function (){
-    Home::CreateView('home', 'js', 'css');
+    Home::CreateView('home', '', '');
 });
 
 // Peter: I think we dont need both index and home. Home is what we show at index.php
