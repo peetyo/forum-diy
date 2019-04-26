@@ -69,3 +69,7 @@ fabric.properties
 
 .gitignore
 .idea/workspace.xml
+
+# Ignore PrePros
+
+prepros-6.config
