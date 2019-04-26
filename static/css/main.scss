@@ -28,6 +28,15 @@ body {
   background-color: $primary !important;
 }
 
+.login-form{
+  margin-right: unset !important;
+}
+
+.btn-login{
+  background-color: white;
+  margin-right: 5px;
+}
+
 
 .search-bar{
   background-color: $secondary;

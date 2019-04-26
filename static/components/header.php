@@ -30,10 +30,10 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <form class="form-inline mx-auto">
+        <form class="form-inline mx-auto login-form">
             <input class="form-control mr-sm-2" type="text" placeholder="Login" aria-label="Login">
             <input class="form-control mr-sm-2" type="password" placeholder="Password" aria-label="Password">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
+            <button class="btn btn-login my-2 my-sm-0" type="submit">Login</button>
         </form>
         <span>New member? Sign up here</span>
     </div>
