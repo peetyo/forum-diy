@@ -16,7 +16,7 @@
     <!-- <link rel="stylesheet" href="static/css/<?=$pageCss?>"> -->
     <?php 
     if(!empty($pageCss)){
-        echo '<link rel="stylesheet" href="static/css/'.$pageCss.'">';
+        echo '<link rel="stylesheet" href="static/css/'.$pageCss.'.css">';
     }
     ?>
 </head>

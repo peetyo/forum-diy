@@ -7,6 +7,10 @@ Route::set('index.php', function (){
     Home::CreateView('home', '', '');
 });
 
+Route::set('topics', function (){
+    Home::CreateView('topics', 'topics', '');
+});
+
 // Peter: I think we dont need both index and home. Home is what we show at index.php
 // Route::set('index.php', function (){
 //     Index::CreateView('index', '', '');
