@@ -134,7 +134,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.js"
         integrity="sha256-pl1bSrtlqtN/MCyW8XUTYuJCKohp9/iJESVW1344SBM=" crossorigin="anonymous"></script>
 <script src="static/js/main.js"></script>
-<script src="static/js/<?=$pageJs?>"></script>
+<?php 
+    if(!empty($pageJs)){
+        echo '<script src="static/js/'.$pageJs.'"></script>';
+    }
+?>
+
 
 </body>
 </html>
