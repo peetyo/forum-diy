@@ -1,8 +1,8 @@
 <?php
 
-class Sanitizer {
+class Validations {
 
-    public static   function trim_remove($data) {
+    public static function trim_remove($data) {
         $Newdata = trim($data);   
         $Newdata = htmlspecialchars($data);
         $Newdata = filter_var($data,FILTER_SANITIZE_ENCODED);

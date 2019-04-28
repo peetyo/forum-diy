@@ -17,7 +17,7 @@ Route::set('sign-up', function (){
    // Sign_up::test();
 });
 
-Route::set('sign-up-user', function (){
+Route::set('create-user', function (){
     Sign_up::create_user();
 });
 // TODO: 404 and other error handling

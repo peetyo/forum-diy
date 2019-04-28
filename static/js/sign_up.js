@@ -1,7 +1,7 @@
 $('#frmSignup').submit(function(e){
     e.preventDefault()
     $.ajax({
-      url: "sign-up-user",
+      url: "create-user",
       method: "POST",
       data: $('#frmSignup').serialize(),
       dataType: "JSON"
