@@ -15,8 +15,8 @@
     <link rel="stylesheet" href="static/css/main.css">
     <!-- <link rel="stylesheet" href="static/css/<?=$pageCss?>"> -->
     <?php 
-    if(!empty($pageCss)){
-        echo '<link rel="stylesheet" href="static/css/'.$pageCss.'">';
+    if(file_exists("static/css/'.$pageCss.'.css")){
+        echo '<link rel="stylesheet" href="static/css/'.$pageCss.'.css">';
     }
     ?>
 </head>
@@ -35,7 +35,7 @@
             <input class="form-control mr-sm-2" type="password" placeholder="Password" aria-label="Password">
             <button class="btn btn-login my-2 my-sm-0" type="submit">Login</button>
         </form>
-        <span>New member? Sign up here</span>
+        <span id='sign-up'>New member? Sign up here</span>
     </div>
 </nav>
 

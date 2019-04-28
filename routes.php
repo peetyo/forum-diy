@@ -4,7 +4,7 @@
 // to be honest I don't understand why we pass more than just the name of the view we need
 // Should be disccussed
 Route::set('index.php', function (){
-    Home::CreateView('home', '', '');
+    Home::CreateView('home');
 });
 
 // Peter: I think we dont need both index and home. Home is what we show at index.php
@@ -12,8 +12,12 @@ Route::set('index.php', function (){
 //     Index::CreateView('index', '', '');
 // });
 
-// Route::set('home', function (){
-//     Home::CreateView('home', 'css', 'js');
-// });
+Route::set('sign-up', function (){
+    Sign_up::CreateView('sign-up');
+   // Sign_up::test();
+});
 
+Route::set('sign-up-user', function (){
+    Sign_up::create_user();
+});
 // TODO: 404 and other error handling
