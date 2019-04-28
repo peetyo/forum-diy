@@ -1,10 +1,12 @@
 <?php
 
+include './includes/config/database.php';
+
 class Model {
-    protected $username = 'root';
-    protected $password = '';
-    protected $host = 'localhost';
-    protected $dbName = 'lifehack';
+    protected $username = DBUSER;
+    protected $password = DBPWD;
+    protected $host = DBHOST;
+    protected $dbName = DBNAME;
     protected $connection;
     public $db;
     protected $aOptions = array(
