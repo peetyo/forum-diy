@@ -9,7 +9,6 @@
             <div class="col-12">
                 <h1>Welcome to <?= $appName ?></h1>
                 <p>CSS is <?=$pageCss?> and JS is <?=$pageJs?></p>
-                <p><?=$v?></p>
             </div>
         </div>
         <div class="row d-flex justify-content-center">
