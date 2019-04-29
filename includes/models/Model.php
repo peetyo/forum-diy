@@ -1,12 +1,16 @@
 <?php
+// Michal: Remember to check the database config file!!!!!
+include './includes/config/database.php';
 
 class Model {
-    private $username = 'root';
-    private $password = '';
-    private $host = 'localhost';
-    private $dbName = 'lifehack';
+    private $username = DBUSER;
+    private $password = DBPWD;
+    private $host = DBHOST;
+    private $dbName = DBNAME;
     private $connection;
-    protected $db;
+    // $db was changed from protected to public since is
+    // needs to be accessed from different classes
+    public $db;
     private $aOptions = array(
         PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
