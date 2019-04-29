@@ -1,16 +1,16 @@
 <?php
 
 class Model {
-    protected $username = 'root';
-    protected $password = '';
-    protected $host = 'localhost';
-    protected $dbName = 'lifehack';
-    protected $connection;
-    public $db;
-    protected $aOptions = array(
+    private $username = 'root';
+    private $password = '';
+    private $host = 'localhost';
+    private $dbName = 'lifehack';
+    private $connection;
+    private $aOptions = array(
         PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-      );
+    );
+    protected $db;
 
     function __construct(){
         try{
