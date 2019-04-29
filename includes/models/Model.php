@@ -1,15 +1,13 @@
 <?php
 
-include './includes/config/database.php';
-
 class Model {
-    protected $username = DBUSER;
-    protected $password = DBPWD;
-    protected $host = DBHOST;
-    protected $dbName = DBNAME;
-    protected $connection;
-    public $db;
-    protected $aOptions = array(
+    private $username = 'root';
+    private $password = '';
+    private $host = 'localhost';
+    private $dbName = 'lifehack';
+    private $connection;
+    protected $db;
+    private $aOptions = array(
         PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
       );
