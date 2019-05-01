@@ -4,6 +4,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?=$appName?></title>
 
     <!-- All the external css -->
@@ -16,7 +17,7 @@
     <!-- <link rel="stylesheet" href="static/css/<?=$pageCss?>"> -->
     <?php 
     if(!empty($pageCss)){
-        echo '<link rel="stylesheet" href="static/css/'.$pageCss.'">';
+        echo '<link rel="stylesheet" href="static/css/'.$pageCss.'.css">';
     }
     ?>
 </head>

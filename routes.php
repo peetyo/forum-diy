@@ -25,3 +25,9 @@ Route::set('index.php', function (){
 // });
 
 // TODO: 404 and other error handling
+
+// In the get, we need to pass additional array with the keys
+// that we are expecting
+Route::set('topic.php', function (){
+    Topic::CreateView('topic','topic','');
+});
