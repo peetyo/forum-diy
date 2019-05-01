@@ -1,12 +1,12 @@
 <?php
 // Michal: Remember to check the database config file!!!!!
-include './includes/config/database.php';
+//include './includes/config/database.php';
 
 class Model {
-    private $username = DBUSER;
-    private $password = DBPWD;
-    private $host = DBHOST;
-    private $dbName = DBNAME;
+    private $username = 'root';
+    private $password = 'root';
+    private $host =  'localhost:8889';
+    private $dbName = 'lifehack';
     private $connection;
     // $db was changed from protected to public since is
     // needs to be accessed from different classes

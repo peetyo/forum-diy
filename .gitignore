@@ -69,6 +69,5 @@ fabric.properties
 
 .gitignore
 .idea/workspace.xml
-includes/config/database.php
 .idea/workspace.xml
 .idea

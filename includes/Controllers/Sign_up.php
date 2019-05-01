@@ -33,9 +33,15 @@ class Sign_up extends Controller {
         //hash and peber the password
         $user_password = password_hash($_POST['txtPassword'], PASSWORD_BCRYPT);
 
-        echo $email;
+        
+        try{
+            $sign_class = new Sign;
+            $sign_class->sign_up_user($username, $user_password,$email );
+        }catch( PDOException $e ){
+            echo '{"message":"Error", "line": '.__LINE__.'}';
+        }
         // try catch stament
-        // use stored procedure function for input the data 
+       
 
     }
 
