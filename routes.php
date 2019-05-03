@@ -9,8 +9,8 @@ Route::set('index.php', function (){
     Home::CreateView('home');
 
 // MORTY: i left this for testing purpose
- $test = new Users;
- $test->read_users();
+// $test = new Users;
+// $test->read_users();
 });
 
 // Peter: I think we dont need both index and home. Home is what we show at index.php
