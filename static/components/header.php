@@ -35,7 +35,8 @@
             <input class="form-control mr-sm-2" type="password" placeholder="Password" aria-label="Password">
             <button class="btn btn-login my-2 my-sm-0" type="submit">Login</button>
         </form>
-        <span id='sign-up'>New member? Sign up here</span>
+        
+        <a href="sign-up" ><span  id='sign-up'>New member? Sign up here</span></a> 
     </div>
 </nav>
 
