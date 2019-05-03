@@ -14,6 +14,7 @@
         </div>
         <div class="col-md-9">
             <div class="col-12">
+                <h1><?=$data["name"]?></h1>
                 <h1>Here is the title of the topic. I don't know how long should it be.</h1>
             </div>
             <div class="col-12">
