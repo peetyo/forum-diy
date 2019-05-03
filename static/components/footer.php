@@ -136,7 +136,7 @@
 <script src="static/js/main.js"></script>
 <?php 
     if(!empty($pageJs)){
-        echo '<script src="static/js/'.$pageJs.'"></script>';
+        echo '<script src="static/js/'.$pageJs.'.js"></script>';
     }
 ?>
 

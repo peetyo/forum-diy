@@ -6,13 +6,11 @@
 
 
 Route::set('index.php', function (){
-    /*
-     * Michal: The first function is just for the testing
-     * purposes. It'll tell you whether or not DB connection works
-     * TODO: Remove DatabaseTest() for the production
-     */
-    Home::DatabaseTest();
-    Home::CreateView('home', '', '');
+    Home::CreateView('home');
+
+// MORTY: i left this for testing purpose
+// $test = new Users;
+// $test->read_users();
 });
 
 // Peter: I think we dont need both index and home. Home is what we show at index.php
@@ -20,8 +18,12 @@ Route::set('index.php', function (){
 //     Index::CreateView('index', '', '');
 // });
 
-// Route::set('home', function (){
-//     Home::CreateView('home', 'css', 'js');
-// });
+Route::set('sign-up', function (){
+    Sign_up::CreateView('sign_up');
+   // Sign_up::test();
+});
 
+Route::set('create-user', function (){
+    Sign_up::create_user();
+});
 // TODO: 404 and other error handling

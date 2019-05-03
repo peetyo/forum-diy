@@ -5,7 +5,7 @@ include './includes/config/database.php';
 class Model {
     private $username = DBUSER;
     private $password = DBPWD;
-    private $host = DBHOST;
+    private $host =  DBHOST;
     private $dbName = DBNAME;
     private $connection;
     // $db was changed from protected to public since is

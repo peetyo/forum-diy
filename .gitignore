@@ -66,9 +66,9 @@ fabric.properties
 
 # Editor-based Rest Client
 .idea/httpRequests
-
+includes/config/database.php
 .gitignore
 .idea/workspace.xml
-includes/config/database.php
 .idea/workspace.xml
 .idea
+.idea/watcherTasks.xml
