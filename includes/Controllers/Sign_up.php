@@ -38,7 +38,8 @@ class Sign_up extends Controller {
         } 
         //hash the password
         $user_password = password_hash($_POST['txtPassword'], PASSWORD_BCRYPT);
-   
+        $username = $_POST['txtUserName'];
+        $email = $_POST['txtEmail'];
            // try catch stament
         try{
             $user_class = new Users;
