@@ -1,3 +1,5 @@
+
+//AJAX POST Request with sign_up data 
 $('#frmSignup').submit(function(e){
     e.preventDefault()
     $.ajax({
@@ -8,8 +10,8 @@ $('#frmSignup').submit(function(e){
     }).always(function(jData){
       console.log(jData)
         if(jData.Error){
-            // something to display error message like toast or something 
-            console.log('ebaha mamata na tazi darjava')
+            //TODO create a toast message or something like that ?
+            console.log(jData.Error)
         }
   
     })

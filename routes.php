@@ -7,6 +7,8 @@
 
 Route::set('index.php', function (){
     Home::CreateView('home');
+
+// MORTY: i left this for testing purpose
  $test = new Users;
  $test->read_users();
 });
