@@ -1,6 +1,6 @@
 <?php
 // Michal: Remember to check the database config file!!!!!
-include './includes/config/database.php';
+//include './includes/config/database.php';
 
 class Model {
     private $username = DBUSER;
