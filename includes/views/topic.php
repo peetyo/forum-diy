@@ -4,25 +4,27 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item"><a href="#">Cetegory</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Topic</li>
+            <li class="breadcrumb-item"><a href="#"><?=$data->topicData[0]["category_name"]?></a></li>
+            <li class="breadcrumb-item active" aria-current="page"><?=$data->topicData[0]["topic_name"]?> </li>
         </ol>
     </nav>
     <div class="row">
 
         <div class="col-md-8">
             <div class="col-12">
-                <h1><?= $data["name"] ?></h1>
+                <h1><?= $data->topicData[0]["topic_name"] ?></h1>
             </div>
             <div class="col-12">
                 <div class="card topic">
                     <div class="card-header bg-dark text-white">
                         <img src="https://via.placeholder.com/25" alt="User's profile picture">
-                        <span class="username">Michal</span> posted on <span class="comment-date">2019.04.30</span>
+                        <span class="username"> <?= $data->topicData[0]["username"]?></span> posted on
+                        <span class="comment-date"><?=$data->topicData[0]["date_created"]?></li>
+                        </span>
                     </div>
                     <div class="card-body">
                         <p class="card-text">
-                            <?= $data["content"] ?>
+                            <?= $data->topicData[0]["content"] ?>
                         </p>
                     </div>
                     <div class="text-right card-footer text-muted bg-dark">
@@ -32,18 +34,31 @@
                         </div>
                     </div>
                 </div>
+                <?php
+                /*
+                 * Michal: Looping through comments.
+                 * Our logic (controller) fetch all the information needed
+                 * Now it's just displaying, therefore we need a loop
+                 * for our array
+                 */
+                // To make it easier, I extract comments from the passed object
+                $comments = $data->commentData;
+                foreach ($comments as $key => $comment){
+                ?>
                 <div class="card comment">
                     <div class="card-header">
                         <img src="https://via.placeholder.com/25" alt="User's profile picture">
-                        <span class="username">Michal</span> posted on <span class="comment-date">2019.04.30</span>
+                        <span class="username">
+                            <?=$comment["username"]?>
+                        </span>
+                        posted on
+                        <span class="comment-date">
+                            <?=$comment["date_created"]?>
+                        </span>
                     </div>
                     <div class="card-body">
                         <p class="card-text">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                            laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-                            voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                            cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                           <?=$comment["content"]?>
                         </p>
                     </div>
                     <div class="text-right card-footer text-muted">
@@ -52,86 +67,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="card comment">
-                    <div class="card-header">
-                        <img src="https://via.placeholder.com/25" alt="User's profile picture">
-                        <span class="username">Michal</span> posted on <span class="comment-date">2019.04.30</span>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                            laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-                            voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                            cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                        </p>
-                    </div>
-                    <div class="text-right card-footer text-muted">
-                        <div class="btn-group" role="group" aria-label="Basic example">
-                            <button type="button" class="btn btn-primary">Reply</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="card comment">
-                    <div class="card-header">
-                        <img src="https://via.placeholder.com/25" alt="User's profile picture">
-                        <span class="username">Michal</span> posted on <span class="comment-date">2019.04.30</span>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                            laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-                            voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                            cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                        </p>
-                    </div>
-                    <div class="text-right card-footer text-muted">
-                        <div class="btn-group" role="group" aria-label="Basic example">
-                            <button type="button" class="btn btn-primary">Reply</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="card comment">
-                    <div class="card-header">
-                        <img src="https://via.placeholder.com/25" alt="User's profile picture">
-                        <span class="username">Michal</span> posted on <span class="comment-date">2019.04.30</span>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                            laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-                            voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                            cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                        </p>
-                    </div>
-                    <div class="text-right card-footer text-muted">
-                        <div class="btn-group" role="group" aria-label="Basic example">
-                            <button type="button" class="btn btn-primary">Reply</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="card comment">
-                    <div class="card-header">
-                        <img src="https://via.placeholder.com/25" alt="User's profile picture">
-                        <span class="username">Michal</span> posted on <span class="comment-date">2019.04.30</span>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                            laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-                            voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                            cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                        </p>
-                    </div>
-                    <div class="text-right card-footer text-muted">
-                        <div class="btn-group" role="group" aria-label="Basic example">
-                            <button type="button" class="btn btn-primary">Reply</button>
-                        </div>
-                    </div>
-                </div>
+                <?php
+                }
+                ?>
             </div>
             <div class="col-12">
                 <nav aria-label="...">
@@ -160,8 +98,14 @@
                 <div class="card-body">
                     <h5 class="card-title">Topic info</h5>
                     <ul>
-                        <li>Created on 2019.05.04</li>
-                        <li>10 replies</li>
+                        <li>Created on <?=$data->topicData[0]["date_created"]?></li>
+                        <?php
+                        /* Michal: In the <li> below, system checks if there are any comments.
+                         * If yes, it echo 'x replies' else 'No replies'
+                         * If you want to read more on it, google 'Ternary Operator PHP'
+                         */
+                        ?>
+                        <li><?=$data->topicData[0]["comments"] > 0 ? $data->topicData[0]["comments"]. " replies" :  "No replies" ?></li>
                     </ul>
                     <a href="#" class="btn btn-primary">Go somewhere</a>
                 </div>
