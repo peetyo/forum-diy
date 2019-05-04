@@ -107,7 +107,6 @@
                         ?>
                         <li><?=$data->topicData[0]["comments"] > 0 ? $data->topicData[0]["comments"]. " replies" :  "No replies" ?></li>
                     </ul>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
                 </div>
             </div>
         </div>
