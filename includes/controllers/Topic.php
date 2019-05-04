@@ -2,11 +2,8 @@
 
 class Topic extends Controller{
 
-//    public static $objTopic;
 
-    public function GetTopic($topicId){
-        $dupa = $_GET['dupa'];
-        $topicName = "chuj";
+    public function GetTopic(){
         // Get the ID of the topic, sanatize it
 
 //        // Make a call to the database
@@ -19,7 +16,9 @@ class Topic extends Controller{
 //        }
 
         // fetch an object with all the info about the topic
-        $objTopic=array("name"=>"test123","content"=>"testContent & test Content");
+        $objTopic=array(
+            "name"=>"This is the name of this topic",
+            "content"=>"testContent & test Content");
 //        self::$objTopic = 'the fetched object';
 //        echo $topicName;
 

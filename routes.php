@@ -12,7 +12,7 @@ Route::set('index.php', function (){
      * TODO: Remove DatabaseTest() for the production
      */
     Home::DatabaseTest();
-    Home::CreateView('home', '', '');
+    Home::CreateView('home', '', '', '');
 });
 
 // Peter: I think we dont need both index and home. Home is what we show at index.php
@@ -29,6 +29,6 @@ Route::set('index.php', function (){
 // In the get, we need to pass additional array with the keys
 // that we are expecting
 Route::set('topic.php', function (){
-    Topic::GetTopic($_GET['a']);
-    Topic::CreateView('topic','topic','', '');
+    Topic::GetTopic();
+//    Topic::CreateView('topic','topic','', '');
 });

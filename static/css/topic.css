@@ -3,4 +3,8 @@
   height: unset !important;
   margin: 1rem 0 1rem 0; }
 
+.comment .btn {
+  font-size: 0.8rem !important;
+  margin: 5px !important; }
+
 /*# sourceMappingURL=topic.css.map */
