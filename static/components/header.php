@@ -29,13 +29,12 @@
         <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <form class="form-inline mx-auto login-form">
-            <input class="form-control mr-sm-2" type="text" placeholder="Login" aria-label="Login">
-            <input class="form-control mr-sm-2" type="password" placeholder="Password" aria-label="Password">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent" <?php if(isset($_SESSION['User'])){ echo "style='display:none' "; }?>>
+        <form class="form-inline mx-auto login-form" id='loginfrm'>
+            <input class="form-control mr-sm-2" name="txtUserName" type="text" value='test123' placeholder="UserName" aria-label="Login">
+            <input class="form-control mr-sm-2"  name="txtPassword" type="password" value='1234567' placeholder="Password" aria-label="Password">
             <button class="btn btn-login my-2 my-sm-0" type="submit">Login</button>
         </form>
-        
         <a href="sign-up" ><span  id='sign-up'>New member? Sign up here</span></a> 
     </div>
 </nav>
