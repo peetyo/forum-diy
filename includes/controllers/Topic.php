@@ -50,14 +50,23 @@ class Topic extends Controller
                  */
 
                 // Creating a passing object
-                $objTopic =new stdClass();
+                $objTopic = new stdClass();
+                $paginationData = new stdClass();
                 $objTopic->topicData = $topicContent;
                 $objTopic->commentData = $commentsContent;
-                $objTopic->paginationData = $iPageNumber;
+                // I need overall number of page and a current page
+
+
+                echo json_encode($objTopic);
+                die();
 
             }
 
 
+        }
+        else{
+            echo 'error';
+            die();
         }
 
         /*

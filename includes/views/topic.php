@@ -105,7 +105,6 @@
                          * If you want to read more on it, google 'Ternary Operator PHP'
                          */
                         ?>
-                        <li><?=$data->topicData[0]["comments"] > 0 ? $data->topicData[0]["comments"]. " replies" :  "No replies" ?></li>
                     </ul>
                 </div>
             </div>
