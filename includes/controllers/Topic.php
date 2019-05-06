@@ -26,7 +26,7 @@ class Topic extends Controller
         $sTopicContentQuery = $topic->db->prepare('CALL get_topic_by_id(:topicId)');
         $sTopicContentQuery->bindValue(':topicId', $iTopicId);
         $sTopicContentQuery->execute();
-        $topicContent = $sTopicContentQuery->fetchAll();
+        $topicContent = $sTopicContentQuery->fetch();
         // closing the connection HOW? IS IT NEEDED?
         // $sTopicContentQuery = null;
         // check if anything was received
