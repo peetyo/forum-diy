@@ -25,13 +25,7 @@ class Topics extends Model
             // closing the connection
             // $sCommentsQuery = null;
 
-            /*
-             * Scenario:!
-             * Go to the page url/topic.php?id=324344534
-             * What do you see?
-             * Here you should be redirected to 404 (see 'else)
-             */
-            if (count($commentsContent)) {
+            if (!empty($commentsContent)) {
 
                 /*
                  * Currently, we have two objects -> $topicContent and $commentsContent

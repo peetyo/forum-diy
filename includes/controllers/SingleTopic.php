@@ -30,6 +30,9 @@ class SingleTopic extends Controller
          */
         $topic = new Topics();
         $objTopic = $topic->get_topic($iTopicId, $iOffset);
+        if($objTopic == false){
+            self::NotExistingPage();
+        }
 
         // +1 since we're starting technically with 0 ;P
         $objTopic->currentPage = $iPageNumber+1;
@@ -48,13 +51,9 @@ class SingleTopic extends Controller
         //echo json_encode($objTopic);
         //die();
 
-        if($objTopic == false){
-            self::NotExistingPage();
-        }
-
 
         /*
-         * Create a veiw, pass object.
+         * Create a view, pass object.
          * OBS: View is created here instead of routes,
          * otherwise it be impossible/hard to pass additional variables/data
          * Thanks, Peter, for the solution ;)
