@@ -5,9 +5,8 @@ class Topics extends Model
 {
     public function get_topic($iTopicId, $iOffset){
         // Make a call to the database
-        $topic = new Model;
         // Make a SELECT statement here, prepare, and execute
-        $sTopicContentQuery = $topic->db->prepare('CALL get_topic_by_id(:topicId)');
+        $sTopicContentQuery = $this->db->prepare('CALL get_topic_by_id(:topicId)');
         $sTopicContentQuery->bindValue(':topicId', $iTopicId);
         $sTopicContentQuery->execute();
         $topicContent = $sTopicContentQuery->fetch();
@@ -16,8 +15,9 @@ class Topics extends Model
         // check if anything was received
         if (count($topicContent)) {
             // Michal:  If the topic exists, now we retrieve comments
-            $comments = new Model;
-            $sCommentsQuery = $comments->db->prepare('CALL get_comments_for_the_topic(:topicId, :offset)');
+            // Closing cursor first is to close connection from above
+            $sTopicContentQuery->closeCursor();
+            $sCommentsQuery = $this->db->prepare('CALL get_comments_for_the_topic(:topicId, :offset)');
             $sCommentsQuery->bindValue(':topicId', $iTopicId);
             $sCommentsQuery->bindValue(':offset', $iOffset);
             $sCommentsQuery->execute();
@@ -34,7 +34,6 @@ class Topics extends Model
 
                 // Creating a passing object
                 $objTopic = new stdClass();
-                $paginationData = new stdClass();
                 $objTopic->topicData = $topicContent;
                 $objTopic->commentData = $commentsContent;
 
@@ -53,8 +52,9 @@ class Topics extends Model
                  *
                  */
 
-                $numberOfComments = new Model;
-                $sNumberOfCommentsQuery = $numberOfComments->db->prepare('CALL get_number_of_comments(:topicId)');
+                // Again, closing the connection from abote
+                $sCommentsQuery->closeCursor();
+                $sNumberOfCommentsQuery = $this->db->prepare('CALL get_number_of_comments(:topicId)');
                 $sNumberOfCommentsQuery->bindValue(':topicId', $iTopicId);
                 $sNumberOfCommentsQuery->execute();
                 /*

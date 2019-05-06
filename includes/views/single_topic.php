@@ -88,11 +88,9 @@
                         if (!($currentPage == 1)) {
                             ?>
                             <li class="page-item">
-                                <span class="page-link">
-                                     <a class="page-link" href="<?= $currentUri ?>&page=<?= $currentPage - 1 ?>">
-                                         Previous
-                                     </a>
-                                </span>
+                                <a class="page-link" href="<?= $currentUri ?>&page=<?= $currentPage - 1 ?>">
+                                    Previous
+                                </a>
                             </li>
                             <?php
                         }
