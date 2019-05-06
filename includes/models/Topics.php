@@ -49,8 +49,7 @@ class Topics extends Model
 
         }
         else{
-            echo 'error';
-            die();
+           return false;
         }
     }
 }

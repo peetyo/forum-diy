@@ -30,6 +30,9 @@ class SingleTopic extends Controller
          */
         $topic = new Topics();
         $objTopic = $topic->get_topic($iTopicId, $iOffset);
+        if($objTopic == false){
+            self::NotExistingPage();
+        }
 
 
         /*
