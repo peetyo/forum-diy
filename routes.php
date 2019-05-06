@@ -11,17 +11,13 @@ Route::set('index.php', function (){
      * purposes. It'll tell you whether or not DB connection works
      * TODO: Remove DatabaseTest() for the production
      */
-    Home::DatabaseTest();
-    Home::CreateView('home', '', '');
+    // Home::DatabaseTest();
+    Home::CreateView('home', '', '','');
 });
 
-// Peter: I think we dont need both index and home. Home is what we show at index.php
-// Route::set('index.php', function (){
-//     Index::CreateView('index', '', '');
-// });
+Route::set('category', function (){
 
-// Route::set('home', function (){
-//     Home::CreateView('home', 'css', 'js');
-// });
+    Category::getCategory();
+});
 
 // TODO: 404 and other error handling
