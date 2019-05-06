@@ -25,7 +25,6 @@ class Topics extends Model
             // closing the connection
             // $sCommentsQuery = null;
             if (count($commentsContent)) {
-                // print_r($commentsContent);
 
                 /*
                  * Currently, we have two objects -> $topicContent and $commentsContent
@@ -38,11 +37,38 @@ class Topics extends Model
                 $paginationData = new stdClass();
                 $objTopic->topicData = $topicContent;
                 $objTopic->commentData = $commentsContent;
-                // I need overall number of page and a current page
 
+                /*
+                 * Calculate number of pages by dividing total
+                 * number of pages by number of results, which is 5
+                 * If you want to change that, please contact
+                 * the database administrator ;)
+                 * AKA change in the routines
+                 *
+                 * So I figured that count($commentsContent) is always returning 5...
+                 * obviously, therefore I need to make another quick call to the database
+                 * to ask how many comments there are
+                 *
+                 * IF YOU HAVE ANOTHER IDEA, YOU'RE WELCOME TO TRY IT OUT
+                 *
+                 */
+
+                $numberOfComments = new Model;
+                $sNumberOfCommentsQuery = $numberOfComments->db->prepare('CALL get_number_of_comments(:topicId)');
+                $sNumberOfCommentsQuery->bindValue(':topicId', $iTopicId);
+                $sNumberOfCommentsQuery->execute();
+                /*
+                 * That technically should return something since it passed
+                 * check if any comments already.
+                 */
+                $numberOfComments = $sNumberOfCommentsQuery->fetch();
+                $iNumberOfComments = $numberOfComments['totalComments'];
+
+                $iNumberOfPages = ceil($iNumberOfComments/5);
+                $objTopic->numberOfComments = $iNumberOfComments;
+                $objTopic->numberOfPages = $iNumberOfPages;
+                
                 return $objTopic;
-                //echo json_encode($objTopic);
-                //die();
 
             }
 

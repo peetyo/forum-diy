@@ -30,6 +30,24 @@ class SingleTopic extends Controller
          */
         $topic = new Topics();
         $objTopic = $topic->get_topic($iTopicId, $iOffset);
+
+        // +1 since we're starting technically with 0 ;P
+        $objTopic->currentPage = $iPageNumber+1;
+
+        /*
+         * Current URL is for the pagination,
+         * we shouldn't have the static variable since
+         * the url might be changed
+         * And since user might pass different variables, all we need
+         * is just the base url with the id, right?
+         */
+        $objTopic->currentUri = $_SERVER['REQUEST_URI'];
+
+        // uncomment one below to see what we receive.
+        // btw, I recomment some JSON Viewer extension
+        //echo json_encode($objTopic);
+        //die();
+
         if($objTopic == false){
             self::NotExistingPage();
         }

@@ -72,19 +72,30 @@
                 ?>
             </div>
             <div class="col-12">
+                <?php
+                // TODO: What the hell is aria-label? Do something about it
+                ?>
                 <nav aria-label="...">
                     <ul class="pagination">
                         <li class="page-item disabled">
                             <span class="page-link">Previous</span>
                         </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item active">
-                          <span class="page-link">
-                            2
-                            <span class="sr-only">(current)</span>
-                          </span>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <?php
+                        $currentPage = $data->currentPage;
+                        $numberOfPages = $data->numberOfPages;
+                        $currentUri = $data->currentUri;
+                        for ($page = 1; $page<=$numberOfPages;$page++) {
+                        ?>
+                            <li class="page-item <?=($page == $currentPage) ? "active" : ""?> ">
+                                <a class="page-link" href="<?=$currentUri?>&page=<?=$page?>">
+                                    <?=($page == $currentPage) ? "<span class='sr-only'>" : ""?>
+                                    <?=$page?>
+                                    <?=($page == $currentPage) ? "</span>" : ""?>
+                                </a>
+                            </li>
+                        <?php
+                        }
+                        ?>
                         <li class="page-item">
                             <a class="page-link" href="#">Next</a>
                         </li>
