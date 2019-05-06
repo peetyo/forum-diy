@@ -57,8 +57,8 @@ class Topic extends Controller
                 // I need overall number of page and a current page
 
 
-                echo json_encode($objTopic);
-                die();
+                //echo json_encode($objTopic);
+                //die();
 
             }
 
