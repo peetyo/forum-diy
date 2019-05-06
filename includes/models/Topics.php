@@ -24,6 +24,13 @@ class Topics extends Model
             $commentsContent = $sCommentsQuery->fetchAll();
             // closing the connection
             // $sCommentsQuery = null;
+
+            /*
+             * Scenario:!
+             * Go to the page url/topic.php?id=324344534
+             * What do you see?
+             * Here you should be redirected to 404 (see 'else)
+             */
             if (count($commentsContent)) {
 
                 /*
@@ -67,7 +74,7 @@ class Topics extends Model
                 $iNumberOfPages = ceil($iNumberOfComments/5);
                 $objTopic->numberOfComments = $iNumberOfComments;
                 $objTopic->numberOfPages = $iNumberOfPages;
-                
+                $objTopic->whats = $topicContent;
                 return $objTopic;
 
             }
