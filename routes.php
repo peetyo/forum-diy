@@ -29,6 +29,6 @@ Route::set('index.php', function (){
 // In the get, we need to pass additional array with the keys
 // that we are expecting
 Route::set('topic.php', function (){
-    Topic::GetTopic();
-//    Topic::CreateView('topic','topic','', '');
+    SingleTopic::GetTopic();
+//    SingleTopic::CreateView('topic','topic','', '');
 });
