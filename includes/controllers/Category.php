@@ -13,20 +13,10 @@ class Category extends Controller
         }
         $sCategoryName = $_GET['cat'];
 
-        /*
-         * Using the model Topics (I think it should
-         * be just Topic.
-         * And then executing get_topic() function
-         * that returns an object, which
-         * is saved in $objTopic
-         */
         $topics = new Topics();
         $objTopics = $topics->getTopicsFromCategory($sCategoryName);
-
       
         self::CreateView('category', '', '', $objTopics);
-
+        
     }
-
-
 }
