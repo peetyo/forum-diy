@@ -32,3 +32,8 @@ Route::set('topic.php', function (){
     SingleTopic::GetTopic();
 //    SingleTopic::CreateView('topic','topic','', '');
 });
+
+Route::set('topics.php', function (){
+    Topics::create_topic();
+//    SingleTopic::CreateView('topic','topic','', '');
+});
