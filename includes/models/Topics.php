@@ -80,23 +80,4 @@ class Topics extends Model
         }
     }
 
-    public function create_topic(){
-        // Validate all this input
-        $_POST['topic_name'] = 'Test Topic';
-        Validation::checkInput($_POST['topic_name'],'string',5,20);
-        
-        $_POST['category_id'] = 3;
-        Validation::checkInput($_POST['category_id'],'integer',1,2);
-        
-        $_POST['user_id'] = 3;
-        Validation::checkInput($_POST['user_id'],'integer','','');
-        
-        $_POST['content'] = 'Test Topic Test Topic Test Topic Test Topic Test Topic';
-        Validation::checkInput($_POST['content'],'string',10,500);
-        
-        $aTopicData = $_POST;
-        // echo $aTopicData['topic_name']; works
-        echo "all good";
-
-    }
 }
