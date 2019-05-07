@@ -79,5 +79,24 @@ class Topics extends Model
            return false;
         }
     }
+    public function create_topic($topicData){
+            try{
+                $sQuery = $this->db->prepare('CALL create_topic(:topic_name, :category_id, :user_id, :content)');
+                $sQuery->bindValue(':topic_name', $topicData['topic_name']);
+                $sQuery->bindValue(':category_id', $topicData['category_id']);
+                $sQuery->bindValue(':user_id', $topicData['user_id']);
+                $sQuery->bindValue(':content', $topicData['content']);
+                $sQuery->execute();
+                if(!$sQuery->rowCount()){
+                  echo "Sorry, something went wrong when creating topic.";
+                  exit();
+                }
+                // Remember to update this echo once its paired with some AJAX
+                echo "Topic created";
+            }catch(PDOException $error){
+                echo "Sorry, something went wrong. Try again later.";
+                exit();
+            }
+    }
 
 }

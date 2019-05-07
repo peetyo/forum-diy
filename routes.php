@@ -30,10 +30,15 @@ Route::set('index.php', function (){
 // that we are expecting
 Route::set('topic.php', function (){
     SingleTopic::GetTopic();
-//    SingleTopic::CreateView('topic','topic','', '');
 });
 
+// Peter: created for testing
 Route::set('topics.php', function (){
     Topics::create_topic();
+});
+
+// Peter: created for testing
+Route::set('SingleTopic.php', function (){
+    SingleTopic::create_topic();
 //    SingleTopic::CreateView('topic','topic','', '');
 });

@@ -64,7 +64,7 @@ class SingleTopic extends Controller
     }
 
 
-    public function create_topic(){
+    public static function create_topic(){
         // Validate all this input
         // NOTE: MATCH THE LENGTHS FROM THE DATABASE
         $_POST['topic_name'] = 'Test Topic';
@@ -81,7 +81,8 @@ class SingleTopic extends Controller
         
         $aTopicData = $_POST;
         // echo $aTopicData['topic_name']; works
-        echo "all good";
+        $classTopic = new Topics();
+        $classTopic->create_topic($aTopicData);
 
     }
 
