@@ -15,20 +15,16 @@
             <!-- Squared categories start
                 Should be fetch
              -->
-            <a href="category?cat=4">
-                <div class="card card-1 p-3">
-                    <div class="bottom-text">
-                        <h2>Category name</h2>
-                    </div>
+            <div class="card card-1 p-3">
+                <div class="bottom-text">
+                    <h2>Category name</h2>
                 </div>
-            </a>
-            <a href="category?cat=3">
-                <div class="card card-1 p-3">
-                    <div class="bottom-text">
-                        <h2>Category name</h2>
-                    </div>
+            </div>
+            <div class="card card-1 p-3">
+                <div class="bottom-text">
+                    <h2>Category name</h2>
                 </div>
-            </a>
+            </div>
             <div class="card card-1 p-3">
                 <div class="bottom-text">
                     <h2>Category name</h2>
