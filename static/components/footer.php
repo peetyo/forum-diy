@@ -136,7 +136,7 @@
 <script src="static/js/main.js"></script>
 
 <?php 
-    if(file_exists("static/js/'.$pageJs.'.js")){
+    if(file_exists("static/js/$pageJs.js")){
         echo '<script src="static/js/'.$pageJs.'.js"></script>';
     }
 ?>

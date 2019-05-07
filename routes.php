@@ -9,7 +9,7 @@ Route::set('index.php', function (){
 });
 
 Route::set('sign-up', function (){
-    Sign_up::CreateView('sign_up');
+    Sign_up::CreateView('sign_up','');
    // Sign_up::test();
 });
 
