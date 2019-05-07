@@ -28,6 +28,26 @@ class Users extends Model {
        }
        echo '{ "message":"error"}';
     }
+
+    // :MORTIMUS the results of function  will be used to check if the username exist or not
+    // the function takes the username from table
+    public function select_username($username){
+        $sQuery = $this->db->prepare('SELECT username from users WHERE username = :usersname');
+        $sQuery->bindValue(':usersname', $username);
+        $sQuery->execute();
+        $aUser = $sQuery->fetchAll();
+       
+        return $aUser;
+    }
+
+    public function select_username_and_password($username){
+        $sQuery = $this->db->prepare('SELECT id,username,password_hashed,email  from users WHERE username = :usersname');
+        $sQuery->bindValue(':usersname', $username);
+        $sQuery->execute();
+        $aUser = $sQuery->fetchAll();
+       
+        return $aUser;
+    }
 }
 // for testing
 // $modeltest = new Users;
