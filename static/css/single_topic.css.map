@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,KAAK;EACH,KAAK,EAAE,gBAAgB;EACvB,MAAM,EAAE,gBAAgB;EACxB,MAAM,EAAE,aAAa;;AAIrB,aAAI;EACF,SAAS,EAAE,iBAAiB;EAC5B,MAAM,EAAE,cAAc",
+"sources": ["single_topic.scss"],
+"names": [],
+"file": "single_topic.css"
+}

@@ -134,8 +134,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.js"
         integrity="sha256-pl1bSrtlqtN/MCyW8XUTYuJCKohp9/iJESVW1344SBM=" crossorigin="anonymous"></script>
 <script src="static/js/main.js"></script>
+
 <?php 
-    if(!empty($pageJs)){
+    if(file_exists("static/js/'.$pageJs.'.js")){
         echo '<script src="static/js/'.$pageJs.'.js"></script>';
     }
 ?>

@@ -71,4 +71,9 @@ includes/config/database.php
 .idea/workspace.xml
 .idea/workspace.xml
 .idea
+<<<<<<< HEAD
 .idea/watcherTasks.xml
+=======
+
+static/css/.sass-cache
+>>>>>>> c569fba3687a0b21029f5949f93d70f225bedd73
