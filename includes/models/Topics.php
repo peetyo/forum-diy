@@ -67,7 +67,8 @@ class Topics extends Model
               return 'Sorry, no topics found in this category';
         }catch(PDOException $error){
             // Correct this error for production
-            return $error;
+            return 'Sorry, we are experiencing technical issues. Try again later.';
+            // return $error; Add the error log!
         }
 
     }
