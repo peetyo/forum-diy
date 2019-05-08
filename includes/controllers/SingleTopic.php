@@ -7,7 +7,12 @@ class SingleTopic extends Controller
         //TODO: Catch if the ID is wrong!!!!
 
         // Get the ID of the topic, sanatize it
+        if(!isset($_GET['id'])){
+            self::NotExistingPage();
+    }
         $iTopicId = $_GET['id'];
+
+
         // Check which page is it.
         if (!isset($_GET['page']) || $_GET['page'] == 0 ){
             /*
