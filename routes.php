@@ -39,8 +39,7 @@ Route::set('create-topic', function (){
 });
 Route::set('api-create-topic', function (){
     // execute the create topic controller method
-    echo BotValidation::Verify($_POST['token']);
-    echo '{"status":"ok"}';
+    SingleTopic::crete_topic();
 });
 
 // Peter: created for testing

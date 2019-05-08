@@ -1,7 +1,7 @@
 <?php
 class Validation {
 
-    public static function checkInput($input, $expectedType, $minLength, $maxLength ){
+    public static function iNnumberOfPages($input, $expectedType, $minLength, $maxLength ){
         // supported types string int boolean email 
         if($expectedType != ''){
 

@@ -69,7 +69,7 @@ class SingleTopic extends Controller
     }
 
 
-    public static function create_topic_view()
+    public function create_topic_view()
     {
 
         // Get categories from the database
@@ -80,25 +80,33 @@ class SingleTopic extends Controller
         //die;
         self::CreateView('new_topic', 'new_topic', 'new_topic.js', $objCategories);
 
-        // Validate all this input
-        // NOTE: MATCH THE LENGTHS FROM THE DATABASE
-//        $_POST['topic_name']; // = 'Test Topic';
-//        Validation::checkInput($_POST['topic_name'],'string',5,20);
-//
-//        $_POST['category_id']; // = 3;
-//        Validation::checkInput($_POST['category_id'],'integer',1,2);
-//
-//        $_POST['user_id']; // = 3;
-//        Validation::checkInput($_POST['user_id'],'integer','','');
-//
-//        $_POST['content']; // = 'Test Topic Test Topic Test Topic Test Topic Test Topic';
-//        Validation::checkInput($_POST['content'],'string',10,500);
-//
-//        $aTopicData = $_POST;
-//        // echo $aTopicData['topic_name']; works
-//        $classTopic = new Topics();
-//        $classTopic->create_topic($aTopicData);
-
     }
 
+    public function crete_topic(){
+
+        // Validate all this input
+        // NOTE: MATCH THE LENGTHS FROM THE DATABASE
+        $sTopicName = $_POST['topic_name']; // = 'Test Topic';
+        Validation::checkInput($sTopicName,'string',5,20);
+
+        $iCategoryId = $_POST['category_id']; // = 3;
+        Validation::checkInput($iCategoryId,'integer',1,2);
+
+        $iUserId = 3; //$_POST['user_id']; // = 3;
+        Validation::checkInput($iUserId,'integer','','');
+
+        $sContent = $_POST['content']; // = 'Test Topic Test Topic Test Topic Test Topic Test Topic';
+        Validation::checkInput($sContent,'string',10,500);
+
+        $aTopicData = $_POST;
+        // echo $aTopicData['topic_name']; works
+        //$classTopic = new Topics();
+        //$classTopic->create_topic($aTopicData);
+
+
+        /*
+         *  Pass the token in the function below
+         */
+        BotValidation::Verify($token);
+    }
 }
