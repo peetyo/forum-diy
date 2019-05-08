@@ -98,9 +98,7 @@
                             ?>
                             <li class="page-item <?= ($page == $currentPage) ? "active" : "" ?> ">
                                 <a class="page-link" href="<?= $currentUri ?>&page=<?= $page ?>">
-                                    <?= ($page == $currentPage) ? "<span class='sr-only'>" : "" ?>
                                     <?= $page ?>
-                                    <?= ($page == $currentPage) ? "</span>" : "" ?>
                                 </a>
                             </li>
                             <?php
