@@ -4,6 +4,16 @@
             <h1>Create a new topic</h1>
         </div>
         <div class="col-md-8">
+            <!-- Error message-->
+            <div id="err-msg" class="alert alert-warning" style="display:none;">
+                <p>Something went wrong, please try again.</p>
+            </div>
+
+            <!-- Successful signup message-->
+            <div id="succ-msg" class="alert alert-success" style="display:none;">
+                <p>Your topic was added successfully.
+                    You'll be redirected to the main page in a moment...</p>
+            </div>
             <form id="new-topic-form">
                 <div class="form-group">
                     <label for="topic_name">Title</label>

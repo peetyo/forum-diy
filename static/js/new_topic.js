@@ -29,11 +29,13 @@ function onSubmit(token) {
         Otherwise, the error code. It should be a little bit more specific
          */
         console.log('response', response);
-        if (response.status == "ok") {
-
-        } else {
+        if (response.status == 1) {
             // redirect to the proper page
-            //window.location.href = "topic.php";
+            displaySuccess();
+            window.location.href = "topic.php?id=" + response.topic;
+        } else {
+            displayError();
+            console.error('error adding topic')
         }
     });
     console.log('something', simplemde.value());
@@ -41,6 +43,15 @@ function onSubmit(token) {
 
 $(document).on('click', '#btnSubmit', function (event) {
     event.preventDefault();
-
-
 })
+
+
+//function for displaying the error message if the signup is invalid
+function displayError() {
+    document.getElementById("err-msg").style.display = "block";
+}
+
+//function for displaying the success message
+function displaySuccess() {
+    document.getElementById("succ-msg").style.display = "block";
+}

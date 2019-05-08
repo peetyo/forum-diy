@@ -68,7 +68,6 @@ class SingleTopic extends Controller
 
     }
 
-
     public function create_topic_view()
     {
 
@@ -108,5 +107,13 @@ class SingleTopic extends Controller
          *  Pass the token in the function below
          */
         BotValidation::Verify($token);
+
+        /*
+         * Please pass id in return as a JSON
+         * Structure
+         * {"status":1, "message":"optional message", "topic":346}
+         * or, when error
+         * {"status":0}
+         */
     }
 }
