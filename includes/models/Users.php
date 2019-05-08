@@ -13,6 +13,19 @@ class Users extends Model {
     }
     //prepared insert stament, whcih is used in sign_up controller
     public function sign_up_user($username, $hashed_pass, $email ){
+
+        $checkUserQuery = $this->db->prepare( 'SELECT username, email FROM users WHERE email = :email');
+        $checkUserQuery->bindValue( ':email', $email);
+        $checkUserQuery->execute();
+        // check if the user exists in the dabase
+        if(!empty($checkUserQuery->fetch())){   
+           // return false to the controllers
+            return false;
+           exit;  
+        }
+
+
+
         $sQuery = $this->db->prepare('INSERT INTO users
          VALUES(null, :userName, :hashed_password, :email, :date_created, :user_role, :active )');
         $sQuery->bindValue(':userName',$username );

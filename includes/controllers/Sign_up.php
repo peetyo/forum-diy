@@ -42,9 +42,16 @@ class Sign_up extends Controller {
         $username = $_POST['txtUserName'];
         $email = $_POST['txtEmail'];
            // try catch stament
+           // insert to the database by calling sign_up_user
         try{
             $user_class = new Users;
-            $user_class->sign_up_user($username, $user_password,$email );
+            // call the function 
+            // excpect true (user added) or false (user not added, i.e. user exists)
+            $isUserAdded = $user_class->sign_up_user($username, $user_password,$email );
+            if($isUserAdded == false) {
+                echo '{"Error":"Something went wrong, please contact the support"}';
+                die;
+            }
         }catch( PDOException $e ){
             echo '{"Error":"Something went wrong, please contact the support"}';
             //Saving the errors in txt file to keep track what happend in case something broke

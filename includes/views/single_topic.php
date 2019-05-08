@@ -10,6 +10,7 @@
     </nav>
     <div class="row">
 
+
         <div class="col-md-8">
             <div class="col-12">
                 <h1><?= $data->topicData["topic_name"] ?></h1>
