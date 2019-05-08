@@ -1,4 +1,4 @@
 //Redirect to the sign up page
-// $('#sign-up').click(function(){
-//     window.location.href = 'sign-up'
-// })
+ $('#sign-up').click(function(){
+    window.location.href = 'sign-up'
+ })

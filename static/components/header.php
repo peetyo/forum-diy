@@ -14,17 +14,20 @@
     <!-- Main CSS -->
     <!-- TODO: Q: Should we include SRI? -->
     <link rel="stylesheet" href="static/css/main.css">
+    <link rel="stylesheet" href="static/css/topics.css">
     <?php 
-    if(file_exists("static/css/$pageCss.css")){
-        echo '<link rel="stylesheet" href="static/css/'.$pageCss.'.css">';
+    if(file_exists("static/css/$pageCss.css")){ ?>
+    <!-- TOPICS CSS -->
+    <link rel="stylesheet" href="static/css/<?=$pageCss?>">
+    <?php 
     }
     ?>
+
 </head>
 <body>
 
-<!-- TODO: Style the navigation bar according to the wireframes -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-color">
-    <a class="navbar-brand" href="#">Forum DIY</a>
+<nav class="navbar navbar-expand-lg navbar-light navbar-color">
+    <a class="navbar-brand" href="#"><img src="./static/assets/logo.png" alt=""></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -33,10 +36,9 @@
         <form class="form-inline mx-auto login-form">
             <input class="form-control mr-sm-2" type="text" placeholder="Login" aria-label="Login">
             <input class="form-control mr-sm-2" type="password" placeholder="Password" aria-label="Password">
-            <button class="btn btn-login my-2 my-sm-0" type="submit">Login</button>
+            <button class="btn btn-login my-2 my-sm-0" type="submit">Log in</button>
         </form>
-        
-        <a href="sign-up" ><span  id='sign-up'>New member? Sign up here</span></a> 
+        <button class="btn btn-signup my-2 my-sm-0" type="submit" id="sign-up">Sign up</button>
     </div>
 </nav>
 
@@ -46,16 +48,28 @@
         <!-- Grid row-->
         <div class="row py-4 d-flex flex-row-reverse">
 
-            <!-- Grid column -->
-            <div class="col-md-6 col-lg-5 text-center text-md-right mb-4 mb-md-0">
-                <form class="form-inline my-2 my-lg-0">
+            <!-- Old version of search bar
+            <div class="col-md-12 col-lg-12 text-center text-md-right mb-4 mb-md-0">
+                <form class=" form-inline my-2 my-lg-0">
                     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
                 </form>
             </div>
+            -->
+
+            <div class="search col-md-12 col-lg-12 text-center">
+                <form class="form-inline">
+                    <input class="search-bar form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+
+
             <!-- Grid column -->
         </div>
         <!-- Grid row-->
-
+        <hr class="horizontal-line">
     </div>
+
 </div>
+
