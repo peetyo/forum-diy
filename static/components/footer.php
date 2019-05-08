@@ -138,7 +138,7 @@
 <script src="https://cdn.jsdelivr.net/npm/simplemde@1.11.2/dist/simplemde.min.js"
         integrity="sha256-6sZs7OGP0Uzcl7UDsLaNsy1K0KTZx1+6yEVrRJMn2IM=" crossorigin="anonymous"></script>
 <script src="static/js/main.js"></script>
-<scritp src="static/js/check_form.js"></scritp>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <?php
 if (!empty($pageJs)) {
     echo '<script src="static/js/' . $pageJs . '"></script>';
