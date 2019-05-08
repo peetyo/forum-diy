@@ -32,9 +32,14 @@ Route::set('topic.php', function (){
     SingleTopic::GetTopic();
 });
 
+
 // Peter: created for testing
-Route::set('topics.php', function (){
-    Topics::create_topic();
+Route::set('create-topic', function (){
+   SingleTopic::create_topic_view();
+});
+Route::set('api-create-topic', function (){
+    // execute the create topic controller method
+    echo '{"status":"ok"}';
 });
 
 // Peter: created for testing

@@ -5,19 +5,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><?=$appName?></title>
+    <title><?= $appName ?></title>
 
     <!-- All the external css -->
+    <!-- Include CSS for icons. -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+          type="text/css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha256-YLGeXaapI0/5IgZopewRJcFXomhRMlYYjugPLSyNjTY=" crossorigin="anonymous"/>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simplemde@1.11.2/dist/simplemde.min.css"
+          integrity="sha256-Is0XNfNX8KF/70J2nv8Qe6BWyiXrtFxKfJBHoDgNAEM=" crossorigin="anonymous">
+
 
     <!-- Main CSS -->
     <!-- TODO: Q: Should we include SRI? -->
     <link rel="stylesheet" href="static/css/main.css">
-    <!-- <link rel="stylesheet" href="static/css/<?=$pageCss?>"> -->
-    <?php 
-    if(!empty($pageCss)){
-        echo '<link rel="stylesheet" href="static/css/'.$pageCss.'.css">';
+    <!-- <link rel="stylesheet" href="static/css/<?= $pageCss ?>"> -->
+    <?php
+    if (!empty($pageCss)) {
+        echo '<link rel="stylesheet" href="static/css/' . $pageCss . '.css">';
     }
     ?>
 </head>
@@ -26,7 +33,8 @@
 <!-- TODO: Style the navigation bar according to the wireframes -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-color">
     <a class="navbar-brand" href="#">Forum DIY</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 
