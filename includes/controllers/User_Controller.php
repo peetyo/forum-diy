@@ -59,12 +59,12 @@ class User_Controller extends Controller {
   public static function login_user(){
     //checking length
     if(strlen($_POST['txtPassword']) < 6 || strlen($_POST['txtPassword']) > 20){
-        echo '{"Error":"Wrong user name and password"}';
+        echo '{"Error":"Wrong username or password"}';
         exit;
     }
     // check lenght of user name
     if(strlen($_POST['txtUserName']) < 4 || strlen($_POST['txtUserName']) > 20){
-        echo '{"Error":"Wrong user name and password"}';
+        echo '{"Error":"Wrong username or password"}';
         exit;
     }
     // trim variables
@@ -84,7 +84,7 @@ class User_Controller extends Controller {
 
     //we are checking if the size of the array is zero or and doesn't match the user is not verifed 
     if(sizeof($selected_user)=== 0 || $selected_user[0]['username'] != $username ) {
-        echo '{"Error":"Wrong user name and passwords"}';
+        echo '{"Error":"Wrong username or password"}';
         exit;
     } 
 
@@ -100,12 +100,13 @@ class User_Controller extends Controller {
     }
 
     if(!password_verify($_POST['txtPassword'],$verife_user[0]['password_hashed'] )){
-        echo '{"Error":"Wrong user name and password"}';
+        echo '{"Error":"Wrong user name or password"}';
         exit; 
     }
     // TODO later create another stament to check if the user is active or not 
     session_start();
     $_SESSION['User'] = $verife_user[0];
+    echo '{"Success":"User logged in"}';
     // print_r($_SESSION['User']);
   }
 }

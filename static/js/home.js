@@ -1,16 +1,2 @@
-$('#loginfrm').submit(function(e){
-  e.preventDefault()
-  $.ajax({
-    url: "login",
-    method: "POST",
-    data: $('#loginfrm').serialize(),
-    dataType: "JSON"
-  }).always(function(jData){
-    console.log(jData)
-      if(jData.Error){
-          //TODO create a toast message or something like that ?
-          console.log(jData.Error)
-      }
-
-  })
-})
+// PETER: THE LOGIN form in the header is available on every page not just home
+// I moved the code in main.js
