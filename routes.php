@@ -32,7 +32,8 @@ Route::set('login', function(){
 
 // In the get, we need to pass additional array with the keys
 // that we are expecting
-Route::set('topic.php', function (){
+// Peter: changed topic.php to topic. Just to have nicer urls
+Route::set('topic', function (){
     SingleTopic::GetTopic();
 });
 // TODO: 404 and other error handling
