@@ -31,3 +31,6 @@ Route::set('topic.php', function (){
     SingleTopic::GetTopic();
 });
 // TODO: 404 and other error handling
+Route::set('error.php', function (){
+    Home::NotExistingPage('error', '');
+});

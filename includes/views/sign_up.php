@@ -1,6 +1,8 @@
 
+<div class="d-flex justify-content-center align-items-center container ">
 
-<form id='frmSignup' class='col-4 m-3'>
+<form id='frmSignup' class='col-6 m-3 centered'>
+
 <!-- Error message-->
 <div id="err-msg" class="alert alert-warning"  style="display:none;">
   <p>Incorrect sign up, please try again.</p>
@@ -15,8 +17,11 @@
 <!-- We should display the requirement for the signup for example:
   Password (at least 6 characters)
   Because we are not specifying what's the error, so the user won't understand why it's not working -->
+
+
 <div class="form-group">
-    <label>User name</label>
+    <label>Username</label>
+    <p>Username should be between 6-20 characters. </p>
     <input name="txtUserName" type="text" value='test' class="form-control" placeholder="Enter username">
   </div>
   <div class="form-group">
@@ -25,11 +30,15 @@
   </div>
   <div class="form-group">
     <label>Password</label>
+    <p>Password should be between 6-20 character</p>
     <input name="txtPassword" type="password" value='1234567' class="form-control" placeholder="Password">
   </div>
   <div class="form-group">
     <label>Confirm Password</label>
     <input name="txtConfirmPassword" type="password" value='1234567' class="form-control" placeholder="Password">
   </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="btn btn-secondary">Submit</button>
 </form>
+</div>
+
+

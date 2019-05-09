@@ -14,6 +14,7 @@ class Sign_up extends Controller {
             exit;
         }
         // check lenght of user name
+        // Why is it 4 and 20? in error it says between 6-20. 420 got you confused?:)
         if(strlen($_POST['txtUserName']) < 4 || strlen($_POST['txtUserName']) > 20){
             echo '{"Error":"Username  should be between 6 and 20 character"}';
             exit;

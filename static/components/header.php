@@ -15,6 +15,8 @@
     <!-- TODO: Q: Should we include SRI? -->
     <link rel="stylesheet" href="static/css/main.css">
     <link rel="stylesheet" href="static/css/topics.css">
+    <link rel="stylesheet" href="static/css/signup.css">
+
     <?php 
     if(file_exists("static/css/$pageCss.css")){ ?>
     <!-- TOPICS CSS -->
