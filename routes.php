@@ -13,8 +13,8 @@ Route::set('index.php', function (){
 // $test->read_users();
 });
 
-Route::set('topics', function (){
-    Home::CreateView('topics', 'topics', '');
+Route::set('category', function (){
+    Home::CreateView('category', '');
 });
 
 Route::set('sign-up', function (){
