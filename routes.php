@@ -13,20 +13,10 @@ Route::set('index.php', function (){
 // $test->read_users();
 });
 
-// Route::set('sign-up', function (){
-//     Sign_up::CreateView('sign_up','');
-//    // Sign_up::test();
-// });
 Route::set('topics', function (){
     Home::CreateView('topics', 'topics', '');
 });
 
-// Peter: I think we dont need both index and home. Home is what we show at index.php
-// Route::set('index.php', function (){
-//     Index::CreateView('index', '', '');
-// });
-
-// THis IS DUPLICATING HAVE A LOOK line 16.
 Route::set('sign-up', function (){
     User_Controller::CreateView('sign_up','');
    // Sign_up::test();
