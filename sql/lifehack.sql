@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.0
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 04, 2019 at 02:27 PM
--- Server version: 10.1.31-MariaDB
--- PHP Version: 7.2.4
+-- Generation Time: May 09, 2019 at 10:25 PM
+-- Server version: 10.1.38-MariaDB
+-- PHP Version: 7.3.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -26,11 +26,24 @@ DELIMITER $$
 --
 -- Procedures
 --
-CREATE DEFINER=`root`@`localhost` PROCEDURE `get_comments_for_the_topic` (IN `topic` INT)  NO SQL
+CREATE DEFINER=`root`@`localhost` PROCEDURE `create_topic` (IN `topic_name` VARCHAR(50) CHARSET utf8mb4, IN `category_id` BIGINT, IN `user_id` BIGINT, IN `content` TEXT CHARSET utf8mb4)  NO SQL
+INSERT INTO `topics`(`id`, `topic_name`, `date_created`, `category_id`, `user_id`, `content`) VALUES (NULL,topic_name,NULL,category_id,user_id,content)$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_comments_for_the_topic` (IN `topic` INT, IN `page_offset` INT)  NO SQL
 SELECT comments.content, comments.date_created, users.username
 FROM `comments`
 JOIN users ON comments.user_id = users.id
+WHERE topic_id = topic
+ORDER BY comments.date_created ASC
+LIMIT 5 OFFSET page_offset$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_number_of_comments` (IN `topic` INT)  NO SQL
+SELECT COUNT(comments.id) AS totalComments
+FROM `comments`JOIN users ON comments.user_id = users.id
 WHERE topic_id = topic$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_topics_from_category` (IN `wanted_category_id` INT)  NO SQL
+SELECT * FROM topics where category_id = wanted_category_id$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `get_topic_by_id` (IN `topic_id` INT UNSIGNED)  NO SQL
 SELECT topics.topic_name, topics.date_created, users.username, categories.category_name, topics.content, COUNT(comments.id) AS comments
@@ -81,8 +94,9 @@ CREATE TABLE `comments` (
 --
 
 INSERT INTO `comments` (`id`, `content`, `date_created`, `topic_id`, `user_id`) VALUES
-(1, 'I will show how to hack nasa with HTML', '2019-05-01 20:27:24', 1, 3),
-(2, 'Here is another comment lol', '2019-05-04 10:07:01', 1, 3);
+(1, 'I will show how to hack nasa with HTML', '2019-05-09 18:20:22', 1, 7),
+(2, 'Here is another comment lol', '2019-05-09 18:20:25', 1, 7),
+(3, 'Here is another comment lol', '2019-05-09 18:20:25', 8, 7);
 
 -- --------------------------------------------------------
 
@@ -104,7 +118,8 @@ CREATE TABLE `topics` (
 --
 
 INSERT INTO `topics` (`id`, `topic_name`, `date_created`, `category_id`, `user_id`, `content`) VALUES
-(1, 'HACK NASA WITH HTML', '2019-05-04 10:03:46', 4, 3, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\r\n');
+(1, 'HACK NASA WITH HTML', '2019-05-09 18:19:35', 4, 7, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip\r\n'),
+(8, 'Don\'t Hack NASA', '2019-05-09 18:19:35', 3, 7, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip\r\n');
 
 -- --------------------------------------------------------
 
@@ -127,8 +142,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password_hashed`, `email`, `date_createad`, `user_role_id`, `active`) VALUES
-(3, 'test', '123', 'genchev.martin@gmail.com', '2019-05-01 19:10:15', 4, 1),
-(4, 'test', '$2y$10$mNodYCkcFkdWCUMvLkp0l..vwB1T/MDTHQfusIOswcUej7e.kmQXC', 'AKER%40a.com', '2019-05-01 19:02:43', 4, 0);
+(7, 'peter', '$2y$10$3W69JMBZXmjOiub6ol4m/.0uCDMbuUgu8gXJqpzeUwbBrXjJwLHQe', 'AKER@a.com', '2019-05-07 10:33:43', 4, 0);
 
 -- --------------------------------------------------------
 
@@ -208,19 +222,19 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `topics`
 --
 ALTER TABLE `topics`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `user_roles`
