@@ -17,6 +17,10 @@ Route::set('category', function (){
     Home::CreateView('category', '');
 });
 
+Route::set('category-logic', function (){
+    Category::getCategory();
+});
+
 Route::set('sign-up', function (){
     User_Controller::CreateView('sign_up','');
    // Sign_up::test();
