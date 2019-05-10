@@ -9,12 +9,20 @@ contentTextbox.value("This text will appear in the editor");
 onSubmit() is called by reCaptcha. We get a token in return, that needs
 to be send to the server to get verified.
  */
-function onSubmit(token) {
-    console.log('submit', token)
-
+$(document).on('click', '#btnSubmit', function (event) {
+    event.preventDefault();
+    console.log('submit')
     // Check if fields are empty and valid
+    try{
+        if($('#topic_name').val()=='') throw 'Topic cannot be empty';
+        if($('#category_id').val()=='') throw 'Choose category';
+        if(contentTextbox.value()=='') throw 'Write some content';
+    } catch (e) {
+        console.log(e);
+        return;
+    }
 
-    const form = $('#new-topic-form').serialize() + '&content=' + contentTextbox.value() + '&token=' + token
+    const form = $('#new-topic-form').serialize() + '&content=' + contentTextbox.value()
     // Make an ajax call
     $.ajax({
         url: 'api-create-topic',
@@ -34,16 +42,12 @@ function onSubmit(token) {
             window.location.href = "topic?id=" + response.topic;
         } else {
             displayError();
-            // reset the reCaptcha to default state
-            grecaptcha.reset();
         }
     });
-}
-
-$(document).on('click', '#btnSubmit', function (event) {
-    event.preventDefault();
-    console.log('btn clicked')
 })
+
+
+
 
 
 //function for displaying the error message if the signup is invalid

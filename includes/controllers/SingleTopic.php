@@ -98,7 +98,7 @@ class SingleTopic extends Controller
         // $_POST['content'] = 'Test Topic Test Topic Test Topic Test Topic Test Topic';
         Validation::checkInput($_POST['content'],'string',10,500);
         
-        $token = $_POST['token'];
+        //$token = $_POST['token'];
         $aTopicData = $_POST;
         // echo $aTopicData['topic_name']; works
       
@@ -108,10 +108,10 @@ class SingleTopic extends Controller
          *  Pass the token in the function below
          */
        
-        if( BotValidation::Verify($token) == false){
-            echo "Token was invalid";
-            exit();
-        }
+//        if( BotValidation::Verify($token) == false){
+//            echo "Token was invalid";
+//            exit();
+//        }
         $classTopic = new Topics();
         $classTopic->create_topic($aTopicData);
 
