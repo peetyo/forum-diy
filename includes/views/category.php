@@ -14,7 +14,11 @@
     <div class="row">
         <div class="col-lg-3">
        
-        <a href="create-topic" class="btn create-topic mb-2">Create topic</a>
+      <?php
+       if(isset($_SESSION['User'])){
+           echo '<a href="create-topic" class="btn create-topic mb-2">Create topic</a>';
+       }
+      ?>
 
             <h3>Tags</h3>
             <div class="list-group">
