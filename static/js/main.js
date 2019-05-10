@@ -18,6 +18,14 @@
           // PETER: Removing the form and the signup button immediately on successful login.  	
          $('#sign-up').remove();
          $('#loginfrm').remove();
+         $('#navbarSupportedContent').append('<button class="btn btn-logout my-2 my-sm-0" type="submit" id="logout" >Logout</button>')
        }
    })
  })
+
+ //Redirect to home after logout
+ $(document).click(function(e){
+  if(e.target.id == 'logout'){
+    window.location.href = 'logout'
+  }
+})

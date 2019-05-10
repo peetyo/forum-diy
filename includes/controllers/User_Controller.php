@@ -108,5 +108,12 @@ class User_Controller extends Controller {
     $_SESSION['User'] = $verife_user[0];
     echo '{"Success":"User logged in"}';
     // print_r($_SESSION['User']);
-  }
+    }
+
+    public static function logout(){
+        session_start();
+        session_destroy();
+        header('Location: index.php');
+
+    }
 }

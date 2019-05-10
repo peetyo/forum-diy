@@ -40,3 +40,7 @@ Route::set('topic', function (){
 Route::set('error.php', function (){
     Home::NotExistingPage('error', '');
 });
+
+Route::set('logout', function(){
+    User_Controller::logout();
+});
