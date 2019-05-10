@@ -39,9 +39,7 @@
                     <textarea id="content"></textarea>
                 </div>
                 <div class="form-group">
-                    <button class="g-recaptcha btn btn-primary" id="btnSubmit"
-                            data-sitekey="6LdagqIUAAAAAPPCF-37cRYK8J5d48NidRdJmVYE"
-                            data-callback='onSubmit'>Submit
+                    <button class="btn btn-primary" id="btnSubmit">Submit
                     </button>
                 </div>
             </form>

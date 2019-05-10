@@ -101,6 +101,7 @@ class Topics extends Model
         }
 
     }
+
     public function create_topic($topicData){
         // print_r($topicData);    
         try{
