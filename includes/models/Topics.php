@@ -100,21 +100,27 @@ class Topics extends Model
     public function create_topic($topicData){
         // print_r($topicData);    
         try{
-                $sQuery = $this->db->prepare('CALL create_topic(:topic_name, :category_id, :user_id, :content)');
+                $db = $this->db;
+                $sQuery = $db->prepare('INSERT INTO `topics` VALUES (NULL,:topic_name,NULL,:category_id,:user,:content)');
+                // Could not get the last inserted ID when using the stored procedure
+                // The procedure code itself has to be updated somehow, but I didnt manage 
+                // to make it work. - PETER
+                // $sQuery = $db->prepare('CALL create_topic(:topic_name, :category_id, :user_id, :content)');
                 $sQuery->bindValue(':topic_name', $topicData['topic_name']);
                 $sQuery->bindValue(':category_id', $topicData['category_id']);
-                $sQuery->bindValue(':user_id', $topicData['user_id']);
+                $sQuery->bindValue(':user', $topicData['user_id']);
                 $sQuery->bindValue(':content', $topicData['content']);
                 $sQuery->execute();
                 if(!$sQuery->rowCount()){
-                  echo "Sorry, something went wrong when creating topic.";
+                  echo '{"status": 0, "message": "Sorry, something went wrong when creating topic."}';
                   exit();
                 }
+                $id = $db->lastInsertId();
                 // Remember to update this echo once its paired with some AJAX
-                echo "Topic created";
+                echo '{"status": 1, "message": "topic created", "topic": '.$id.' }';
             }catch(PDOException $error){
-                // echo "Sorry, something went wrong. Try again later.";
-                echo $error;
+
+                echo '{"status": 0, "message": "Sorry, something went wrong. Try again later."}';
                 exit();
             }
     }

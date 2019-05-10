@@ -18,7 +18,7 @@
                 <div class="form-group">
                     <label for="topic_name">Title</label>
                     <input type="text" class="form-control" id="topic_name" name="topic_name"
-                           placeholder="Enter the topic name here" required>
+                        placeholder="Enter the topic name here" required>
                 </div>
                 <div class="form-group">
                     <label for="category_id">Category</label>

@@ -42,6 +42,11 @@ Route::set('error.php', function (){
     Home::NotExistingPage('error', '');
 });
 
+Route::set('create-topic', function (){
+    // execute the create topic controller method
+    SingleTopic::create_topic_view();
+});
+
 Route::set('api-create-topic', function (){
     // execute the create topic controller method
     SingleTopic::crete_topic();

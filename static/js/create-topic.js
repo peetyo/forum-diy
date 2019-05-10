@@ -1,4 +1,3 @@
-<!-- Initialize the editor. -->
 console.log('init')
 
 
@@ -16,7 +15,7 @@ function onSubmit(token) {
     // Check if fields are empty and valid
 
     const form = $('#new-topic-form').serialize() + '&content=' + contentTextbox.value() + '&token=' + token
-    //Make an ajax call
+    // Make an ajax call
     $.ajax({
         url: 'api-create-topic',
         type: 'POST',
@@ -32,17 +31,16 @@ function onSubmit(token) {
         if (response.status == 1) {
             // redirect to the proper page
             displaySuccess();
-            window.location.href = "topic.php?id=" + response.topic;
+            window.location.href = "topic?id=" + response.topic;
         } else {
             displayError();
-            console.error('error adding topic')
         }
     });
-    console.log('something', simplemde.value());
 }
 
 $(document).on('click', '#btnSubmit', function (event) {
     event.preventDefault();
+    console.log('btn clicked')
 })
 
 
