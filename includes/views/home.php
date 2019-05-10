@@ -13,7 +13,7 @@
             <!-- Squared categories start
                 Should be fetch
              -->
-             <a href="category?cat=4">
+             <a href="category?cat=3">
                 <div class="card card-1 border-light mb-3">
                     <div class="img-container">
                     <img src="./static/assets/house.png" class="card-img card-img-top" alt="">
@@ -28,7 +28,7 @@
                 </div>
              </a>
 
-             <a href="category?cat=3">
+             <a href="category?cat=4">
              <div class="card card-1 border-light mb-3">
                  <div class="img-container">
                  <img src="./static/assets/search.png" class="card-img card-img-top" alt="">

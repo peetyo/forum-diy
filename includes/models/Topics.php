@@ -10,8 +10,6 @@ class Topics extends Model
         $sTopicContentQuery->bindValue(':topicId', $iTopicId);
         $sTopicContentQuery->execute();
         $topicContent = $sTopicContentQuery->fetch();
-        // closing the connection HOW? IS IT NEEDED?
-        // $sTopicContentQuery = null;
         // check if anything was received
         if (count($topicContent)) {
             // Michal:  If the topic exists, now we retrieve comments
@@ -24,19 +22,23 @@ class Topics extends Model
             $commentsContent = $sCommentsQuery->fetchAll();
             // closing the connection
             // $sCommentsQuery = null;
-
+            // Creating a passing object
+            $objTopic = new stdClass();
+            $objTopic->topicData = $topicContent;
+            $objTopic->commentData = [];
+            $objTopic->whats = $topicContent;
+            $objTopic->numberOfComments = 0;
+            $objTopic->numberOfPages = 1;
+            
             if (!empty($commentsContent)) {
-
+                
                 /*
-                 * Currently, we have two objects -> $topicContent and $commentsContent
-                 * Both are arrays
-                 * I suggest merging them into one, so we can pass it as object expected by CreateView
-                 */
-
-                // Creating a passing object
-                $objTopic = new stdClass();
-                $objTopic->topicData = $topicContent;
+                * Currently, we have two objects -> $topicContent and $commentsContent
+                * Both are arrays
+                * I suggest merging them into one, so we can pass it as object expected by CreateView
+                */
                 $objTopic->commentData = $commentsContent;
+                
 
                 /*
                  * Calculate number of pages by dividing total
@@ -68,11 +70,11 @@ class Topics extends Model
                 $iNumberOfPages = ceil($iNumberOfComments/5);
                 $objTopic->numberOfComments = $iNumberOfComments;
                 $objTopic->numberOfPages = $iNumberOfPages;
-                $objTopic->whats = $topicContent;
-                return $objTopic;
-
+                // $objTopic->whats = $topicContent;
+                
             }
-
+            
+            return $objTopic;
 
         }
         else{
@@ -99,4 +101,32 @@ class Topics extends Model
         }
 
     }
+    public function create_topic($topicData){
+        // print_r($topicData);    
+        try{
+                $db = $this->db;
+                $sQuery = $db->prepare('INSERT INTO `topics` VALUES (NULL,:topic_name,NULL,:category_id,:user,:content)');
+                // Could not get the last inserted ID when using the stored procedure
+                // The procedure code itself has to be updated somehow, but I didnt manage 
+                // to make it work. - PETER
+                // $sQuery = $db->prepare('CALL create_topic(:topic_name, :category_id, :user_id, :content)');
+                $sQuery->bindValue(':topic_name', $topicData['topic_name']);
+                $sQuery->bindValue(':category_id', $topicData['category_id']);
+                $sQuery->bindValue(':user', $topicData['user_id']);
+                $sQuery->bindValue(':content', $topicData['content']);
+                $sQuery->execute();
+                if(!$sQuery->rowCount()){
+                  echo '{"status": 0, "message": "Sorry, something went wrong when creating topic."}';
+                  exit();
+                }
+                $id = $db->lastInsertId();
+                // Remember to update this echo once its paired with some AJAX
+                echo '{"status": 1, "message": "topic created", "topic": '.$id.' }';
+            }catch(PDOException $error){
+
+                echo '{"status": 0, "message": "Sorry, something went wrong. Try again later."}';
+                exit();
+            }
+    }
+
 }

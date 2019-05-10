@@ -8,8 +8,13 @@ class Route {
 
         self::$validRoutes[] = $route;
 
+
         if ($_GET['url'] == $route) {
+            $pageExist = true;
             $function->__invoke();
         }
+
+
+
     }
 }

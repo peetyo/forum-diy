@@ -4,7 +4,7 @@
 // to be honest I don't understand why we pass more than just the name of the view we need
 // Should be disccussed
 
-ini_set('display_errors', 1);
+// ini_set('display_errors', 1);
 Route::set('index.php', function (){
     Home::CreateView('home','');
 
@@ -36,6 +36,7 @@ Route::set('login', function(){
 Route::set('topic', function (){
     SingleTopic::GetTopic();
 });
+
 // TODO: 404 and other error handling
 Route::set('error.php', function (){
     Home::NotExistingPage('error', '');
@@ -43,4 +44,13 @@ Route::set('error.php', function (){
 
 Route::set('logout', function(){
     User_Controller::logout();
+});
+Route::set('create-topic', function (){
+    // execute the create topic controller method
+    SingleTopic::create_topic_view();
+});
+
+Route::set('api-create-topic', function (){
+    // execute the create topic controller method
+    SingleTopic::crete_topic();
 });
