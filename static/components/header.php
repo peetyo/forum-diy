@@ -1,4 +1,7 @@
-<?php require_once './static/pageinfo.php'; ?>
+<?php
+require_once './static/pageinfo.php';
+$csrf = CSRFToken::generate_token();
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -45,6 +48,7 @@
             <form class="form-inline mx-auto login-form" id="loginfrm">
                 <input class="form-control mr-sm-2" name="txtUserName" type="text" placeholder="Username" aria-label="Login">
                 <input class="form-control mr-sm-2" name="txtPassword" type="password" placeholder="Password" aria-label="Password">
+                <input type="hidden" name="token" value="'.$csrf.'">
                 <button class="btn btn-login my-2 my-sm-0" type="submit">Log in</button>
             </form>
             <button class="btn btn-signup my-2 my-sm-0" type="submit" id="sign-up">Sign up</button>';

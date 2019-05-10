@@ -2,6 +2,13 @@
 ini_set('display_errors', 1);
 class User_Controller extends Controller {
    public static function create_user(){
+       // check the token integrity
+       if (!hash_equals($_SESSION['key'], $_POST['token'])){
+           echo '{"Error":"Invalid token"}';
+           exit;
+       }
+
+
         // check if passwords mathces
         if($_POST['txtPassword'] != $_POST['txtConfirmPassword']){
             echo '{"Error":"Passoword no match"}';
@@ -62,6 +69,12 @@ class User_Controller extends Controller {
     }
 
   public static function login_user(){
+
+       if (!hash_equals($_SESSION['key'], $_POST['token'])){
+           echo '{"Error":"Invalid token"}';
+           exit;
+       }
+
     //checking length
     if(strlen($_POST['txtPassword']) < 6 || strlen($_POST['txtPassword']) > 20){
         echo '{"Error":"Wrong username or password"}';

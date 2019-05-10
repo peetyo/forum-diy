@@ -1,4 +1,3 @@
-
 <div class="d-flex justify-content-center align-items-center container ">
 
 <form id='frmSignup' class='col-6 m-3 centered'>
@@ -37,8 +36,10 @@
     <label>Confirm Password</label>
     <input name="txtConfirmPassword" type="password"  class="form-control" placeholder="Password">
   </div>
+    <input type="hidden" name="token" value="<?= $csrf ?>">
   <button type="submit" class="btn btn-secondary">Submit</button>
 </form>
+
 </div>
 
 
