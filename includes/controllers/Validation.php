@@ -7,12 +7,12 @@ class Validation {
 
             if($expectedType == 'email'){
                 if (!filter_var($input, FILTER_VALIDATE_EMAIL)) {
-                    echo("Your email is not a valid email address");
+                    echo '{"status": 0, "message": "Your email is not a valid email address"}';
                     exit();
                 }
             }else{
                 if(gettype($input) != $expectedType){
-                    echo "Invalid input type";
+                    echo '{"status": 0, "message": "Invalid input type"}';
                     exit();
                 }
             }
@@ -21,13 +21,13 @@ class Validation {
         // Check the length
         if($minLength != ''){
             if(strlen($input)<$minLength){
-               echo "Invalid length (min)";
-               exit();
+                echo '{"status": 0, "message": "Invalid length (min)"}';
+                exit();
             }
         }
         if($maxLength != ''){
             if(strlen($input)>$maxLength){
-                echo "Invalid length (max)";
+                echo '{"status": 0, "message": "Invalid length (max)"}';
                 exit();
              }
         }
