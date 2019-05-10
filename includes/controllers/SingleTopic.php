@@ -85,16 +85,17 @@ class SingleTopic extends Controller
 
         // Validate all this input
         // NOTE: MATCH THE LENGTHS FROM THE DATABASE
-        $_POST['topic_name'] = 'Test Topic';
+        // $_POST['topic_name'] = 'Test Topic';
         Validation::checkInput($_POST['topic_name'],'string',5,20);
         
-        $_POST['category_id'] = 3;
-        Validation::checkInput($_POST['category_id'],'integer',1,2);
+        // $_POST['category_id'] = 3;
+        // NOTE: the form's option values are strings not integers 
+        Validation::checkInput($_POST['category_id'],'string',1,2);
         
         $_POST['user_id'] = 7;
         Validation::checkInput($_POST['user_id'],'integer','','');
         
-        $_POST['content'] = 'Test Topic Test Topic Test Topic Test Topic Test Topic';
+        // $_POST['content'] = 'Test Topic Test Topic Test Topic Test Topic Test Topic';
         Validation::checkInput($_POST['content'],'string',10,500);
         
         $token = $_POST['token'];
