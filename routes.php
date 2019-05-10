@@ -36,13 +36,13 @@ Route::set('login', function(){
 Route::set('topic', function (){
     SingleTopic::GetTopic();
 });
+
 // TODO: 404 and other error handling
 Route::set('error.php', function (){
     Home::NotExistingPage('error', '');
 });
 
-// Peter: created for testing
-Route::set('SingleTopic.php', function (){
-    SingleTopic::create_topic();
-//    SingleTopic::CreateView('topic','topic','', '');
+Route::set('api-create-topic', function (){
+    // execute the create topic controller method
+    SingleTopic::crete_topic();
 });

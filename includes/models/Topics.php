@@ -10,8 +10,6 @@ class Topics extends Model
         $sTopicContentQuery->bindValue(':topicId', $iTopicId);
         $sTopicContentQuery->execute();
         $topicContent = $sTopicContentQuery->fetch();
-        // closing the connection HOW? IS IT NEEDED?
-        // $sTopicContentQuery = null;
         // check if anything was received
         if (count($topicContent)) {
             // Michal:  If the topic exists, now we retrieve comments
