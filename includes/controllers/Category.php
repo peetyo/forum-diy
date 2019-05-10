@@ -21,7 +21,7 @@ class Category extends Controller
         // an array. The error responses should be updated and also 
         //the way we handle them.
         if(gettype($aTopics)== 'string'){
-            self::NotExistingPage();
+            self::CreateView('error', '');
         }
         $data = array();
         $data['category'] = $iCategoryId;

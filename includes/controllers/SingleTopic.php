@@ -8,7 +8,7 @@ class SingleTopic extends Controller
 
         // Get the ID of the topic, sanatize it
         if (!isset($_GET['id'])) {
-            self::NotExistingPage();
+            self::CreateView('error', '');
         }
         $iTopicId = $_GET['id'];
 
@@ -36,7 +36,7 @@ class SingleTopic extends Controller
         $topic = new Topics();
         $objTopic = $topic->get_topic($iTopicId, $iOffset);
         if ($objTopic == false) {
-            self::NotExistingPage();
+            self::CreateView('error', '');
         }
 
         // +1 since we're starting technically with 0 ;P
