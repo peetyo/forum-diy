@@ -48,8 +48,9 @@
                 <button class="btn btn-login my-2 my-sm-0" type="submit">Log in</button>
             </form>
             <button class="btn btn-signup my-2 my-sm-0" type="submit" id="sign-up">Sign up</button>';
-        }else 
+        }else{ 
           echo '<button class="btn btn-logout my-2 my-sm-0" type="submit" id="logout" >Logout</button>';
+        }
         ?>
        
     </div>
