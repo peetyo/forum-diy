@@ -7,7 +7,7 @@
 
 class BotValidation
 {
-    public function Verify($token)
+    public static function Verify($token)
     {
         // Google reCaptcha secret key
         $secretKey = "6LdagqIUAAAAAOdl28x6wSpjAq6ZmnOcWkIQNw3O";

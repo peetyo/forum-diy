@@ -2,7 +2,7 @@
 
 class SingleTopic extends Controller
 {
-    public function GetTopic()
+    public static function GetTopic()
     {
         //TODO: Catch if the ID is wrong!!!!
 
@@ -68,7 +68,7 @@ class SingleTopic extends Controller
 
     }
 
-    public function create_topic_view()
+    public static function create_topic_view()
     {
 
         // Get categories from the database
@@ -81,7 +81,7 @@ class SingleTopic extends Controller
 
     }
 
-    public function crete_topic(){
+    public static function crete_topic(){
 
         // Validate all this input
         // NOTE: MATCH THE LENGTHS FROM THE DATABASE

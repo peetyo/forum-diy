@@ -4,7 +4,7 @@
 // to be honest I don't understand why we pass more than just the name of the view we need
 // Should be disccussed
 
-ini_set('display_errors', 1);
+// ini_set('display_errors', 1);
 Route::set('index.php', function (){
     Home::CreateView('home','');
 
