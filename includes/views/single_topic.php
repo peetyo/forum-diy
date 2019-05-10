@@ -25,7 +25,7 @@
                     </div>
                     <div class="card-body">
                         <p class="card-text">
-                            <?= $data->topicData["content"] ?>
+                            <?= htmlentities($data->topicData["content"]) ?>
                         </p>
                     </div>
                     <div class="text-right card-footer text-muted bg-dark">
