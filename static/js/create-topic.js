@@ -34,6 +34,8 @@ function onSubmit(token) {
             window.location.href = "topic?id=" + response.topic;
         } else {
             displayError();
+            // reset the reCaptcha to default state
+            grecaptcha.reset();
         }
     });
 }

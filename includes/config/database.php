@@ -1,5 +1,5 @@
 <?php
 define('DBUSER','root');
-define('DBPWD','');
+define('DBPWD','root');
 define('DBHOST','localhost');
 define('DBNAME','lifehack');
