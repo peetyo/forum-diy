@@ -46,11 +46,14 @@ body {
   margin-right: unset !important;
 }
 
-.btn-login {
+.btn-login{
   background-color: transparent;
   border: 1px solid white;
   color: $offWhite;
   margin-right: 5px;
+}
+.btn-logout{
+  background-color: white;
 }
 .btn-signup{
   color: $primary;

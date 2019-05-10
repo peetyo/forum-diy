@@ -43,13 +43,15 @@
         if(!isset($_SESSION['User'])){ 
             echo '
             <form class="form-inline mx-auto login-form" id="loginfrm">
-                <input class="form-control mr-sm-2" name="txtUserName" type="text" placeholder="Login" aria-label="Login">
+                <input class="form-control mr-sm-2" name="txtUserName" type="text" placeholder="Username" aria-label="Login">
                 <input class="form-control mr-sm-2" name="txtPassword" type="password" placeholder="Password" aria-label="Password">
                 <button class="btn btn-login my-2 my-sm-0" type="submit">Log in</button>
             </form>
             <button class="btn btn-signup my-2 my-sm-0" type="submit" id="sign-up">Sign up</button>';
-        }
+        }else 
+          echo '<button class="btn btn-logout my-2 my-sm-0" type="submit" id="logout" >Logout</button>';
         ?>
+       
     </div>
     
     

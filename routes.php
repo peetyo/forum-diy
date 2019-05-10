@@ -42,6 +42,9 @@ Route::set('error.php', function (){
     Home::NotExistingPage('error', '');
 });
 
+Route::set('logout', function(){
+    User_Controller::logout();
+});
 Route::set('create-topic', function (){
     // execute the create topic controller method
     SingleTopic::create_topic_view();
