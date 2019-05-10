@@ -14,34 +14,38 @@
     <!-- Main CSS -->
     <!-- TODO: Q: Should we include SRI? -->
     <link rel="stylesheet" href="static/css/main.css">
-    <link rel="stylesheet" href="static/css/topics.css">
-    <link rel="stylesheet" href="static/css/signup.css">
-
     <?php 
-    if(file_exists("static/css/$pageCss.css")){ ?>
-    <!-- TOPICS CSS -->
-    <link rel="stylesheet" href="static/css/<?=$pageCss?>">
-    <?php 
-    }
+        if(file_exists("static/css/$pageCss.css")){
+            echo '<link rel="stylesheet" href="static/css/'.$pageCss.'.css">';
+        }
     ?>
 
 </head>
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-light navbar-color">
-    <a class="navbar-brand" href="#"><img src="./static/assets/logo.png" alt=""></a>
+    <a class="navbar-brand" href="index.php"><img src="./static/assets/logo.png" alt=""></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <form class="form-inline mx-auto login-form">
-            <input class="form-control mr-sm-2" type="text" placeholder="Login" aria-label="Login">
-            <input class="form-control mr-sm-2" type="password" placeholder="Password" aria-label="Password">
-            <button class="btn btn-login my-2 my-sm-0" type="submit">Log in</button>
-        </form>
-        <button class="btn btn-signup my-2 my-sm-0" type="submit" id="sign-up">Sign up</button>
+        <!-- Showing the login form only if you are NOT logged in. -->
+        <?php 
+        session_start(); 
+
+        if(!isset($_SESSION['User'])){ 
+            echo '
+            <form class="form-inline mx-auto login-form" id="loginfrm">
+                <input class="form-control mr-sm-2" name="txtUserName" type="text" placeholder="Login" aria-label="Login">
+                <input class="form-control mr-sm-2" name="txtPassword" type="password" placeholder="Password" aria-label="Password">
+                <button class="btn btn-login my-2 my-sm-0" type="submit">Log in</button>
+            </form>
+            <button class="btn btn-signup my-2 my-sm-0" type="submit" id="sign-up">Sign up</button>';
+        }
+        ?>
     </div>
+    
+    
 </nav>
 
 <div class="search-bar">
@@ -74,4 +78,3 @@
     </div>
 
 </div>
-

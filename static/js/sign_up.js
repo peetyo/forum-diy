@@ -25,7 +25,7 @@ $('#frmSignup').submit(function(e){
             displayError();
 
         }else{
-          console.log('Valid signup - not necessary successful :)');
+          console.log('user created successfuly');
           displaySuccess();
          // setTimeout("location.href = './index.php';", 3000)
         }

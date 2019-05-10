@@ -28,13 +28,13 @@
             </div>
         </div>
 
+<!-- PETER: Not sure why this is here. -->
+<!-- <div class="row">
 
-<div class="row">
 
+</div> -->
 
-</div>
-
-    <div class="col-md-9">
+    <div class="col-md-9 pl-3 mb-5">
         <div class="panel panel-default">
             <div class="panel-body">
                     <div class="panel-heading">
@@ -54,9 +54,7 @@
                 </div>
             </div>
         </div>
-    </div>
-
-    <div class="col-md-9">
+        
         <div class="panel panel-default">
             <div class="panel-body">
                     <div class="panel-heading">
@@ -76,50 +74,8 @@
                 </div>
             </div>
         </div>
+
     </div>
 
-    <div class="col-md-9">
-        <div class="panel panel-default">
-            <div class="panel-body">
-                    <div class="panel-heading">
-                        <h4>Main title or question or topic</h4>
-                    </div>
-                        <p>Text about explaining the question or something else a bit longer but should be max 2 lines then....</p>
-            </div>
-            <div class="thread-info">
-                <div class="thread-info-avatar">
-                <img class="img-circle" src="https://www.ukielist.com/wp-content/uploads/2017/03/default-avatar.png" alt="avatar">
-                </div>
-                <div class="thread-info-author">
-                </div>
-                <div class="thread-info-tags">
-                    <a href="#">Tag1</a>
-                    <a href="#">Tag2</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-md-9">
-        <div class="panel panel-default">
-            <div class="panel-body">
-                    <div class="panel-heading">
-                        <h4>Main title or question or topic</h4>
-                    </div>
-                        <p>Text about explaining the question or something else a bit longer but should be max 2 lines then....</p>
-            </div>
-            <div class="thread-info">
-                <div class="thread-info-avatar">
-                <img class="img-circle" src="https://www.ukielist.com/wp-content/uploads/2017/03/default-avatar.png" alt="avatar">
-                </div>
-                <div class="thread-info-author">
-                </div>
-                <div class="thread-info-tags">
-                    <a href="#">Tag1</a>
-                    <a href="#">Tag2</a>
-                </div>
-            </div>
-        </div>
-    </div>
 
 </section>
