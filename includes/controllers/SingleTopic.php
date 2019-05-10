@@ -7,7 +7,12 @@ class SingleTopic extends Controller
         //TODO: Catch if the ID is wrong!!!!
 
         // Get the ID of the topic, sanatize it
+        if(!isset($_GET['id'])){
+            self::NotExistingPage();
+    }
         $iTopicId = $_GET['id'];
+
+
         // Check which page is it.
         if (!isset($_GET['page']) || $_GET['page'] == 0 ){
             /*
@@ -63,5 +68,27 @@ class SingleTopic extends Controller
 
     }
 
+
+    public static function create_topic(){
+        // Validate all this input
+        // NOTE: MATCH THE LENGTHS FROM THE DATABASE
+        $_POST['topic_name'] = 'Test Topic';
+        Validation::checkInput($_POST['topic_name'],'string',5,20);
+        
+        $_POST['category_id'] = 3;
+        Validation::checkInput($_POST['category_id'],'integer',1,2);
+        
+        $_POST['user_id'] = 3;
+        Validation::checkInput($_POST['user_id'],'integer','','');
+        
+        $_POST['content'] = 'Test Topic Test Topic Test Topic Test Topic Test Topic';
+        Validation::checkInput($_POST['content'],'string',10,500);
+        
+        $aTopicData = $_POST;
+        // echo $aTopicData['topic_name']; works
+        $classTopic = new Topics();
+        $classTopic->create_topic($aTopicData);
+
+    }
 
 }

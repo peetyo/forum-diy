@@ -40,3 +40,14 @@ Route::set('topic', function (){
 Route::set('error.php', function (){
     Home::NotExistingPage('error', '');
 });
+
+// Peter: created for testing
+Route::set('topics.php', function (){
+    Topics::create_topic();
+});
+
+// Peter: created for testing
+Route::set('SingleTopic.php', function (){
+    SingleTopic::create_topic();
+//    SingleTopic::CreateView('topic','topic','', '');
+});
