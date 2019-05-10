@@ -5,7 +5,7 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
             <li class="breadcrumb-item"><a href="#"><?= $data->topicData["category_name"] ?></a></li>
-            <li class="breadcrumb-item active" aria-current="page"><?= $data->topicData["topic_name"] ?> </li>
+            <li class="breadcrumb-item active" aria-current="page"><?=  htmlentities($data->topicData["topic_name"]) ?> </li>
         </ol>
     </nav>
     <div class="row">
@@ -13,7 +13,7 @@
 
         <div class="col-md-8">
             <div class="col-12">
-                <h1><?= $data->topicData["topic_name"] ?></h1>
+                <h1><?= htmlentities($data->topicData["topic_name"]) ?></h1>
             </div>
             <div class="col-12">
                 <div class="card topic">
