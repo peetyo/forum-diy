@@ -14,10 +14,6 @@ Route::set('index.php', function (){
 });
 
 Route::set('category', function (){
-    Home::CreateView('category', '');
-});
-
-Route::set('category-logic', function (){
     Category::getCategory();
 });
 

@@ -79,4 +79,24 @@ class Topics extends Model
            return false;
         }
     }
+
+    public function getTopicsFromCategory($category){
+        try{
+            $sQuery = $this->db->prepare('CALL get_topics_from_category(:categoryId)');
+            $sQuery->bindValue(':categoryId', $category);
+            $sQuery->execute();
+            $aTopics = $sQuery->fetchAll();
+            if( count($aTopics) ){
+                
+                return $aTopics;
+                exit;
+              }
+              return 'Sorry, no topics found in this category';
+        }catch(PDOException $error){
+            // Correct this error for production
+            return 'Sorry, we are experiencing technical issues. Try again later.';
+            // return $error; Add the error log!
+        }
+
+    }
 }
