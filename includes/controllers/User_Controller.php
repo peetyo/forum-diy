@@ -57,6 +57,12 @@ class User_Controller extends Controller {
     }
 
   public static function login_user(){
+
+       if (!hash_equals($_SESSION['key'], $_POST['token'])){
+           echo '{"Error":"Invalid token"}';
+           exit;
+       }
+
     //checking length
     if(strlen($_POST['txtPassword']) < 6 || strlen($_POST['txtPassword']) > 20){
         echo '{"Error":"Wrong username or password"}';
