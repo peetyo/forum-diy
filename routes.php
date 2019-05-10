@@ -3,7 +3,7 @@
 // if we dont perform a check we get errors that files are not found (404)
 // to be honest I don't understand why we pass more than just the name of the view we need
 // Should be disccussed
-
+session_start();
 // ini_set('display_errors', 1);
 Route::set('index.php', function (){
     Home::CreateView('home','');
@@ -38,8 +38,8 @@ Route::set('topic', function (){
 });
 
 // TODO: 404 and other error handling
-Route::set('error.php', function (){
-    Home::NotExistingPage('error', '');
+Route::set('error', function (){
+    Controller::NotExistingPage();
 });
 
 Route::set('logout', function(){
@@ -47,10 +47,20 @@ Route::set('logout', function(){
 });
 Route::set('create-topic', function (){
     // execute the create topic controller method
-    SingleTopic::create_topic_view();
+    if(isset($_SESSION['User'])){
+        SingleTopic::create_topic_view();
+    }else{
+        Controller::NotExistingPage();
+    }
+
 });
 
 Route::set('api-create-topic', function (){
     // execute the create topic controller method
-    SingleTopic::crete_topic();
+    
+    if(isset($_SESSION['User'])){
+        SingleTopic::crete_topic();
+    }else{
+        Home::NotExistingPage('error', '');
+    }
 });
