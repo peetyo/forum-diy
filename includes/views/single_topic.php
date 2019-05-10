@@ -19,7 +19,7 @@
                 <div class="card topic">
                     <div class="card-header bg-dark text-white">
                         <img src="https://via.placeholder.com/25" alt="User's profile picture">
-                        <span class="username"> <?= $data->topicData["username"] ?></span> posted on
+                        <span class="username"> <?= htmlentities($data->topicData["username"]) ?></span> posted on
                         <span class="comment-date"><?= $data->topicData["date_created"] ?></li>
                         </span>
                     </div>
@@ -50,7 +50,7 @@
                         <div class="card-header">
                             <img src="https://via.placeholder.com/25" alt="User's profile picture">
                             <span class="username">
-                            <?= $comment["username"] ?>
+                            <?= htmlentities($comment["username"] )?>
                         </span>
                             posted on
                             <span class="comment-date">
@@ -59,7 +59,7 @@
                         </div>
                         <div class="card-body">
                             <p class="card-text">
-                                <?= $comment["content"] ?>
+                                <?= htmlentities($comment["content"]) ?>
                             </p>
                         </div>
                         <div class="text-right card-footer text-muted">
