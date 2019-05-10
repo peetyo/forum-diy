@@ -44,13 +44,13 @@ class Validation {
     //cleans the empty fields and remove html tags
     public static function sanitize_inputs($data){
         $Newdata = trim($data);
-        $Newdata = filter_input($data, FILTER_SANITIZE_STRING);
+        $Newdata = filter_var($data, FILTER_SANITIZE_STRING);
         return $data;
     }
 
     public static function sanitize_output($data){
         $Newdata = trim($data);
-        $Newdata = filter_input($data, FILTER_SANITIZE_STRING);
+        $Newdata = filter_var($data, FILTER_SANITIZE_STRING);
         return $data;
     }
 }

@@ -68,9 +68,9 @@
                     <div id='.$topic['id'].' class="panel panel-default mb-2">
                         <div class="panel-body">
                                 <div class="panel-heading">
-                                    <h4>'.$topic['topic_name'].'</h4>
+                                    <h4>'.htmlentities($topic['topic_name']).'</h4>
                                 </div>
-                                    <p>'.substr($topic['content'], 0, 100).'...</p>
+                                    <p>'.htmlentities($topic['content']).'...</p>
                         </div>
                         <div class="thread-info">
                             <div class="thread-info-avatar">
