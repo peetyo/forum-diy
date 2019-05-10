@@ -78,7 +78,7 @@ class SingleTopic extends Controller
         $_POST['category_id'] = 3;
         Validation::checkInput($_POST['category_id'],'integer',1,2);
         
-        $_POST['user_id'] = 3;
+        $_POST['user_id'] = 7;
         Validation::checkInput($_POST['user_id'],'integer','','');
         
         $_POST['content'] = 'Test Topic Test Topic Test Topic Test Topic Test Topic';

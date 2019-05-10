@@ -100,7 +100,8 @@ class Topics extends Model
 
     }
     public function create_topic($topicData){
-            try{
+        // print_r($topicData);    
+        try{
                 $sQuery = $this->db->prepare('CALL create_topic(:topic_name, :category_id, :user_id, :content)');
                 $sQuery->bindValue(':topic_name', $topicData['topic_name']);
                 $sQuery->bindValue(':category_id', $topicData['category_id']);
@@ -114,7 +115,8 @@ class Topics extends Model
                 // Remember to update this echo once its paired with some AJAX
                 echo "Topic created";
             }catch(PDOException $error){
-                echo "Sorry, something went wrong. Try again later.";
+                // echo "Sorry, something went wrong. Try again later.";
+                echo $error;
                 exit();
             }
     }
