@@ -14,7 +14,6 @@
     <!-- Main CSS -->
     <!-- TODO: Q: Should we include SRI? -->
     <link rel="stylesheet" href="static/css/main.css">
-
     <?php 
         if(file_exists("static/css/$pageCss.css")){
             echo '<link rel="stylesheet" href="static/css/'.$pageCss.'.css">';

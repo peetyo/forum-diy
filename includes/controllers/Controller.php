@@ -12,7 +12,7 @@ class Controller {
 
     public static function NotExistingPage(){
         // Let's make a nice 404 page :)
-        echo '404';
+        require_once "./includes/views/error.php";
         die();
     }
 }
