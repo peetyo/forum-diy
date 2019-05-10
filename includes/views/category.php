@@ -13,7 +13,9 @@
 
     <div class="row">
         <div class="col-lg-3">
-            <button class="col-12">Create thread</button>
+       
+        <a href="create-topic" class="btn create-topic mb-2">Create topic</a>
+
             <h3>Tags</h3>
             <div class="list-group">
                 <a href="#">All</a>
