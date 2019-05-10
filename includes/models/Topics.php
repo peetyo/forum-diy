@@ -22,19 +22,23 @@ class Topics extends Model
             $commentsContent = $sCommentsQuery->fetchAll();
             // closing the connection
             // $sCommentsQuery = null;
-
+            // Creating a passing object
+            $objTopic = new stdClass();
+            $objTopic->topicData = $topicContent;
+            $objTopic->commentData = [];
+            $objTopic->whats = $topicContent;
+            $objTopic->numberOfComments = 0;
+            $objTopic->numberOfPages = 1;
+            
             if (!empty($commentsContent)) {
-
+                
                 /*
-                 * Currently, we have two objects -> $topicContent and $commentsContent
-                 * Both are arrays
-                 * I suggest merging them into one, so we can pass it as object expected by CreateView
-                 */
-
-                // Creating a passing object
-                $objTopic = new stdClass();
-                $objTopic->topicData = $topicContent;
+                * Currently, we have two objects -> $topicContent and $commentsContent
+                * Both are arrays
+                * I suggest merging them into one, so we can pass it as object expected by CreateView
+                */
                 $objTopic->commentData = $commentsContent;
+                
 
                 /*
                  * Calculate number of pages by dividing total
@@ -66,11 +70,11 @@ class Topics extends Model
                 $iNumberOfPages = ceil($iNumberOfComments/5);
                 $objTopic->numberOfComments = $iNumberOfComments;
                 $objTopic->numberOfPages = $iNumberOfPages;
-                $objTopic->whats = $topicContent;
-                return $objTopic;
-
+                // $objTopic->whats = $topicContent;
+                
             }
-
+            
+            return $objTopic;
 
         }
         else{
