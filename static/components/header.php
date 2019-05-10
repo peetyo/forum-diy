@@ -38,7 +38,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <!-- Showing the login form only if you are NOT logged in. -->
         <?php 
-        session_start(); 
+
 
         if(!isset($_SESSION['User'])){ 
             echo '

@@ -50,7 +50,7 @@ Route::set('create-topic', function (){
     if(isset($_SESSION['User'])){
         SingleTopic::create_topic_view();
     }else{
-        Controller::NotExistingPage();
+        Controller::CreateView('error', '');
     }
 
 });
@@ -61,6 +61,7 @@ Route::set('api-create-topic', function (){
     if(isset($_SESSION['User'])){
         SingleTopic::crete_topic();
     }else{
-        Home::NotExistingPage('error', '');
+        Controller::CreateView('error' , '');
+
     }
 });
