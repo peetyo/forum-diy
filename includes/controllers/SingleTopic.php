@@ -92,7 +92,7 @@ class SingleTopic extends Controller
         // NOTE: the form's option values are strings not integers 
         Validation::checkInput($_POST['category_id'],'string',1,2);
         
-        $_POST['user_id'] = 7;
+        $_POST['user_id'] = (int)$_SESSION['User']['id'] ;
         Validation::checkInput($_POST['user_id'],'integer','','');
         
         // $_POST['content'] = 'Test Topic Test Topic Test Topic Test Topic Test Topic';
