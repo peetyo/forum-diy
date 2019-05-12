@@ -1,5 +1,6 @@
 <?php
 
+
 class Controller {
     public static function CreateView($viewName, $object) {
         $pageCss = $viewName;

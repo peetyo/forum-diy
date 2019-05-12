@@ -2,7 +2,7 @@
 
 class CSRFToken
 {
-    public function generate_token()
+    public static function generate_token()
     {
         // create a key for hash_hmac
         if (empty($_SESSION['key'])) {
@@ -14,7 +14,7 @@ class CSRFToken
         return $csrf;
     }
 
-    public function force_generate_token()
+    public static function force_generate_token()
     {
         // create a key for hash_hmac
         $_SESSION['key'] = bin2hex(random_bytes(32));
