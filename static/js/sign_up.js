@@ -33,7 +33,7 @@ $('#frmSignup').submit(function(e){
           displayError(jData.text);
         }else{
           // when we get a php error and pass it in the response text
-          console.log("Internal Server Error")
+          displayError('Internal Server error');
         }
     })
   })
