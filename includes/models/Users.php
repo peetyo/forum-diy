@@ -13,6 +13,24 @@ class Users extends Model {
     }
     //prepared insert stament, whcih is used in sign_up controller
     public function sign_up_user($username, $hashed_pass, $email ){
+
+        $checkUserQuery = $this->db->prepare( 'SELECT username, email FROM users WHERE email = :email');
+        $checkUserQuery->bindValue( ':email', $email);
+        $checkUserQuery->execute();
+        // check if the user exists in the dabase
+        if(!empty($checkUserQuery->fetch())){   
+            // return false to the controllers
+            // return false;
+            //PETER: the response here is sent to AJAX and AJAX expects a JSON
+            // These 2 have to be separated to show something meaningful to the user
+            // we gotta tell them if the email is already in use of if the username is already in use
+            // specifically.
+            echo '{"Error":"duplicating username or email"}';
+            exit;  
+        }
+
+
+
         $sQuery = $this->db->prepare('INSERT INTO users
          VALUES(null, :userName, :hashed_password, :email, :date_created, :user_role, :active )');
         $sQuery->bindValue(':userName',$username );
@@ -22,11 +40,31 @@ class Users extends Model {
         $sQuery->bindValue(':user_role', 4 );
         $sQuery->bindValue(':active', 0 );
         $sQuery->execute();
-       if( $sQuery->rowCount() ){
+        if( $sQuery->rowCount() ){
            echo '{"message":"success", "text":"user created"}';
            exit;
-       }
-       echo '{ "message":"error"}';
+        }
+        echo '{"Error":"user was not created"}';
+    }
+
+    // :MORTIMUS the results of function  will be used to check if the username exist or not
+    // the function takes the username from table
+    public function select_username($username){
+        $sQuery = $this->db->prepare('SELECT username from users WHERE username = :usersname');
+        $sQuery->bindValue(':usersname', $username);
+        $sQuery->execute();
+        $aUser = $sQuery->fetchAll();
+       
+        return $aUser;
+    }
+
+    public function select_username_and_password($username){
+        $sQuery = $this->db->prepare('SELECT id,username,password_hashed,email  from users WHERE username = :usersname');
+        $sQuery->bindValue(':usersname', $username);
+        $sQuery->execute();
+        $aUser = $sQuery->fetchAll();
+       
+        return $aUser;
     }
 }
 // for testing

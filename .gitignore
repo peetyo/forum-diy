@@ -72,3 +72,8 @@ includes/config/database.php
 .idea/workspace.xml
 .idea
 .idea/watcherTasks.xml
+static/css/.sass-cache
+
+# Ignore PrePros
+
+prepros-6.config

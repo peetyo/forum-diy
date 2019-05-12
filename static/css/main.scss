@@ -4,36 +4,61 @@ That's the main SCSS file
 For the file watcher, please remember to include --style compressed in the arguments
 
  */
+//fonts
+@import url('https://fonts.googleapis.com/css?family=Lato');
+$lato: 'Lato', sans-serif;
 
 // Our colors
 $offWhite: #f1f1f1;
+$grey: #6e6e6e;
 $teal: #009688;
 $teal400: #26A69A;
 $teal600: #00897B;
-$tealA400: #1DE9B6;
+$darkBlue: #2c3e50;
 
-$amber: #FFC107;
+$cat1: rgb(255, 170, 0);
+$cat2:  rgb(26, 72, 111);
+$cat3: rgb(64, 151, 137);
+$primary: $teal600  ;
+$secondary: $darkBlue;
 
-$primary: $teal;
-$secondary: $amber;
-$accent: $tealA400;
+
 
 
 body {
   background: $offWhite;
+  font-family: $lato;
+  
 }
 
 .navbar-color{
-  background-color: $primary !important;
+  background-color: $primary;
+  color: $offWhite;
 }
 
-.login-form{
+.navbar-brand img{
+  width: 120px;
+}
+
+
+
+.login-form {
   margin-right: unset !important;
 }
 
 .btn-login{
-  background-color: white;
+  background-color: transparent;
+  border: 1px solid white;
+  color: $offWhite;
   margin-right: 5px;
+}
+
+.btn-logout{
+  background-color: white;
+}
+.btn-signup{
+  color: $primary;
+  background-color: white;
 }
 a{
   color: black;
@@ -50,39 +75,95 @@ span#sign-up:hover{
 }
 
 
-.search-bar{
-  background-color: $secondary;
+.search {
+  padding: 80px 0 80px 0;
+  justify-content: center;
+ display: inline-flex;
 }
 
+.btn-secondary{
+  background-color: $darkBlue;
+}
+
+.horizontal-line {
+  height: 1 px;
+  padding-bottom: 24px;
+  margin: 0px;
+  
+}
 // Category card box
-.card {
+.cards-container{
+  padding: 36px 0 48px 0;
+
+}
+
+.card-1 {
   background: #fff;
-  border-radius: 2px;
-  //display: inline-block;
-  height: 300px;
+  border-radius: 5px;
+  height: 250px;
   margin: 1rem;
-  //position: relative;
   width: 300px;
-
   display:flex;
-  //align-items: flex-end;
   align-content: flex-end;
-
-  .card-1 {
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
-  }
-
-  .card-1:hover {
+  justify-content: center;
+  padding: 16px;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.25);
+  font-size: 16px;
+  &:hover{
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
   }
 }
 
-.bottom-text{
-  position: relative;
-  top: 70%;
-  left: 5%;
+  .img-container{
+    text-align: center;
+    padding-top:20px;
+  }
+  .card-img {
+  margin: 0 auto;
+  width: 80px;
+  }
+
+  .card-body h4{
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    &:hover{
+      cursor: pointer;
+      text-decoration: none;
+    }
+  }
+
+  .card-body p{
+    color: $grey;
+    font-size: 14px;
+  }
+
+//category 1 coloring 
+.cat1-line{
+    background-color: $cat1;
+  }
+.cat1-text{
+    color: $cat1;
+  }
+
+//category 2 
+.cat2-line{
+  background-color: $cat2;
 }
+.cat2-text{
+  color: $cat2;
+}
+
+//category3
+.cat3-line{
+  background-color: $cat3;
+}
+
+.cat3-text{
+  color: $cat3;
+}
+
+
 
 
 // Footer

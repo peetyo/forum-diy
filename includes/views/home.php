@@ -6,46 +6,65 @@
 
     <section class="container">
         <div class="row">
-            <div class="col-12">
-                <h1>Welcome to <?= $appName ?></h1>
-                <p>CSS is <?=$pageCss?> and JS is <?=$pageJs?></p>
-            </div>
+
         </div>
-        <div class="row d-flex justify-content-center">
+        <div
+         class="row cards-container d-flex justify-content-center">
             <!-- Squared categories start
                 Should be fetch
              -->
-            <div class="card card-1 p-3">
-                <div class="bottom-text">
-                    <h2>Category name</h2>
+             <a href="category?cat=3">
+                <div class="card card-1 border-light mb-3">
+                    <div class="img-container">
+                    <img src="./static/assets/house.png" class="card-img card-img-top" alt="">
+                    </div>
+                
+                    <div class="card-body">
+                        <hr class="cat1-line">
+                        <h4 class="cat1-text">Home</h4>
+                        <p class="card-text">Click this if you're interested</p>
+
+                    </div>
                 </div>
-            </div>
-            <div class="card card-1 p-3">
-                <div class="bottom-text">
-                    <h2>Category name</h2>
+             </a>
+
+             <a href="category?cat=4">
+             <div class="card card-1 border-light mb-3">
+                 <div class="img-container">
+                 <img src="./static/assets/search.png" class="card-img card-img-top" alt="">
+                 </div>
+               
+                <div class="card-body">
+                    <hr class="cat2-line">
+                    <h4 class="cat2-text">Office</h4>
+                    <p class="card-text">Click this if you're interested</p>
+
                 </div>
-            </div>
-            <div class="card card-1 p-3">
-                <div class="bottom-text">
-                    <h2>Category name</h2>
+             </div>
+             </a>
+             
+             <a href="#">
+                <div class="card card-1 border-light mb-3">
+                    <div class="img-container">
+                    <img src="./static/assets/route.png" class="card-img card-img-top" alt="">
+                    </div>
+                
+                    <div class="card-body">
+                        <hr class="cat3-line">
+                        <h4 class="cat3-text">Travel</h4>
+                        <p class="card-text">Click this if you're interested</p>
+
+                    </div>
                 </div>
-            </div>
-            <div class="card card-1 p-3">
-                <div class="bottom-text">
-                    <h2>Category name</h2>
-                </div>
-            </div>
-            <div class="card card-1 p-3">
-                <div class="bottom-text">
-                    <h2>Category name</h2>
-                </div>
-            </div>
-            <div class="card card-1 p-3">
-                <div class="bottom-text">
-                    <h2>Category name</h2>
-                </div>
+             </a>
+
+
+             
+
+
             </div>
 
 
         </div>
     </section>
+
