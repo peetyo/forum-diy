@@ -20,12 +20,12 @@ class User_Controller extends Controller {
             exit;
         }
         // check lenght of user name
-        if(strlen($_POST['txtUserName']) < 4 || strlen($_POST['txtUserName']) > 20){
+        if(strlen($_POST['txtUsername']) < 4 || strlen($_POST['txtUsername']) > 20){
             echo '{"status":"0","message":"Username should be between 6 and 20 character"}';
             exit;
         }
         //Preventing the user to create admin or moderator 
-        if($_POST['txtUserName'] === 'admin' || $_POST['txtUserName'] === 'moderator' ){
+        if($_POST['txtUsername'] === 'admin' || $_POST['txtUsername'] === 'moderator' ){
             echo '{"status":"0","message":"Reservated usernames"}';
             exit;
         }
@@ -35,7 +35,7 @@ class User_Controller extends Controller {
             exit;
         }
         // check if the fields are empty
-        if(empty($_POST['txtUserName']) ||
+        if(empty($_POST['txtUsername']) ||
             empty($_POST['txtEmail']) ||
             empty($_POST['txtPassword']) ||
             empty($_POST['txtConfirmPassword']) ){
@@ -52,7 +52,7 @@ class User_Controller extends Controller {
         //hash the password
         $user_password = password_hash($_POST['txtPassword'], PASSWORD_BCRYPT);
         // trim variables
-        $username = $_POST['txtUserName'];
+        $username = $_POST['txtUsername'];
         $email = trim($_POST['txtEmail']);
            // try catch stament
         try{
@@ -81,12 +81,12 @@ class User_Controller extends Controller {
         exit;
     }
     // check lenght of user name
-    if(strlen($_POST['txtUserName']) < 4 || strlen($_POST['txtUserName']) > 20){
+    if(strlen($_POST['txtUsername']) < 4 || strlen($_POST['txtUsername']) > 20){
         echo '{"Error":"Wrong username or password"}';
         exit;
     }
     // trim variables
-    $username = $_POST['txtUserName'];
+    $username = $_POST['txtUsername'];
     $user_model = new Users;
 
     try{
