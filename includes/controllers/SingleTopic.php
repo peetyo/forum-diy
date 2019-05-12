@@ -1,7 +1,5 @@
 <?php
 
-use Controller;
-
 class SingleTopic extends Controller
 {
     public static function GetTopic()

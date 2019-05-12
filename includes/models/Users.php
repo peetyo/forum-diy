@@ -14,8 +14,9 @@ class Users extends Model {
     //prepared insert stament, whcih is used in sign_up controller
     public function sign_up_user($username, $hashed_pass, $email ){
 
-        $checkUserQuery = $this->db->prepare( 'SELECT username, email FROM users WHERE email = :email');
+        $checkUserQuery = $this->db->prepare( 'SELECT username, email FROM users WHERE email = :email OR username = :username');
         $checkUserQuery->bindValue( ':email', $email);
+        $checkUserQuery->bindValue( ':username', $username);
         $checkUserQuery->execute();
         // check if the user exists in the dabase
         if(!empty($checkUserQuery->fetch())){   
@@ -25,7 +26,7 @@ class Users extends Model {
             // These 2 have to be separated to show something meaningful to the user
             // we gotta tell them if the email is already in use of if the username is already in use
             // specifically.
-            echo '{"Error":"duplicating username or email"}';
+            echo '{"status":"0","text":"Duplicating username or email"}';
             exit;  
         }
 
@@ -41,10 +42,10 @@ class Users extends Model {
         $sQuery->bindValue(':active', 0 );
         $sQuery->execute();
         if( $sQuery->rowCount() ){
-           echo '{"message":"success", "text":"user created"}';
+           echo '{"status":"1", "text":"User created"}';
            exit;
         }
-        echo '{"Error":"user was not created"}';
+        echo '{"status":"0","text":"User was not created"}';
     }
 
     // :MORTIMUS the results of function  will be used to check if the username exist or not
