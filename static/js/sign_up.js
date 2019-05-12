@@ -1,9 +1,9 @@
 //function for displaying the error message if the signup is invalid
-function displayError(text) {
+function displayError(message) {
   
   document.getElementById("err-msg").style.display ="block";
-  if(text){
-    document.querySelector("#err-msg p").textContent = text;
+  if(message){
+    document.querySelector("#err-msg p").textContent = message;
   }
 }
 
@@ -30,7 +30,7 @@ $('#frmSignup').submit(function(e){
         }else if(jData.status == 0){
           //TODO create a toast message or something like that ?
           //$('h1').text('Incorrect login')
-          displayError(jData.text);
+          displayError(jData.message);
         }else{
           // when we get a php error and pass it in the response text
           displayError('Internal Server error');
