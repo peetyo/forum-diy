@@ -1,6 +1,3 @@
-console.log('init')
-
-
 const contentTextbox = new SimpleMDE({element: $("#content")[0]});
 contentTextbox.value("This text will appear in the editor");
 
@@ -11,7 +8,6 @@ to be send to the server to get verified.
  */
 $(document).on('click', '#btnSubmit', function (event) {
     event.preventDefault();
-    console.log('submit')
     // Check if fields are empty and valid
     // try{
     //     if($('#topic_name').val()=='') throw 'Topic cannot be empty';
@@ -35,13 +31,15 @@ $(document).on('click', '#btnSubmit', function (event) {
         and, if successful, the ID so we can go directly to the page.
         Otherwise, the error code. It should be a little bit more specific
          */
-        console.log('response', response);
+        // console.log('response', response);
         if (response.status == 1) {
             // redirect to the proper page
             displaySuccess();
             window.location.href = "topic?id=" + response.topic;
         } else if(response.status == 0){
-            displayError(response.text);
+            console.log('status 0')
+            console.log(response.message)
+            displayError(response.message);
         } else{
             displayError('Internal Server error')
         }
@@ -53,8 +51,12 @@ $(document).on('click', '#btnSubmit', function (event) {
 
 
 //function for displaying the error message if the signup is invalid
-function displayError() {
-    document.getElementById("err-msg").style.display = "block";
+function displayError(message) {
+  
+    document.getElementById("err-msg").style.display ="block";
+    if(message){
+      document.querySelector("#err-msg p").textContent = message;
+    }
 }
 
 //function for displaying the success message
