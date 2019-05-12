@@ -13,14 +13,14 @@ $(document).on('click', '#btnSubmit', function (event) {
     event.preventDefault();
     console.log('submit')
     // Check if fields are empty and valid
-    try{
-        if($('#topic_name').val()=='') throw 'Topic cannot be empty';
-        if($('#category_id').val()=='') throw 'Choose category';
-        if(contentTextbox.value()=='') throw 'Write some content';
-    } catch (e) {
-        console.log(e);
-        return;
-    }
+    // try{
+    //     if($('#topic_name').val()=='') throw 'Topic cannot be empty';
+    //     if($('#category_id').val()=='') throw 'Choose category';
+    //     if(contentTextbox.value()=='') throw 'Write some content';
+    // } catch (e) {
+    //     console.log(e);
+    //     return;
+    // }
 
     const form = $('#new-topic-form').serialize() + '&content=' + contentTextbox.value()
     // Make an ajax call
@@ -40,8 +40,10 @@ $(document).on('click', '#btnSubmit', function (event) {
             // redirect to the proper page
             displaySuccess();
             window.location.href = "topic?id=" + response.topic;
-        } else {
-            displayError();
+        } else if(response.status == 0){
+            displayError(response.text);
+        } else{
+            displayError('Internal Server error')
         }
     });
 })
@@ -57,5 +59,6 @@ function displayError() {
 
 //function for displaying the success message
 function displaySuccess() {
+    document.getElementById("err-msg").style.display = "none";
     document.getElementById("succ-msg").style.display = "block";
 }
