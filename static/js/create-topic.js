@@ -37,8 +37,6 @@ $(document).on('click', '#btnSubmit', function (event) {
             displaySuccess();
             window.location.href = "topic?id=" + response.topic;
         } else if(response.status == 0){
-            console.log('status 0')
-            console.log(response.message)
             displayError(response.message);
         } else{
             displayError('Internal Server error')
