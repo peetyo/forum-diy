@@ -9,14 +9,18 @@ to be send to the server to get verified.
 $(document).on('click', '#btnSubmit', function (event) {
     event.preventDefault();
     // Check if fields are empty and valid
-    // try{
-    //     if($('#topic_name').val()=='') throw 'Topic cannot be empty';
-    //     if($('#category_id').val()=='') throw 'Choose category';
-    //     if(contentTextbox.value()=='') throw 'Write some content';
-    // } catch (e) {
-    //     console.log(e);
-    //     return;
-    // }
+    try{
+        if($('#topic_name').val()=='') throw 'Add topic name';
+        if($('#category_id').val()=='') throw 'Choose category';
+        if(contentTextbox.value()=='') throw 'Write some content for your topic';
+
+        if($('#topic_name').val().length < 5) throw 'Topic name should be at least 5 characters';
+        if($('#topic_name').val().length > 255) throw 'Topic name should be less than 255 characters';
+        if(contentTextbox.value().length < 5) throw 'Topic content should be at least 5 characters';
+    } catch (e) {
+        displayError(e)
+        return;
+    }
 
     const form = $('#new-topic-form').serialize() + '&content=' + contentTextbox.value()
     // Make an ajax call

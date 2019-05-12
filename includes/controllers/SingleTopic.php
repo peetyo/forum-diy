@@ -82,7 +82,10 @@ class SingleTopic extends Controller
     }
 
     public static function crete_topic(){
-
+        if (!hash_equals($_SESSION['key'], $_POST['token'])){
+            echo '{"status":"0","message":"Invalid token"}';
+            exit;
+        }
         // Validate all this input
         // NOTE: MATCH THE LENGTHS FROM THE DATABASE
         // $_POST['topic_name'] = 'Test Topic';
