@@ -6,7 +6,7 @@
         <div class="col-md-8">
             <!-- Error message-->
             <div id="err-msg" class="alert alert-warning" style="display:none;">
-                <p>Something went wrong, please try again.</p>
+                <p style="margin: 0">Something went wrong, please try again.</p>
             </div>
 
             <!-- Successful signup message-->

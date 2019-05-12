@@ -1,6 +1,10 @@
 //function for displaying the error message if the signup is invalid
-function displayError() {
+function displayError(text) {
+  
   document.getElementById("err-msg").style.display ="block";
+  if(text){
+    document.querySelector("#err-msg p").textContent = text;
+  }
 }
 
 //function for displaying the success message
@@ -17,19 +21,20 @@ $('#frmSignup').submit(function(e){
       data: $('#frmSignup').serialize(),
       dataType: "JSON"
     }).always(function(jData){
-      console.log(jData)
-        if(jData.Error){
-            //TODO create a toast message or something like that ?
-            console.log(jData.Error)
-            //$('h1').text('Incorrect login')
-            displayError();
 
-        }else{
+        if(jData.status == 1){
           console.log('user created successfuly');
+          document.getElementById("err-msg").style.display ="none";
           displaySuccess();
-         // setTimeout("location.href = './index.php';", 3000)
+          setTimeout("location.href = './index.php';", 2000)
+        }else if(jData.status == 0){
+          //TODO create a toast message or something like that ?
+          //$('h1').text('Incorrect login')
+          displayError(jData.text);
+        }else{
+          // when we get a php error and pass it in the response text
+          displayError('Internal Server error')
         }
-  
     })
   })
 
