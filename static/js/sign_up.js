@@ -55,11 +55,7 @@ $('#frmSignup').submit(function(e){
           displayError(jData.message);
         }else{
           // when we get a php error and pass it in the response text
-<<<<<<< HEAD
           displayError('Internal Server error')
-=======
-          displayError('Internal Server error');
->>>>>>> hotfix/signup-error-handling
         }
     })
   })
