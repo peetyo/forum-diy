@@ -21,7 +21,7 @@
 <div class="form-group">
     <label>Username</label>
     <p>Username should be between 6-20 characters. </p>
-    <input name="txtUserName" type="text"  class="form-control" placeholder="Enter username">
+    <input name="txtUsername" type="text"  class="form-control" placeholder="Enter username">
   </div>
   <div class="form-group">
     <label>Email address</label>
