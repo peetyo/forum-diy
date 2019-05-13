@@ -17,15 +17,21 @@ $('#frmSignup').submit(function(e){
     e.preventDefault()
 
       // try and catch to handle frontend validation
+      // TODO: use switch statements?
       try{
         if($('input[name = "txtUsername"]').val() =='') throw 'Add username';
         if($('input[name = "txtEmail"]').val() =='') throw 'Add email';
         if($('#frmSignup input[name = "txtPassword"]').val() =='') throw 'Add password';
-        // if($('input[name = "txtConfirmPassword"]').val() =='') throw 'Confirm password';
+        if($('input[name = "txtConfirmPassword"]').val() =='') throw 'Confirm password';
 
-        // if($('#topic_name').val().length < 5) throw 'Topic name should be at least 5 characters';
-        // if($('#topic_name').val().length > 255) throw 'Topic name should be less than 255 characters';
-        // if(contentTextbox.value().length < 5) throw 'Topic content should be at least 5 characters';
+        if($('input[name = "txtUsername"]').val().length < 6) throw 'Username should be at least 6 characters';
+        if($('input[name = "txtUsername"]').val().length > 20) throw 'Username should be less than 20 characters';
+
+        if($('#frmSignup input[name = "txtPassword"]').val().length < 6) throw 'Password should be at least 6 characters';
+        if($('#frmSignup input[name = "txtPassword"]').val().length > 20) throw 'Password should be less than 20 characters';
+        
+        if($('#frmSignup input[name = "txtPassword"]').val() != $('input[name = "txtConfirmPassword"]').val()) throw 'Passwords don\'t match';
+
       } catch (e) {
         displayError(e)
         return;
