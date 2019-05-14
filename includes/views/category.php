@@ -1,3 +1,6 @@
+<?php
+$Parsedown = new Parsedown();
+?>
 <section class="container">
    
    <!-- Not sure we need this row section, could be deleted -->
@@ -74,7 +77,7 @@
                                 <div class="panel-heading">
                                     <h4>'.htmlentities($topic['topic_name']).'</h4>
                                 </div>
-                                    <p>'.htmlentities($topic['content']).'...</p>
+                                    <p>'.$Parsedown->text(htmlentities($topic['content'])).'...</p>
                         </div>
                         <div class="thread-info">
                             <div class="thread-info-avatar">
