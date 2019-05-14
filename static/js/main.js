@@ -11,15 +11,16 @@
      data: $('#loginfrm').serialize(),
      dataType: "JSON"
    }).always(function(jData){
-       if(jData.Error){
-           //TODO create a toast message or something like that ?
-           console.log(jData.Error)
-       }else{
-          // PETER: Removing the form and the signup button immediately on successful login.  	
-         $('#sign-up').remove();
+    if (jData.status == 1) {
+      $('#sign-up').remove();
          $('#loginfrm').remove();
          $('#navbarSupportedContent').append('<button class="btn btn-logout my-2 my-sm-0" type="submit" id="logout" >Logout</button>')
-       }
+    } else if(jData.status == 0){
+      console.log(jData.message)
+    } else{
+      console.log('Internal Server error')
+    }
+
    })
  })
 
