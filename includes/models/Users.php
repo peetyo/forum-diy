@@ -26,7 +26,7 @@ class Users extends Model {
             // These 2 have to be separated to show something meaningful to the user
             // we gotta tell them if the email is already in use of if the username is already in use
             // specifically.
-            echo '{"status":"0","text":"Duplicating username or email"}';
+            echo '{"status":"0","message":"Duplicating username or email"}';
             exit;  
         }
 
@@ -42,10 +42,10 @@ class Users extends Model {
         $sQuery->bindValue(':active', 0 );
         $sQuery->execute();
         if( $sQuery->rowCount() ){
-           echo '{"status":"1", "text":"User created"}';
+           echo '{"status":"1", "message":"User created"}';
            exit;
         }
-        echo '{"status":"0","text":"User was not created"}';
+        echo '{"status":"0","message":"User was not created"}';
     }
 
     // :MORTIMUS the results of function  will be used to check if the username exist or not

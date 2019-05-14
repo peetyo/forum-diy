@@ -4,42 +4,42 @@ class User_Controller extends Controller {
    public static function create_user(){
        // check the token integrity
        if (!hash_equals($_SESSION['key'], $_POST['token'])){
-           echo '{"status":"0","text":"Invalid token"}';
+           echo '{"status":"0","message":"Invalid token"}';
            exit;
        }
 
 
         // check if passwords mathces
         if($_POST['txtPassword'] != $_POST['txtConfirmPassword']){
-            echo '{"status":"0","text":"Passwords don\'t match"}';
+            echo '{"status":"0","message":"Passwords don\'t match"}';
             exit;
         }
         // check lenght of password
         if(strlen($_POST['txtPassword']) < 6 || strlen($_POST['txtPassword']) > 20){
-            echo '{"status":"0","text":"Password should be between 6 and 20 character"}';
+            echo '{"status":"0","message":"Password should be between 6 and 20 character"}';
             exit;
         }
         // check lenght of user name
-        if(strlen($_POST['txtUserName']) < 4 || strlen($_POST['txtUserName']) > 20){
-            echo '{"status":"0","text":"Username should be between 6 and 20 character"}';
+        if(strlen($_POST['txtUsername']) < 4 || strlen($_POST['txtUsername']) > 20){
+            echo '{"status":"0","message":"Username should be between 6 and 20 character"}';
             exit;
         }
         //Preventing the user to create admin or moderator 
-        if($_POST['txtUserName'] === 'admin' || $_POST['txtUserName'] === 'moderator' ){
-            echo '{"status":"0","text":"Reservated usernames"}';
+        if($_POST['txtUsername'] === 'admin' || $_POST['txtUsername'] === 'moderator' ){
+            echo '{"status":"0","message":"Reservated usernames"}';
             exit;
         }
         // check if it valid email
         if(!filter_var($_POST['txtEmail'],FILTER_VALIDATE_EMAIL)){
-            echo '{"status":"0","text":"Enter valid email"}';
+            echo '{"status":"0","message":"Enter valid email"}';
             exit;
         }
         // check if the fields are empty
-        if(empty($_POST['txtUserName']) ||
+        if(empty($_POST['txtUsername']) ||
             empty($_POST['txtEmail']) ||
             empty($_POST['txtPassword']) ||
             empty($_POST['txtConfirmPassword']) ){
-                echo '{"status":"0","text":"Please fill all the fields"}';
+                echo '{"status":"0","message":"Please fill all the fields"}';
                 exit;
         } 
         //TODO add more checking if the username is taken or not same for the email!!!
@@ -52,14 +52,14 @@ class User_Controller extends Controller {
         //hash the password
         $user_password = password_hash($_POST['txtPassword'], PASSWORD_BCRYPT);
         // trim variables
-        $username = $_POST['txtUserName'];
+        $username = $_POST['txtUsername'];
         $email = trim($_POST['txtEmail']);
            // try catch stament
         try{
             $user_class = new Users;
             $user_class->sign_up_user($username, $user_password,$email );
         }catch( PDOException $e ){
-            echo '{"status":"0","text":"Something went wrong, please contact the support"}';
+            echo '{"status":"0","message":"Something went wrong, please contact the support"}';
             //Saving the errors in txt file to keep track what happend in case something breaks
             $error_log = '{"Eror": '.$e.', "line": '.__LINE__.'}';
             $sign_up_log = fopen('./includes/logs/sign_up.txt', "w") or die("Unable to open file!");
@@ -81,12 +81,12 @@ class User_Controller extends Controller {
         exit;
     }
     // check lenght of user name
-    if(strlen($_POST['txtUserName']) < 4 || strlen($_POST['txtUserName']) > 20){
+    if(strlen($_POST['txtUsername']) < 4 || strlen($_POST['txtUsername']) > 20){
         echo '{"Error":"Wrong username or password"}';
         exit;
     }
     // trim variables
-    $username = $_POST['txtUserName'];
+    $username = $_POST['txtUsername'];
     $user_model = new Users;
 
     try{
@@ -122,7 +122,7 @@ class User_Controller extends Controller {
         exit; 
     }
     // TODO later create another stament to check if the user is active or not 
-    session_start();
+    
     $_SESSION['User'] = $verife_user[0];
     echo '{"Success":"User logged in"}';
     // print_r($_SESSION['User']);
