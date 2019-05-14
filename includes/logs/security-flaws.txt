@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-UserMail: peter12354654645@yahooo.bg password: 123456 
-=======
-UserMail: 1232131@a.com password: 123456 
->>>>>>> hotfix/signup-error-handling
+UserMail: peterhhh@a.com password: 123456 

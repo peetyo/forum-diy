@@ -19,13 +19,13 @@ $('#frmSignup').submit(function(e){
       // try and catch to handle frontend validation
       // TODO: use switch statements?
       try{
-        if($('input[name = "txtUsername"]').val() =='') throw 'Add username';
+        if($('#frmSignup input[name = "txtUsername"]').val() =='') throw 'Add username';
         if($('input[name = "txtEmail"]').val() =='') throw 'Add email';
         if($('#frmSignup input[name = "txtPassword"]').val() =='') throw 'Add password';
         if($('input[name = "txtConfirmPassword"]').val() =='') throw 'Confirm password';
 
-        if($('input[name = "txtUsername"]').val().length < 6) throw 'Username should be at least 6 characters';
-        if($('input[name = "txtUsername"]').val().length > 20) throw 'Username should be less than 20 characters';
+        if($('#frmSignup input[name = "txtUsername"]').val().length < 6) throw 'Username should be at least 6 characters';
+        if($('#frmSignup input[name = "txtUsername"]').val().length > 20) throw 'Username should be less than 20 characters';
 
         if($('#frmSignup input[name = "txtPassword"]').val().length < 6) throw 'Password should be at least 6 characters';
         if($('#frmSignup input[name = "txtPassword"]').val().length > 20) throw 'Password should be less than 20 characters';
