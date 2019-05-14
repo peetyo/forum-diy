@@ -39,6 +39,7 @@
                     <textarea id="content"></textarea>
                 </div>
                 <div class="form-group">
+                    <input type="hidden" name="token" value="<?= $csrf ?>">
                     <button class="btn btn-primary" id="btnSubmit">Submit
                     </button>
                 </div>
