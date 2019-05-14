@@ -122,7 +122,7 @@ class User_Controller extends Controller {
         exit; 
     }
     // TODO later create another stament to check if the user is active or not 
-    session_start();
+    
     $_SESSION['User'] = $verife_user[0];
     echo '{"Success":"User logged in"}';
     // print_r($_SESSION['User']);
