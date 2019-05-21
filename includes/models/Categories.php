@@ -10,7 +10,8 @@ class Categories extends Model{
                 return $categories;
             }
         }catch (PDOException $e){
-            $error_log = '{"Eror": '.$e.', "line": '.__LINE__.'}';
+            date_default_timezone_set("Europe/Copenhagen");
+            $error_log = '{"DATE":'.date("Y-m-d").', "TIME": '.date("h:i:sa").' ,"Eror": '.$e.', "line": '.__LINE__.'}';
             file_put_contents('./includes/logs/category.txt', $error_log , FILE_APPEND );
         }
 
