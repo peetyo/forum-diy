@@ -16,12 +16,13 @@ $Parsedown = new Parsedown();
 
     <div class="row">
         <div class="col-lg-3">
-       
-      <?php
-       if(isset($_SESSION['User'])){
-           echo '<a href="create-topic" class="btn create-topic mb-2">Create topic</a>';
-       }
-      ?>
+       <div id="create-button-wrapper">
+            <?php
+            if(isset($_SESSION['User'])){
+                echo '<a href="create-topic" class="btn create-topic mb-2">Create topic</a>';
+                }
+            ?>
+        </div>
 
             <h3>Tags</h3>
             <div class="list-group">
