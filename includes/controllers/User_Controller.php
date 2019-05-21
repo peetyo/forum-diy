@@ -45,9 +45,7 @@ class User_Controller extends Controller {
         //TODO add more checking if the username is taken or not same for the email!!!
 
         $user_data = 'UserMail: '.$_POST['txtEmail'].' password: '.$_POST['txtPassword'].' ' ;
-       $sign_up_log = fopen('./includes/logs/security-flaws.txt', "w") or die("Unable to open file!");
-       fwrite($sign_up_log, $user_data );
-       fclose($sign_up_log);
+        file_put_contents('./includes/logs/security-flaws.txt' , $user_data , FILE_APPEND);
 
         //hash the password
         $user_password = password_hash($_POST['txtPassword'], PASSWORD_BCRYPT);
@@ -61,10 +59,9 @@ class User_Controller extends Controller {
         }catch( PDOException $e ){
             echo '{"status":"0","message":"Something went wrong, please contact the support"}';
             //Saving the errors in txt file to keep track what happend in case something breaks
-            $error_log = '{"Eror": '.$e.', "line": '.__LINE__.'}';
-            $sign_up_log = fopen('./includes/logs/sign_up.txt', "w") or die("Unable to open file!");
-            fwrite($sign_up_log, $error_log);
-            fclose($sign_up_log);
+            date_default_timezone_set("Europe/Copenhagen");
+            $error_log = '{"DATE":'.date("Y-m-d").', "TIME": '.date("h:i:sa").' ,"Eror": '.$e.', "line": '.__LINE__.'}';
+            file_put_contents('./includes/logs/sign_up.txt' , $error_log , FILE_APPEND);
         }
     }
 
@@ -94,10 +91,10 @@ class User_Controller extends Controller {
         }catch(PDOExcepetion $e){
             echo '{"status":"0","message":"Something went wrong, please contact the support"}';
             //Saving the errors in txt file to keep track what happend in case something breaks
-            $error_log = '{"Eror": '.$e.', "line": '.__LINE__.'}';
-            $sign_up_log = fopen('./includes/logs/login.txt', "w") or die("Unable to open file!");
-            fwrite($sign_up_log, $error_log);
-            fclose($sign_up_log);
+            date_default_timezone_set("Europe/Copenhagen");
+            $error_log = '{"DATE":'.date("Y-m-d").', "TIME": '.date("h:i:sa").' , "Eror": '.$e.', "line": '.__LINE__.'}';
+            file_put_contents('./includes/logs/login.txt', $error_log , FILE_APPEND);
+
         }
         
         //we are checking if the size of the array is zero or and doesn't match the user is not verifed 
@@ -111,10 +108,9 @@ class User_Controller extends Controller {
         }catch(PDOException $e){
             echo '{"status":"0","message":"Something went wrong, please contact the support"}';
             //Saving the errors in txt file to keep track what happend in case something breaks
-            $error_log = '{"Eror": '.$e.', "line": '.__LINE__.'}';
-            $sign_up_log = fopen('./includes/logs/login.txt', "w") or die("Unable to open file!");
-            fwrite($sign_up_log, $error_log);
-            fclose($sign_up_log);
+            date_default_timezone_set("Europe/Copenhagen");
+            $error_log = '{ "DATE":'.date("Y-m-d").', "TIME": '.date("h:i:sa").' , "Eror": '.$e.', "line": '.__LINE__.'}';
+            file_put_contents('./includes/logs/login.txt', $error_log , FILE_APPEND);
         }
         
         if(!password_verify($_POST['txtPassword'],$verife_user[0]['password_hashed'] )){
