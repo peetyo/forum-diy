@@ -96,7 +96,9 @@ class Topics extends Model
               return 'Sorry, no topics found in this category';
         }catch(PDOException $error){
             // Correct this error for production
-            return 'Sorry, we are experiencing technical issues. Try again later.';
+            echo '{"status": 0, "message": "Sorry, something went wrong. Try again later."}';
+            $error_log = '{"Eror": '.$error.', "line": '.__LINE__.'}';
+            file_put_contents('./includes/logs/topics.txt', $error_log , FILE_APPEND );
             // return $error; Add the error log!
         }
 
@@ -126,6 +128,9 @@ class Topics extends Model
             }catch(PDOException $error){
 
                 echo '{"status": 0, "message": "Sorry, something went wrong. Try again later."}';
+            date_default_timezone_set("Europe/Copenhagen");
+            $error_log = '{"DATE":'.date("Y-m-d").', "TIME": '.date("h:i:sa").' , "Eror": '.$error.', "line": '.__LINE__.'}';
+            file_put_contents('./includes/logs/topics.txt', $error_log , FILE_APPEND );
                 exit();
             }
     }
