@@ -62,28 +62,31 @@
             <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
 
                 <!-- Content -->
-                <h6 class="text-uppercase font-weight-bold"><?= $appName ?></h6>
+                <h6 class="text-uppercase font-weight-bold">Project made by:</h6>
                 <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-                <p>Project made by: </p>
-
-            </div>
+                <p>Petar Todorov</p>
+                <p>Michal Pawliczki</p>
+                <p>Martin Grenchev</p>
+                <p>Berenike Hegedus</p>
+                </div>
             <!-- Grid column -->
 
             <!-- Grid column -->
             <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
 
                 <!-- Links -->
-                <h6 class="text-uppercase font-weight-bold">Accound</h6>
+                <h6 class="text-uppercase font-weight-bold">Account</h6>
                 <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
                 <p>
-                    <a href="#!">My Account</a>
+                    <a href="sign-up">Sign up</a>
                 </p>
                 <p>
-                    <a href="#!">Help</a>
+                    <a href="index.php">Log in</a>
                 </p>
                 <p>
-                    <a href="#!">Logout</a>
+                    <a href="logout">Log out</a>
                 </p>
+
 
 
             </div>
@@ -93,20 +96,24 @@
             <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
 
                 <!-- Links -->
-                <h6 class="text-uppercase font-weight-bold">Useful links</h6>
+                <h6 class="text-uppercase font-weight-bold"><?= $appName ?></h6>
                 <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
                 <p>
-                    <a href="#!">Your Account</a>
+                    <a href="#!">Back to Home</a>
                 </p>
                 <p>
-                    <a href="#!">Become an Affiliate</a>
+                    <a href="create-topic">Create new post</a>
                 </p>
                 <p>
-                    <a href="#!">Shipping Rates</a>
+                    <a href="category?cat=3">Category: Home</a>
                 </p>
                 <p>
-                    <a href="#!">Help</a>
+                    <a href="category?cat=4">Category: Office</a>
                 </p>
+                <p>
+                    <a href="category?cat=5 ">Category: Travel</a>
+                </p>
+
 
             </div>
             <!-- Grid column -->
