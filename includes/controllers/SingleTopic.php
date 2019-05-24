@@ -34,7 +34,7 @@ class SingleTopic extends Controller
          * is saved in $objTopic
          */
         $topic = new Topics();
-        $objTopic = $topic->get_topic($iTopicId, $iOffset);
+        $objTopic = $topic->get_topic_with_comments($iTopicId, $iOffset);
         if ($objTopic == false) {
             self::CreateView('error', '');
         }
@@ -81,36 +81,36 @@ class SingleTopic extends Controller
 
     }
 
-    public static function crete_topic(){
-        if (!hash_equals($_SESSION['key'], $_POST['token'])){
+    public static function crete_topic()
+    {
+        if (!hash_equals($_SESSION['key'], $_POST['token'])) {
             echo '{"status":"0","message":"Invalid token"}';
             exit;
         }
         // Validate all this input
         // NOTE: MATCH THE LENGTHS FROM THE DATABASE
         // $_POST['topic_name'] = 'Test Topic';
-        Validation::checkInput($_POST['topic_name'],'string',5,255);
-        
+        Validation::checkInput($_POST['topic_name'], 'string', 5, 255);
+
         // $_POST['category_id'] = 3;
         // NOTE: the form's option values are strings not integers 
-        Validation::checkInput($_POST['category_id'],'string',1,2);
-        
-        $_POST['user_id'] = (int)$_SESSION['User']['id'] ;
-        Validation::checkInput($_POST['user_id'],'integer','','');
-        
+        Validation::checkInput($_POST['category_id'], 'string', 1, 2);
+
+        $_POST['user_id'] = (int)$_SESSION['User']['id'];
+        Validation::checkInput($_POST['user_id'], 'integer', '', '');
+
         // $_POST['content'] = 'Test Topic Test Topic Test Topic Test Topic Test Topic';
-        Validation::checkInput($_POST['content'],'string',10,500);
-        
+        Validation::checkInput($_POST['content'], 'string', 10, 500);
+
         //$token = $_POST['token'];
         $aTopicData = $_POST;
         // echo $aTopicData['topic_name']; works
-      
 
 
         /*
          *  Pass the token in the function below
          */
-       
+
 //        if( BotValidation::Verify($token) == false){
 //            echo "Token was invalid";
 //            exit();
@@ -125,5 +125,111 @@ class SingleTopic extends Controller
          * or, when error
          * {"status":0}
          */
+    }
+
+    public static function edit_topic()
+    {
+        if (!hash_equals($_SESSION['key'], $_POST['token'])) {
+            echo '{"status":"0","message":"Invalid token"}';
+            exit;
+        }
+        // Validate all this input
+        // NOTE: MATCH THE LENGTHS FROM THE DATABASE
+        // $_POST['topic_name'] = 'Test Topic';
+        Validation::checkInput($_POST['topic_name'], 'string', 5, 255);
+
+        // $_POST['category_id'] = 3;
+        // NOTE: the form's option values are strings not integers
+        Validation::checkInput($_POST['category_id'], 'string', 1, 2);
+
+        $_POST['user_id'] = (int)$_SESSION['User']['id'];
+        Validation::checkInput($_POST['user_id'], 'integer', '', '');
+
+        // $_POST['content'] = 'Test Topic Test Topic Test Topic Test Topic Test Topic';
+        Validation::checkInput($_POST['content'], 'string', 10, 500);
+
+        //$token = $_POST['token'];
+        $aTopicData = $_POST;
+        // echo $aTopicData['topic_name']; works
+
+
+        /*
+         *  Pass the token in the function below
+         */
+
+//        if( BotValidation::Verify($token) == false){
+//            echo "Token was invalid";
+//            exit();
+//        }
+        $classTopic = new Topics();
+        $classTopic->create_topic($aTopicData);
+
+        /*
+         * Please pass id in return as a JSON
+         * Structure
+         * {"status":1, "message":"optional message", "topic":346}
+         * or, when error
+         * {"status":0}
+         */
+    }
+
+    public static function edit_topic_view()
+    {
+        //check if the user is logged in
+//        if(!$_SESSION['User']['id']){
+//            echo 'Not authorized';
+//            die();
+//        }
+        $iUserId = (int)$_SESSION['User']['id'];
+
+        //check passed ID
+        if (!isset($_GET['id'])) {
+            self::CreateView('error', '');
+        }
+        $iTopicId = $_GET['id'];
+
+        //make a call to the database to get the topic that matches logged in user
+        $topic = new Topics();
+        $objTopic = $topic->get_topic($iTopicId);
+
+        /*
+         * Check if user har rights to edit the post
+         * There are three scenarios
+         * 1 - owner of the post can edit the post.
+         * 2 - moderator can edt the post (edit info will be appended)
+         * 3 - admin can edit the post (edit info will be appended)
+         *
+         * Therefore we need to get user's information first
+         */
+        $user = new Users();
+        $userRoleId = $user->select_user_role_by_id($iUserId);
+        $roleId = $userRoleId['user_role_id'];
+
+        /*
+         * Privileges proposal:
+         * role id:
+         * - 5 - banned user
+         * - 4 - normal user
+         * - 2 - moderator
+         * - 1 - admin
+         */
+        if (
+            ($objTopic->topicData['user_id'] != $iUserId) &&
+            ($roleId != 2) &&
+            ($roleId != 1)
+        ) {
+            echo '{"status": 0, "message": "You have no rights to edit this post."}';
+            die();
+        }
+
+        // now, when we have the topic, we confirmed privileges,
+        // we can display the topic
+
+        if ($objTopic == false) {
+            self::CreateView('error', '');
+        }
+
+        //self:self::CreateView();
+
     }
 }

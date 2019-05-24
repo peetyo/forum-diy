@@ -3,7 +3,7 @@
 
 class Topics extends Model
 {
-    public function get_topic($iTopicId, $iOffset){
+    public function get_topic_with_comments($iTopicId, $iOffset){
         // Make a call to the database
         // Make a SELECT statement here, prepare, and execute
         $sTopicContentQuery = $this->db->prepare('CALL get_topic_by_id(:topicId)');
@@ -82,6 +82,32 @@ class Topics extends Model
         }
     }
 
+    public function get_topic($iTopicId){
+        try {
+            //prepare the statement
+            $sTopicContentQuery = $this->db->prepare('SELECT * from topics WHERE id = :topicId;');
+            $sTopicContentQuery->bindValue(':topicId', $iTopicId);
+            $sTopicContentQuery->execute();
+            $topicContent = $sTopicContentQuery->fetch();
+            //check if anything was received
+            if (count($topicContent) == 0) {
+                echo 'Error retrieving topic';
+                die();
+            }
+            $objTopic = new stdClass();
+            $objTopic->topicData =$topicContent;
+            return $objTopic;
+
+        } catch( PDOException $e ){
+            echo '{"status":"0","message":"Something went wrong, please contact the support"}';
+            //Saving the errors in txt file to keep track what happen in case something breaks
+            date_default_timezone_set("Europe/Copenhagen");
+            $error_log = '{"DATE":'.date("Y-m-d").', "TIME": '.date("h:i:sa").' ,"Eror": '.$e.', "line": '.__LINE__.'}';
+            file_put_contents('./includes/logs/database_connection.txt' , $error_log , FILE_APPEND);
+        }
+
+    }
+
     public function getTopicsFromCategory($category){
         try{
             $sQuery = $this->db->prepare('CALL get_topics_from_category(:categoryId)');
@@ -94,7 +120,7 @@ class Topics extends Model
                 exit;
               }
               return 'Sorry, no topics found in this category';
-        }catch(PDOException $error){
+        }catch(ception $error){
             // Correct this error for production
             echo '{"status": 0, "message": "Sorry, something went wrong. Try again later."}';
             $error_log = '{"Eror": '.$error.', "line": '.__LINE__.'}';
