@@ -222,6 +222,7 @@ class SingleTopic extends Controller
             die();
         }
 
+
         // now, when we have the topic, we confirmed privileges,
         // we can display the topic
 
@@ -229,7 +230,7 @@ class SingleTopic extends Controller
             self::CreateView('error', '');
         }
 
-        //self:self::CreateView();
+        self:self::CreateView('edit-topic', $objTopic);
 
     }
 }

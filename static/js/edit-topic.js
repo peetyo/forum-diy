@@ -1,5 +1,9 @@
+console.log('init');
 const contentTextbox = new SimpleMDE({element: $("#content")[0]});
-contentTextbox.value("Write down your thoughts here... We support markdown syntax here.");
+const receivedContentValue = $('#currentContent').val();
+console.log('current value', receivedContentValue);
+
+contentTextbox.value(receivedContentValue);
 
 
 /*

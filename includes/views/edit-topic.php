@@ -1,4 +1,7 @@
- <div class="container">
+<?php
+echo json_encode($data);
+?>
+<div class="container">
     <div class="row">
         <div class="col-md-12">
             <h1>Create a new topic</h1>
@@ -18,11 +21,11 @@
                 <div class="form-group">
                     <label for="topic_name">Title</label>
                     <input type="text" class="form-control" id="topic_name" name="topic_name"
-                        placeholder="Enter the topic name here" required>
+                        placeholder="Enter the topic name here" value="<?=$data->topicData['topic_name']?>" required>
                 </div>
                 <div class="form-group">
                     <label for="category_id">Category</label>
-                    <select class="form-control" id="category_id" name="category_id" required>
+                    <select class="form-control" id="category_id" name="category_id" required readonly>
                         <?php
                         foreach ($data as $key => $category) {
                             ?>
@@ -40,6 +43,7 @@
                 </div>
                 <div class="form-group">
                     <input type="hidden" name="token" value="<?= $csrf ?>">
+                    <input type="hidden" id="currentContent" value="<?=$data->topicData['content']?>">
                     <button class="btn btn-primary" id="btnSubmit">Submit
                     </button>
                 </div>
