@@ -162,7 +162,7 @@ class SingleTopic extends Controller
 //            exit();
 //        }
         $classTopic = new Topics();
-        $classTopic->create_topic($aTopicData);
+        $classTopic->update_topic($aTopicData);
 
         /*
          * Please pass id in return as a JSON

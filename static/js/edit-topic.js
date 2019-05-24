@@ -1,7 +1,5 @@
-console.log('init');
 const contentTextbox = new SimpleMDE({element: $("#content")[0]});
 const receivedContentValue = $('#currentContent').val();
-console.log('current value', receivedContentValue);
 
 contentTextbox.value(receivedContentValue);
 

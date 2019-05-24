@@ -167,4 +167,34 @@ class Topics extends Model
         }
     }
 
+    public function update_topic($topicData)
+    {
+        // print_r($topicData);
+        try {
+            $db = $this->db;
+            $sQuery = $db->prepare('UPDATE lifehack.topics t
+                                                SET t.topic_name = :topic_name,
+                                                    t.content    = :content
+                                                WHERE t.id = :topicId');
+
+            $sQuery->bindValue(':topic_name', $topicData['topic_name']);
+            $sQuery->bindValue(':content', $topicData['content']);
+            $sQuery->execute();
+            if (!$sQuery->rowCount()) {
+                echo '{"status": 0, "message": "Sorry, something went wrong when creating topic."}';
+                exit();
+            }
+            $id = $db->lastInsertId();
+            // Remember to update this echo once its paired with some AJAX
+            echo '{"status": 1, "message": "topic created", "topic": ' . $id . ' }';
+        } catch (PDOException $error) {
+
+            echo '{"status": 0, "message": "Sorry, something went wrong updating the topic. Try again later."}';
+            date_default_timezone_set("Europe/Copenhagen");
+            $error_log = '{"DATE":' . date("Y-m-d") . ', "TIME": ' . date("h:i:sa") . ' , "Eror": ' . $error . ', "line": ' . __LINE__ . '}';
+            file_put_contents('./includes/logs/topics.txt', $error_log, FILE_APPEND);
+            exit();
+        }
+    }
+
 }
