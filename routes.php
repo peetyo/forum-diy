@@ -67,10 +67,9 @@ Route::set('api-create-topic', function (){
 });
 
 Route::set('edit-topic', function (){
-//   if(isset($_SESSION['User'])){
-//       SingleTopic::edit_topic();
-//   }else{
-//       Controller::CreateView('error','');
-//   }
-   SingleTopic::edit_topic_view();
+   if(isset($_SESSION['User'])){
+       SingleTopic::edit_topic_view();
+   }else{
+       Controller::CreateView('error','');
+   }
 });
