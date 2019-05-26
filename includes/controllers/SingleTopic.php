@@ -51,7 +51,8 @@ class SingleTopic extends Controller
          */
         $objTopic->currentUri = $_SERVER['REQUEST_URI'];
         // check if the current user is able to edit the post
-        if($objTopic->topicData['user_id'] == $_SESSION['User']['id']){
+        $canEdit = UserPrivilegesChecker::is_privileged($objTopic->topicData['user_id']);
+        if($canEdit == true){
             $objTopic->canEdit = true;
         } else {
             $objTopic->canEdit = false;
@@ -178,10 +179,10 @@ class SingleTopic extends Controller
     public static function edit_topic_view()
     {
         //check if the user is logged in
-//        if(!$_SESSION['User']['id']){
-//            echo 'Not authorized';
-//            die();
-//        }
+        if(!$_SESSION['User']['id']){
+            echo 'Not authorized';
+            die();
+        }
         $iUserId = (int)$_SESSION['User']['id'];
 
         //check passed ID
@@ -194,37 +195,15 @@ class SingleTopic extends Controller
         $topic = new Topics();
         $objTopic = $topic->get_topic($iTopicId);
 
-        /*
-         * Check if user har rights to edit the post
-         * There are three scenarios
-         * 1 - owner of the post can edit the post.
-         * 2 - moderator can edt the post (edit info will be appended)
-         * 3 - admin can edit the post (edit info will be appended)
-         *
-         * Therefore we need to get user's information first
-         */
-        $user = new Users();
-        $userRoleId = $user->select_user_role_by_id($iUserId);
-        $roleId = $userRoleId['user_role_id'];
+        $topicUserID = $objTopic->topicData['user_id'];
 
-        /*
-         * Privileges proposal:
-         * role id:
-         * - 5 - banned user
-         * - 4 - normal user
-         * - 2 - moderator
-         * - 1 - admin
-         */
-        if (
-            ($objTopic->topicData['user_id'] != $iUserId) &&
-            ($roleId != 2) &&
-            ($roleId != 1)
-        ) {
-           //TODO: Redirect to 404
-            echo '{"status": 0, "message": "You have no rights to edit this post."}';
+        $canEdit = UserPrivilegesChecker::is_privileged($topicUserID);
+        if($canEdit == false){
+            echo 'cant edit';
             die();
         }
 
+        // $objTopic->topicData['user_id']
 
         // now, when we have the topic, we confirmed privileges,
         // we can display the topic
