@@ -108,10 +108,14 @@ class SingleTopic extends Controller
         //$token = $_POST['token'];
         $aTopicData = $_POST;
         // echo $aTopicData['topic_name']; works
-
+        if(isset($_POST)){
+            if(!empty($_FILES['image_upload'])){
+               $aTopicData['image'] = $_FILES['image_upload'];
+              }
+        }
 
         /*
-         *  Pass the token in the function below
+         *  TODO: Pass the token in the function below
          */
 
 //        if( BotValidation::Verify($token) == false){
@@ -121,7 +125,7 @@ class SingleTopic extends Controller
         $classTopic = new Topics();
         $classTopic->create_topic($aTopicData);
 
-        /*
+        /* TODO:
          * Please pass id in return as a JSON
          * Structure
          * {"status":1, "message":"optional message", "topic":346}
