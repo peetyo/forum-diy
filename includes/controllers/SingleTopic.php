@@ -218,6 +218,7 @@ class SingleTopic extends Controller
             ($roleId != 2) &&
             ($roleId != 1)
         ) {
+           //TODO: Redirect to 404
             echo '{"status": 0, "message": "You have no rights to edit this post."}';
             die();
         }

@@ -179,14 +179,14 @@ class Topics extends Model
 
             $sQuery->bindValue(':topic_name', $topicData['topic_name']);
             $sQuery->bindValue(':content', $topicData['content']);
+            $sQuery->bindValue(':topicId', $topicData['topic_id']);
             $sQuery->execute();
             if (!$sQuery->rowCount()) {
-                echo '{"status": 0, "message": "Sorry, something went wrong when creating topic."}';
+                echo '{"status": 0, "message": "Nothing was updated"}';
                 exit();
             }
-            $id = $db->lastInsertId();
             // Remember to update this echo once its paired with some AJAX
-            echo '{"status": 1, "message": "topic created", "topic": ' . $id . ' }';
+            echo '{"status": 1, "message": "topic updated", "topic": ' . $topicData['topic_id'] . ' }';
         } catch (PDOException $error) {
 
             echo '{"status": 0, "message": "Sorry, something went wrong updating the topic. Try again later."}';

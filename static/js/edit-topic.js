@@ -27,7 +27,7 @@ $(document).on('click', '#btnSubmit', function (event) {
     const form = $('#new-topic-form').serialize() + '&content=' + contentTextbox.value()
     // Make an ajax call
     $.ajax({
-        url: 'api-create-topic',
+        url: 'api-edit-topic',
         type: 'POST',
         data: form,
         dataType: 'json'

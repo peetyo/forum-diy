@@ -40,6 +40,15 @@
                 </div>
                 <div class="form-group">
                     <input type="hidden" name="token" value="<?= $csrf ?>">
+                    <?php
+                    /*
+                     *  WARNING
+                     * The following method can create vulnerability and allow
+                     * hacker to edit different post
+                     * Therefore it is important to check the user's rights again in the Model
+                     */
+                    ?>
+                    <input type="hidden" name="topic_id" value="<?=$data->topicData['id']?>">
                     <input type="hidden" id="currentContent" value="<?=$data->topicData['content']?>">
                     <button class="btn btn-primary" id="btnSubmit">Submit
                     </button>
