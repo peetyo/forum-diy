@@ -11,4 +11,9 @@ class Controller {
         require_once "./static/components/footer.php";
     }
 
+    public static function NotExistingPage(){
+        // Let's make a nice 404 page :)
+        require_once "./includes/views/error.php";
+        die();
+    }
 }

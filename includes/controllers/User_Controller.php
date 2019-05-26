@@ -52,10 +52,13 @@ class User_Controller extends Controller {
         // trim variables
         $username = $_POST['txtUsername'];
         $email = trim($_POST['txtEmail']);
+
            // try catch stament
         try{
+            $token = bin2hex(openssl_random_pseudo_bytes(16));
             $user_class = new Users;
-            $user_class->sign_up_user($username, $user_password,$email );
+           $returnedID =  $user_class->sign_up_user($username, $user_password,$email ,$token );
+            mailer::sent_mail($_POST['txtEmail'], $token , $returnedID , $username);
         }catch( PDOException $e ){
             echo '{"status":"0","message":"Something went wrong, please contact the support"}';
             //Saving the errors in txt file to keep track what happend in case something breaks
@@ -122,6 +125,14 @@ class User_Controller extends Controller {
         $_SESSION['User'] = $verife_user[0];
         echo '{"status":"1","message":"User logged in"}';
     // print_r($_SESSION['User']);
+    }
+    public  static  function verify_user(){
+       require_once("./includes/views/verify_user.php");
+        $token =  $_GET['token'];
+        $used_Id = $_GET['id'];
+        $user_model = new Users;
+        $user_model->activate_user($token,$used_Id);
+
     }
 
     public static function logout(){

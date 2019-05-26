@@ -12,7 +12,7 @@ class Users extends Model {
         }
     }
     //prepared insert stament, whcih is used in sign_up controller
-    public function sign_up_user($username, $hashed_pass, $email ){
+    public function sign_up_user($username, $hashed_pass, $email , $token){
 
         $checkUserQuery = $this->db->prepare( 'SELECT username, email FROM users WHERE email = :email OR username = :username');
         $checkUserQuery->bindValue( ':email', $email);
@@ -33,19 +33,22 @@ class Users extends Model {
 
 
         $sQuery = $this->db->prepare('INSERT INTO users
-         VALUES(null, :userName, :hashed_password, :email, :date_created, :user_role, :active )');
+         VALUES(null, :userName, :hashed_password, :email, :date_created, :user_role, :active , :token )');
         $sQuery->bindValue(':userName',$username );
         $sQuery->bindValue(':hashed_password',$hashed_pass );
         $sQuery->bindValue(':email',$email );
         $sQuery->bindValue(':date_created',date('Y/m/d H:i:s') );
         $sQuery->bindValue(':user_role', 4 );
         $sQuery->bindValue(':active', 0 );
+        $sQuery->bindValue(':token' , $token);
         $sQuery->execute();
-        if( $sQuery->rowCount() ){
-           echo '{"status":"1", "message":"User created"}';
+        $returnedID =  $this->db->lastInsertId();
+        if(!$sQuery->rowCount() ){
+            echo '{"status":"0","message":"User was not created"}';
            exit;
         }
-        echo '{"status":"0","message":"User was not created"}';
+        return $returnedID;
+      //  echo '{"status":"1", "message":"User created" ,"id" = '.$returnedID.'}';
     }
 
     // :MORTIMUS the results of function  will be used to check if the username exist or not
@@ -67,6 +70,28 @@ class Users extends Model {
        
         return $aUser;
     }
+
+   public  function  activate_user($token , $user_id){
+        try{
+            $sQuery = $this->db->prepare('UPDATE users SET active = 1 WHERE id = :ID AND activation_token = :token ');
+            $sQuery->bindValue(':ID' , $user_id);
+            $sQuery->bindValue(':token' , $token);
+            $sQuery->execute();
+            if(!$sQuery->rowCount()){
+                echo '{"status":"0","message":"User was not'.$token.' activated "';
+                exit;
+            }
+            echo '{"status":"1", "message":"User activated" }';
+        }catch(PDOException $e){
+            echo '{"status":"0","message":"Something went wrong, please contact the support"}';
+            //Saving the errors in txt file to keep track what happend in case something breaks
+            date_default_timezone_set("Europe/Copenhagen");
+            $error_log = '{ "DATE":'.date("Y-m-d").', "TIME": '.date("h:i:sa").' , "Eror": '.$e.', "line": '.__LINE__.'}';
+            file_put_contents('./includes/logs/verify.txt', $error_log , FILE_APPEND);
+        }
+
+
+   }
 }
 // for testing
 // $modeltest = new Users;
