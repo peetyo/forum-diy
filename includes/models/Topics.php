@@ -3,7 +3,8 @@
 
 class Topics extends Model
 {
-    public function get_topic($iTopicId, $iOffset){
+    public function get_topic_with_comments($iTopicId, $iOffset)
+    {
         // Make a call to the database
         // Make a SELECT statement here, prepare, and execute
         $sTopicContentQuery = $this->db->prepare('CALL get_topic_by_id(:topicId)');
@@ -29,16 +30,16 @@ class Topics extends Model
             $objTopic->whats = $topicContent;
             $objTopic->numberOfComments = 0;
             $objTopic->numberOfPages = 1;
-            
+
             if (!empty($commentsContent)) {
-                
+
                 /*
                 * Currently, we have two objects -> $topicContent and $commentsContent
                 * Both are arrays
                 * I suggest merging them into one, so we can pass it as object expected by CreateView
                 */
                 $objTopic->commentData = $commentsContent;
-                
+
 
                 /*
                  * Calculate number of pages by dividing total
@@ -67,72 +68,133 @@ class Topics extends Model
                 $numberOfComments = $sNumberOfCommentsQuery->fetch();
                 $iNumberOfComments = $numberOfComments['totalComments'];
 
-                $iNumberOfPages = ceil($iNumberOfComments/5);
+                $iNumberOfPages = ceil($iNumberOfComments / 5);
                 $objTopic->numberOfComments = $iNumberOfComments;
                 $objTopic->numberOfPages = $iNumberOfPages;
                 // $objTopic->whats = $topicContent;
-                
+
             }
-            
+
             return $objTopic;
 
-        }
-        else{
-           return false;
+        } else {
+            return false;
         }
     }
 
-    public function getTopicsFromCategory($category){
-        try{
+    public function get_topic($iTopicId)
+    {
+        try {
+            //prepare the statement
+            $sTopicContentQuery = $this->db->prepare('SELECT t.id, t.topic_name, t.date_created, t.category_id,t.user_id, t.content, c.category_name
+                                                                FROM topics as t
+                                                                JOIN categories c on t.category_id = c.id
+                                                                WHERE t.id = :topicId');
+            $sTopicContentQuery->bindValue(':topicId', $iTopicId);
+            $sTopicContentQuery->execute();
+            $topicContent = $sTopicContentQuery->fetch();
+            //check if anything was received
+            if (count($topicContent) == 0) {
+                echo 'Error retrieving topic';
+                die();
+            }
+            $objTopic = new stdClass();
+            $objTopic->topicData = $topicContent;
+            return $objTopic;
+
+        } catch (PDOException $e) {
+            echo '{"status":"0","message":"Something went wrong, please contact the support"}';
+            //Saving the errors in txt file to keep track what happen in case something breaks
+            date_default_timezone_set("Europe/Copenhagen");
+            $error_log = '{"DATE":' . date("Y-m-d") . ', "TIME": ' . date("h:i:sa") . ' ,"Eror": ' . $e . ', "line": ' . __LINE__ . '}';
+            file_put_contents('./includes/logs/database_connection.txt', $error_log, FILE_APPEND);
+        }
+
+    }
+
+    public function getTopicsFromCategory($category)
+    {
+        try {
             $sQuery = $this->db->prepare('CALL get_topics_from_category(:categoryId)');
             $sQuery->bindValue(':categoryId', $category);
             $sQuery->execute();
             $aTopics = $sQuery->fetchAll();
-            if( count($aTopics) ){
-                
+            if (count($aTopics)) {
+
                 return $aTopics;
                 exit;
-              }
-              return 'Sorry, no topics found in this category';
-        }catch(PDOException $error){
+            }
+            return 'Sorry, no topics found in this category';
+        } catch (ception $error) {
             // Correct this error for production
             echo '{"status": 0, "message": "Sorry, something went wrong. Try again later."}';
-            $error_log = '{"Eror": '.$error.', "line": '.__LINE__.'}';
-            file_put_contents('./includes/logs/topics.txt', $error_log , FILE_APPEND );
+            $error_log = '{"Eror": ' . $error . ', "line": ' . __LINE__ . '}';
+            file_put_contents('./includes/logs/topics.txt', $error_log, FILE_APPEND);
             // return $error; Add the error log!
         }
 
     }
 
-    public function create_topic($topicData){
+    public function create_topic($topicData)
+    {
         // print_r($topicData);    
-        try{
-                $db = $this->db;
-                $sQuery = $db->prepare('INSERT INTO `topics` VALUES (NULL,:topic_name,NULL,:category_id,:user,:content)');
-                // Could not get the last inserted ID when using the stored procedure
-                // The procedure code itself has to be updated somehow, but I didnt manage 
-                // to make it work. - PETER
-                // $sQuery = $db->prepare('CALL create_topic(:topic_name, :category_id, :user_id, :content)');
-                $sQuery->bindValue(':topic_name', $topicData['topic_name']);
-                $sQuery->bindValue(':category_id', $topicData['category_id']);
-                $sQuery->bindValue(':user', $topicData['user_id']);
-                $sQuery->bindValue(':content', $topicData['content']);
-                $sQuery->execute();
-                if(!$sQuery->rowCount()){
-                  echo '{"status": 0, "message": "Sorry, something went wrong when creating topic."}';
-                  exit();
-                }
-                $id = $db->lastInsertId();
-                // Remember to update this echo once its paired with some AJAX
-                echo '{"status": 1, "message": "topic created", "topic": '.$id.' }';
-            }catch(PDOException $error){
-
-                echo '{"status": 0, "message": "Sorry, something went wrong. Try again later."}';
-            date_default_timezone_set("Europe/Copenhagen");
-            $error_log = '{"DATE":'.date("Y-m-d").', "TIME": '.date("h:i:sa").' , "Eror": '.$error.', "line": '.__LINE__.'}';
-            file_put_contents('./includes/logs/topics.txt', $error_log , FILE_APPEND );
+        try {
+            $db = $this->db;
+            $sQuery = $db->prepare('INSERT INTO `topics` VALUES (NULL,:topic_name,NULL,:category_id,:user,:content)');
+            // Could not get the last inserted ID when using the stored procedure
+            // The procedure code itself has to be updated somehow, but I didnt manage
+            // to make it work. - PETER
+            // $sQuery = $db->prepare('CALL create_topic(:topic_name, :category_id, :user_id, :content)');
+            $sQuery->bindValue(':topic_name', $topicData['topic_name']);
+            $sQuery->bindValue(':category_id', $topicData['category_id']);
+            $sQuery->bindValue(':user', $topicData['user_id']);
+            $sQuery->bindValue(':content', $topicData['content']);
+            $sQuery->execute();
+            if (!$sQuery->rowCount()) {
+                echo '{"status": 0, "message": "Sorry, something went wrong when creating topic."}';
                 exit();
             }
+            $id = $db->lastInsertId();
+            // Remember to update this echo once its paired with some AJAX
+            echo '{"status": 1, "message": "topic created", "topic": ' . $id . ' }';
+        } catch (PDOException $error) {
+
+            echo '{"status": 0, "message": "Sorry, something went wrong. Try again later."}';
+            date_default_timezone_set("Europe/Copenhagen");
+            $error_log = '{"DATE":' . date("Y-m-d") . ', "TIME": ' . date("h:i:sa") . ' , "Eror": ' . $error . ', "line": ' . __LINE__ . '}';
+            file_put_contents('./includes/logs/topics.txt', $error_log, FILE_APPEND);
+            exit();
+        }
+    }
+
+    public function update_topic($topicData)
+    {
+        try {
+            $db = $this->db;
+            $sQuery = $db->prepare('UPDATE lifehack.topics t
+                                                SET t.topic_name = :topic_name,
+                                                    t.content    = :content
+                                                WHERE t.id = :topic_id AND t.user_id = :user_id');
+
+            $sQuery->bindValue(':topic_name', $topicData['topic_name']);
+            $sQuery->bindValue(':content', $topicData['content']);
+            $sQuery->bindValue(':topic_id', $topicData['topic_id']);
+            $sQuery->bindValue(':user_id', $_SESSION['User']['id']);
+            $sQuery->execute();
+            if (!$sQuery->rowCount()) {
+                echo '{"status": 0, "message": "Nothing was updated"}';
+                exit();
+            }
+            // Remember to update this echo once its paired with some AJAX
+            echo '{"status": 1, "message": "topic updated", "topic": ' . $topicData['topic_id'] . ' }';
+        } catch (PDOException $error) {
+
+            echo '{"status": 0, "message": "Sorry, something went wrong updating the topic. Try again later."}';
+            date_default_timezone_set("Europe/Copenhagen");
+            $error_log = '{"DATE":' . date("Y-m-d") . ', "TIME": ' . date("h:i:sa") . ' , "Eror": ' . $error . ', "line": ' . __LINE__ . '}';
+            file_put_contents('./includes/logs/topics.txt', $error_log, FILE_APPEND);
+            exit();
+        }
     }
 
 }

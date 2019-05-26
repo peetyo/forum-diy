@@ -67,6 +67,19 @@ class Users extends Model {
        
         return $aUser;
     }
+
+    public function select_user_role_by_id($userId){
+        try {
+            $sQuery = $this->db->prepare('SELECT user_role_id from users WHERE id=:userId');
+            $sQuery->bindValue(':userId', $userId);
+            $sQuery->execute();
+            $user = $sQuery->fetch();
+            return $user;
+        } catch (PDOException $error) {
+            echo 'error';
+            die();
+        }
+    }
 }
 // for testing
 // $modeltest = new Users;
