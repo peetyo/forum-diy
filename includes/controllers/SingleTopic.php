@@ -50,11 +50,12 @@ class SingleTopic extends Controller
          * is just the base url with the id, right?
          */
         $objTopic->currentUri = $_SERVER['REQUEST_URI'];
-
-        // uncomment one below to see what we receive.
-        // btw, I recomment some JSON Viewer extension
-        //echo json_encode($objTopic);
-        //die();
+        // check if the current user is able to edit the post
+        if($objTopic->topicData['user_id'] == $_SESSION['User']['id']){
+            $objTopic->canEdit = true;
+        } else {
+            $objTopic->canEdit = false;
+        }
 
 
         /*
@@ -64,6 +65,7 @@ class SingleTopic extends Controller
          * Thanks, Peter, for the solution ;)
          *
          */
+
         self::CreateView('single_topic', $objTopic);
 
     }

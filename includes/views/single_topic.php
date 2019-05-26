@@ -32,7 +32,16 @@ $Parsedown = new Parsedown();
                     <div class="text-right card-footer text-muted bg-dark">
                         <div class="btn-group" role="group" aria-label="Basic example">
                             <button type="button" class="btn btn-primary">Reply</button>
-                            <a href="edit-topic?id=<?=$data->topicData['id']?>" class="btn btn-primary">Edit</a>
+                            <?php
+                            /*
+                             * Display edit button only if allowed
+                             */
+                            if ($data->canEdit == true) {
+                                ?>
+                                <a href="edit-topic?id=<?= $data->topicData['id'] ?>" class="btn btn-primary">Edit</a>
+                                <?php
+                            }
+                            ?>
                         </div>
                     </div>
                 </div>
