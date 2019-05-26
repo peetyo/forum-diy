@@ -25,7 +25,12 @@ class UserPrivilegesChecker
 
 
         // get the logged in user
-        $iUserId = (int)$_SESSION['User']['id'];
+        if(isset($_SESSION['User']['id'])){
+            $iUserId = (int)$_SESSION['User']['id'];
+        } else{
+            $iUserId = 0;
+        }
+
         // get their role
         $user = new Users();
         $userRoleId = $user->select_user_role_by_id($iUserId);
