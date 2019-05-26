@@ -32,7 +32,7 @@ $Parsedown = new Parsedown();
                     <div class="text-right card-footer text-muted bg-dark">
                         <div class="btn-group" role="group" aria-label="Basic example">
                             <button type="button" class="btn btn-primary">Reply</button>
-                            <button type="button" class="btn btn-primary">Edit</button>
+                            <a href="edit-topic?id=<?=$data->topicData['id']?>" class="btn btn-primary">Edit</a>
                         </div>
                     </div>
                 </div>

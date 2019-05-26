@@ -230,7 +230,6 @@ class SingleTopic extends Controller
         if ($objTopic == false) {
             self::CreateView('error', '');
         }
-
         self:self::CreateView('edit-topic', $objTopic);
 
     }

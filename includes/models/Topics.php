@@ -86,10 +86,10 @@ class Topics extends Model
     {
         try {
             //prepare the statement
-            $sTopicContentQuery = $this->db->prepare('SELECT t.id, t.topic_name, t.date_created, t.category_id, t.user_id, t.content, c.category_name
+            $sTopicContentQuery = $this->db->prepare('SELECT t.id, t.topic_name, t.date_created, t.category_id,t.user_id, t.content, c.category_name
                                                                 FROM topics as t
                                                                 JOIN categories c on t.category_id = c.id
-                                                                WHERE t.id = :topicId;');
+                                                                WHERE t.id = :topicId');
             $sTopicContentQuery->bindValue(':topicId', $iTopicId);
             $sTopicContentQuery->execute();
             $topicContent = $sTopicContentQuery->fetch();
