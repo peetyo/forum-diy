@@ -169,17 +169,17 @@ class Topics extends Model
 
     public function update_topic($topicData)
     {
-        // print_r($topicData);
         try {
             $db = $this->db;
             $sQuery = $db->prepare('UPDATE lifehack.topics t
                                                 SET t.topic_name = :topic_name,
                                                     t.content    = :content
-                                                WHERE t.id = :topicId');
+                                                WHERE t.id = :topic_id AND t.user_id = :user_id');
 
             $sQuery->bindValue(':topic_name', $topicData['topic_name']);
             $sQuery->bindValue(':content', $topicData['content']);
-            $sQuery->bindValue(':topicId', $topicData['topic_id']);
+            $sQuery->bindValue(':topic_id', $topicData['topic_id']);
+            $sQuery->bindValue(':user_id', $_SESSION['User']['id']);
             $sQuery->execute();
             if (!$sQuery->rowCount()) {
                 echo '{"status": 0, "message": "Nothing was updated"}';
