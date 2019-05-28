@@ -70,7 +70,7 @@
                     <li>Martin Grenchev</li>
                     <li>Berenike Hegedus</li>
                 </ul>
-                </div>
+            </div>
             <!-- Grid column -->
 
             <!-- Grid column -->
@@ -79,18 +79,30 @@
                 <!-- Links -->
                 <h6 class="text-uppercase font-weight-bold">Account</h6>
                 <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-                <p>
-                    <a href="sign-up">Sign up</a>
-                </p>
-                <p>
-                    <a href="index.php">Log in</a>
-                </p>
-                <p>
-                    <a href="logout">Log out</a>
-                </p>
-
-
-
+                <div id="actions">
+                    <?php
+                    if (!isset($_SESSION['User'])) {
+                        ?>
+                        <div id="guestActions">
+                            <p>
+                                <a href="sign-up">Sign up</a>
+                            </p>
+                            <p>
+                                <a href="index.php">Log in</a>
+                            </p>
+                        </div>
+                        <?php
+                    } else {
+                        ?>
+                        <div id="userActions">
+                            <p>
+                                <a href="logout">Log out</a>
+                            </p>
+                        </div>
+                        <?php
+                    }
+                    ?>
+                </div>
             </div>
             <!-- Grid column -->
 
@@ -103,9 +115,14 @@
                 <p>
                     <a href="#!">Back to Home</a>
                 </p>
-                <p>
-                    <a href="create-topic">Create new post</a>
-                </p>
+                <?php
+                if (isset($_SESSION['User'])) {
+                    ?>
+                    <p>
+                        <a href="create-topic">Create new post</a>
+                    </p>
+                <?php }
+                ?>
                 <p>
                     <a href="category?cat=3">Category: Home</a>
                 </p>
@@ -148,10 +165,10 @@
         integrity="sha256-6sZs7OGP0Uzcl7UDsLaNsy1K0KTZx1+6yEVrRJMn2IM=" crossorigin="anonymous"></script>
 <script src="static/js/main.js"></script>
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-<?php 
-    if(file_exists("static/js/$pageJs.js")){
-        echo '<script src="static/js/'.$pageJs.'.js"></script>';
-    }
+<?php
+if (file_exists("static/js/$pageJs.js")) {
+    echo '<script src="static/js/' . $pageJs . '.js"></script>';
+}
 ?>
 
 
