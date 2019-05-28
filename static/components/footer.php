@@ -64,10 +64,12 @@
                 <!-- Content -->
                 <h6 class="text-uppercase font-weight-bold">Project made by:</h6>
                 <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-                <p>Petar Todorov</p>
-                <p>Michal Pawliczki</p>
-                <p>Martin Grenchev</p>
-                <p>Berenike Hegedus</p>
+                <ul style="list-style: none">
+                    <li>Petar Todorov</li>
+                    <li>Michał Pawlicki</li>
+                    <li>Martin Grenchev</li>
+                    <li>Berenike Hegedus</li>
+                </ul>
                 </div>
             <!-- Grid column -->
 
