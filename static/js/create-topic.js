@@ -1,5 +1,5 @@
 const contentTextbox = new SimpleMDE({element: $("#content")[0]});
-contentTextbox.value("This text will appear in the editor");
+contentTextbox.value("Write down your thoughts here... We support markdown syntax here.");
 
 
 /*
