@@ -1,5 +1,5 @@
 <?php
-
+ini_set('display_errors', 1);
 class SingleTopic extends Controller
 {
     public static function GetTopic()
