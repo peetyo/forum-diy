@@ -108,6 +108,7 @@ class SingleTopic extends Controller
         //$token = $_POST['token'];
         $aTopicData = $_POST;
         // echo $aTopicData['topic_name']; works
+      
 
 
         /*

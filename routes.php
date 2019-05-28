@@ -22,6 +22,10 @@ Route::set('sign-up', function (){
    // Sign_up::test();
 });
 
+Route::set('verify', function (){
+    User_Controller::verify_user();
+});
+
 Route::set('create-user', function (){
     User_Controller::create_user();
 });
