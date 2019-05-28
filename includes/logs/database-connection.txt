@@ -1,0 +1,10 @@
+{"DATE":2019-05-28, "TIME": 10:05:25pm ,  "Eror": PDOException: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES) in C:\MAMP\htdocs\forum-diy\includes\models\Model.php:22
+Stack trace:
+#0 C:\MAMP\htdocs\forum-diy\includes\models\Model.php(22): PDO->__construct('mysql:host=loca...', 'root', 'root', Array)
+#1 C:\MAMP\htdocs\forum-diy\includes\controllers\Category.php(17): Model->__construct()
+#2 C:\MAMP\htdocs\forum-diy\routes.php(17): Category::getCategory()
+#3 C:\MAMP\htdocs\forum-diy\includes\classes\Route.php(14): {closure}()
+#4 C:\MAMP\htdocs\forum-diy\includes\classes\Route.php(14): Closure->__invoke()
+#5 C:\MAMP\htdocs\forum-diy\routes.php(18): Route::set('category', Object(Closure))
+#6 C:\MAMP\htdocs\forum-diy\index.php(19): require_once('C:\\MAMP\\htdocs\\...')
+#7 {main}, "line": 26}

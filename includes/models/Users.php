@@ -12,7 +12,7 @@ class Users extends Model {
         }
     }
     //prepared insert stament, whcih is used in sign_up controller
-    public function sign_up_user($username, $hashed_pass, $email , $token){
+    public function sign_up_user($username, $hashed_pass, $email ){
 
         $checkUserQuery = $this->db->prepare( 'SELECT username, email FROM users WHERE email = :email OR username = :username');
         $checkUserQuery->bindValue( ':email', $email);
@@ -92,6 +92,19 @@ class Users extends Model {
 
 
    }
+
+    public function select_user_role_by_id($userId){
+        try {
+            $sQuery = $this->db->prepare('SELECT user_role_id from users WHERE id=:userId');
+            $sQuery->bindValue(':userId', $userId);
+            $sQuery->execute();
+            $user = $sQuery->fetch();
+            return $user;
+        } catch (PDOException $error) {
+            echo 'error';
+            die();
+        }
+    }
 }
 // for testing
 // $modeltest = new Users;

@@ -34,7 +34,7 @@ class SingleTopic extends Controller
          * is saved in $objTopic
          */
         $topic = new Topics();
-        $objTopic = $topic->get_topic($iTopicId, $iOffset);
+        $objTopic = $topic->get_topic_with_comments($iTopicId, $iOffset);
         if ($objTopic == false) {
             self::CreateView('error', '');
         }
@@ -90,27 +90,27 @@ class SingleTopic extends Controller
         // NOTE: MATCH THE LENGTHS FROM THE DATABASE
         // $_POST['topic_name'] = 'Test Topic';
         Validation::checkInput($_POST['topic_name'],'string',5,255);
-        
+
         // $_POST['category_id'] = 3;
         // NOTE: the form's option values are strings not integers 
         Validation::checkInput($_POST['category_id'],'string',1,2);
-        
+
         $_POST['user_id'] = (int)$_SESSION['User']['id'] ;
         Validation::checkInput($_POST['user_id'],'integer','','');
-        
+
         // $_POST['content'] = 'Test Topic Test Topic Test Topic Test Topic Test Topic';
         Validation::checkInput($_POST['content'],'string',10,500);
-        
+
         //$token = $_POST['token'];
         $aTopicData = $_POST;
         // echo $aTopicData['topic_name']; works
-      
+
 
 
         /*
          *  Pass the token in the function below
          */
-       
+
 //        if( BotValidation::Verify($token) == false){
 //            echo "Token was invalid";
 //            exit();
