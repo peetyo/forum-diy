@@ -3,7 +3,7 @@
 
 require_once('PHPMailer.php');
 require_once('SMTP.php');
-require_once ('Exception.php');
+//require_once ('Exception.php');
 class mailer{
 
      public  static  function sent_mail($sent_mail_to, $token , $UserID , $username){

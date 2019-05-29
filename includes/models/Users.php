@@ -12,7 +12,7 @@ class Users extends Model {
         }
     }
     //prepared insert stament, whcih is used in sign_up controller
-    public function sign_up_user($username, $hashed_pass, $email ){
+    public function sign_up_user($username, $hashed_pass, $email, $token ){
 
         $checkUserQuery = $this->db->prepare( 'SELECT username, email FROM users WHERE email = :email OR username = :username');
         $checkUserQuery->bindValue( ':email', $email);

@@ -140,7 +140,7 @@ class Topics extends Model
         // print_r($topicData);    
         try {
             $db = $this->db;
-            $sQuery = $db->prepare('INSERT INTO `topics` VALUES (NULL,:topic_name,NULL,:category_id,:user,:content)');
+            $sQuery = $db->prepare('INSERT INTO `topics` VALUES (NULL,:topic_name,NULL, NULL ,:category_id,:user,:content)');
             // Could not get the last inserted ID when using the stored procedure
             // The procedure code itself has to be updated somehow, but I didnt manage
             // to make it work. - PETER
