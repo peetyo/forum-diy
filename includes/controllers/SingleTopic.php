@@ -81,8 +81,6 @@ class SingleTopic extends Controller
         $categories = new Categories();
         $objCategories = $categories->get_categories();
 
-        //echo json_encode($objCategories);
-        //die;
         self::CreateView('create-topic', $objCategories);
 
     }
@@ -92,26 +90,24 @@ class SingleTopic extends Controller
             echo '{"status":"0","message":"Invalid token"}';
             exit;
         }
-        // Validate all this input
+
         // NOTE: MATCH THE LENGTHS FROM THE DATABASE
-        // $_POST['topic_name'] = 'Test Topic';
         Validation::checkInput($_POST['topic_name'],'string',5,255);
 
-        // $_POST['category_id'] = 3;
         // NOTE: the form's option values are strings not integers 
         Validation::checkInput($_POST['category_id'],'string',1,2);
 
         $_POST['user_id'] = (int)$_SESSION['User']['id'] ;
         Validation::checkInput($_POST['user_id'],'integer','','');
 
-        // $_POST['content'] = 'Test Topic Test Topic Test Topic Test Topic Test Topic';
-        Validation::checkInput($_POST['content'],'string',10,500);
+        // Minimum length in real-life scenario should be about 140 characters
+        // We require only 10 so the it is easier to try out the application
+        Validation::checkInput($_POST['content'],'string',10,'');
 
-        //$token = $_POST['token'];
         $aTopicData = $_POST;
-        // echo $aTopicData['topic_name']; works
+
         if(isset($_POST)){
-            if(!empty($_FILES['image_upload'])){
+            if($_FILES['image_upload']['name']!==''){
                 Validation::checkUploadedImage($_FILES['image_upload']);
                 $fileExtension = pathinfo($_FILES['image_upload']['name'], PATHINFO_EXTENSION);
                 $newFileName = 'featured-'.uniqid().'.'.$fileExtension;
@@ -145,18 +141,14 @@ class SingleTopic extends Controller
             echo '{"status":"0","message":"Invalid token"}';
             exit;
         }
-        // Validate all this input
-        // NOTE: MATCH THE LENGTHS FROM THE DATABASE
-        // $_POST['topic_name'] = 'Test Topic';
+
         Validation::checkInput($_POST['topic_name'], 'string', 5, 255);
 
         $_POST['user_id'] = (int)$_SESSION['User']['id'];
         Validation::checkInput($_POST['user_id'], 'integer', '', '');
 
-        // $_POST['content'] = 'Test Topic Test Topic Test Topic Test Topic Test Topic';
-        Validation::checkInput($_POST['content'], 'string', 10, 500);
+        Validation::checkInput($_POST['content'], 'string', 10, '');
 
-        //$token = $_POST['token'];
         $aTopicData = $_POST;
         if(isset($_POST)){
 

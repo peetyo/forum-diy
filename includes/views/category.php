@@ -59,28 +59,30 @@ $Parsedown = new Parsedown();
         
         <?php 
                 // print_r($data); 
-                foreach ($data['topics'] as $topic) {
+                foreach ($data['topics'] as $topic) { ?>
 
-                    echo '<a href="topic?id='.$topic['id'].'">
-                    <div id='.$topic['id'].' class="panel panel-default mb-2">
+                    <a href="topic?id=<?=$topic['id']?>">
+                    <div id=<?=$topic['id']?> class="panel panel-default mb-2">
                         <div class="panel-body">
                                 <div class="panel-heading">
-                                    <h4>'.htmlentities($topic['topic_name']).'</h4>
+                                    <h4> <?= htmlentities($topic['topic_name']) ?></h4>
                                 </div>
-                                    <p>'.$Parsedown->text(htmlentities($topic['content'])).'...</p>
+                                    <p> <?= $Parsedown->text(htmlentities($topic['content'])) ?>...</p>
                         </div>
                         <div class="thread-info">
                             <div class="thread-info-avatar">
                             <img class="img-circle" src="https://www.ukielist.com/wp-content/uploads/2017/03/default-avatar.png" alt="avatar">
                             </div>
                             <div class="thread-info-author">
+                                <p> &nbsp <?= $topic['username'] ?></p>
                             </div>
                             <div class="thread-info-tags">
                                 
                             </div>
                         </div>
                     </div>
-                    </a>';
+                    </a>
+                    <?php
                 }
             ?>
 
