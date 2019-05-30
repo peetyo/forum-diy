@@ -20,8 +20,10 @@ class SingleTopic extends Controller
              * Server is redirecting to the correct page number. s
              */
             $url = $_SERVER['REQUEST_URI'];
+            echo  $_SERVER['REQUEST_URI'];
             header("location:$url&page=1");
         } else {
+            //echo  $_GET['page'];
             $iPageNumber = $_GET['page'] - 1;
             $iOffset = 5 * $iPageNumber;
         }
@@ -50,7 +52,11 @@ class SingleTopic extends Controller
          * is just the base url with the id, right?
          */
         $objTopic->currentUri = $_SERVER['REQUEST_URI'];
-        // check if the current user is able to edit the post
+
+        // uncomment one below to see what we receive.
+        // btw, I recomment some JSON Viewer extension
+        //echo json_encode($objTopic);
+        //die();
         $canEdit = UserPrivilegesChecker::is_privileged($objTopic->topicData['user_id']);
         if($canEdit == true){
             $objTopic->canEdit = true;
@@ -66,7 +72,6 @@ class SingleTopic extends Controller
          * Thanks, Peter, for the solution ;)
          *
          */
-
         self::CreateView('single_topic', $objTopic);
 
     }
@@ -84,26 +89,25 @@ class SingleTopic extends Controller
 
     }
 
-    public static function crete_topic()
-    {
-        if (!hash_equals($_SESSION['key'], $_POST['token'])) {
+    public static function crete_topic(){
+        if (!hash_equals($_SESSION['key'], $_POST['token'])){
             echo '{"status":"0","message":"Invalid token"}';
             exit;
         }
         // Validate all this input
         // NOTE: MATCH THE LENGTHS FROM THE DATABASE
         // $_POST['topic_name'] = 'Test Topic';
-        Validation::checkInput($_POST['topic_name'], 'string', 5, 255);
+        Validation::checkInput($_POST['topic_name'],'string',5,255);
 
         // $_POST['category_id'] = 3;
         // NOTE: the form's option values are strings not integers 
-        Validation::checkInput($_POST['category_id'], 'string', 1, 2);
+        Validation::checkInput($_POST['category_id'],'string',1,2);
 
-        $_POST['user_id'] = (int)$_SESSION['User']['id'];
-        Validation::checkInput($_POST['user_id'], 'integer', '', '');
+        $_POST['user_id'] = (int)$_SESSION['User']['id'] ;
+        Validation::checkInput($_POST['user_id'],'integer','','');
 
         // $_POST['content'] = 'Test Topic Test Topic Test Topic Test Topic Test Topic';
-        Validation::checkInput($_POST['content'], 'string', 10, 500);
+        Validation::checkInput($_POST['content'],'string',10,500);
 
         //$token = $_POST['token'];
         $aTopicData = $_POST;
@@ -130,7 +134,6 @@ class SingleTopic extends Controller
          * {"status":0}
          */
     }
-
     public static function edit_topic()
     {
         if (!hash_equals($_SESSION['key'], $_POST['token'])) {

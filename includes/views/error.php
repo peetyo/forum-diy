@@ -17,10 +17,10 @@
 <div class="vertical-center">
 <div class="container justify-content align-items-center">
     <div class="col-12 m-3">
-        <h1>:(</h1>
+        <h1>404</h1>
         <hr>
-        <h1>I find your lack of navigation disturbing.  </h1>
-        <button type="submit" class="btn btn-secondary" id="backHome">Back to Home</button>
+        <h1>PAGE NOT FOUND</h1>
+        <a href="index.php" class="btn btn-secondary">Back to Home</a>
     </div>
 
 </div>

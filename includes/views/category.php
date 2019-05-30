@@ -7,8 +7,7 @@ $Parsedown = new Parsedown();
     <div class="row">
         <div class="col-12">
             <h1>This is category with ID : <?= $data['category'] ?></h1>
-            
-            <p>Here are the topics about XY category.</p>
+
         </div>
     </div>
 
@@ -24,19 +23,7 @@ $Parsedown = new Parsedown();
             ?>
         </div>
 
-            <h3>Tags</h3>
-            <div class="list-group">
-                <a href="#">All</a>
-                <a href="#">Tag1</a>
-                <a href="#">Tag2</a>
-                <a href="#">Tag2</a>
-                <a href="#">Tag1</a>
-                <a href="#">Tag2</a>
-                <a href="#">Tag1</a>
-                <a href="#">Tag2</a>
-                <a href="#">Tag1</a>
-                <a href="#">Tag2</a>
-            </div>
+
         </div>
 
 <!-- PETER: Not sure why this is here. -->

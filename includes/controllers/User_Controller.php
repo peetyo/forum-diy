@@ -89,7 +89,7 @@ class User_Controller extends Controller {
         $username = $_POST['txtUsername'];
         $user_model = new Users;
 
-        
+
         try{
             $selected_user =  $user_model->select_username($username);
         }catch(PDOExcepetion $e){
