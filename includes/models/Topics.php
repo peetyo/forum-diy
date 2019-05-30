@@ -168,7 +168,7 @@ class Topics extends Model
                   echo '{"status":0, "message":"Failed to upload photo."}';
                   exit;
                 }
-              }
+            }
             $id = $db->lastInsertId();
             // TODO: Remember to update this echo once its paired with some AJAX
             echo '{"status": 1, "message": "topic created", "topic": ' . $id . ' }';
@@ -187,11 +187,18 @@ class Topics extends Model
             $db = $this->db;
             $sQuery = $db->prepare('UPDATE lifehack.topics t
                                                 SET t.topic_name = :topic_name,
-                                                    t.content    = :content
+                                                    t.content    = :content,
+                                                    t.featured_image_url = :featured_image
                                                 WHERE t.id = :topic_id AND t.user_id = :user_id');
 
             $sQuery->bindValue(':topic_name', $topicData['topic_name']);
             $sQuery->bindValue(':content', $topicData['content']);
+            if(isset($topicData['image'])){
+                $imagePath = $topicData['image']['name'];
+                $sQuery->bindValue(':featured_image', $imagePath);
+            }else{
+                $sQuery->bindValue(':featured_image',  $topicData['image_path_old']);
+            }
             $sQuery->bindValue(':topic_id', $topicData['topic_id']);
             $sQuery->bindValue(':user_id', $_SESSION['User']['id']);
             $sQuery->execute();
@@ -199,10 +206,19 @@ class Topics extends Model
                 echo '{"status": 0, "message": "Nothing was updated"}';
                 exit();
             }
-            // Remember to update this echo once its paired with some AJAX
+            if(isset($topicData['image'])){
+                if(move_uploaded_file($topicData['image']['tmp_name'], 'static/images/'.$topicData['image']['name'])){
+                  $sImage = $topicData['image']['name'];
+                }else{
+                  echo '{"status":0, "message":"Failed to upload photo."}';
+                  exit;
+                }
+            }
+            // TODO: Remember to update this echo once its paired with some AJAX
             echo '{"status": 1, "message": "topic updated", "topic": ' . $topicData['topic_id'] . ' }';
         } catch (PDOException $error) {
-
+            
+            echo '{"status": 0, "message": "Sorry, something went wrong updating the topic. Try again later.'.$error.'"}';
             echo '{"status": 0, "message": "Sorry, something went wrong updating the topic. Try again later."}';
             date_default_timezone_set("Europe/Copenhagen");
             $error_log = '{"DATE":' . date("Y-m-d") . ', "TIME": ' . date("h:i:sa") . ' , "Eror": ' . $error . ', "line": ' . __LINE__ . '}';

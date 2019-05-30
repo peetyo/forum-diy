@@ -29,7 +29,7 @@ class Validation {
             if(strlen($input)>$maxLength){
                 echo '{"status": 0, "message": "Invalid length (max)"}';
                 exit();
-             }
+            }
         }
     }
     
