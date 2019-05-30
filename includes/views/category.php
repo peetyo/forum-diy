@@ -67,7 +67,8 @@ $Parsedown = new Parsedown();
                                 <div class="panel-heading">
                                     <h4> <?= htmlentities($topic['topic_name']) ?></h4>
                                 </div>
-                                    <p> <?= $Parsedown->text(htmlentities($topic['content'])) ?>...</p>
+                                  
+                                    <?= str_replace(["</p>\n\n<p>", '<p>', '</p>'], ["\n\n", ""],$Parsedown->text(htmlentities(substr($topic['content'], 0, 200)))); ?>...
                         </div>
                         <div class="thread-info">
                             <div class="thread-info-avatar">

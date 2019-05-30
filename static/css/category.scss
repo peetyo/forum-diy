@@ -15,8 +15,13 @@ a:hover{
 
 
 .thread-info{
+    margin-top: 7px;
     display: flex;
     box-sizing: border-box;
+
+    p{
+        margin-bottom: 0;
+    }
 }
 
 .img-circle{
