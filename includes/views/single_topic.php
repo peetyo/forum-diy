@@ -4,7 +4,7 @@ $Parsedown = new Parsedown();
 <div class="container">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+            <li class="breadcrumb-item"><a href="index.php">categories</a></li>
             <li class="breadcrumb-item"><a href="category?cat=<?= $data->topicData["category_id"] ?>"><?= $data->topicData["category_name"] ?></a></li>
             <li class="breadcrumb-item active" aria-current="page"><?=  htmlentities($data->topicData["topic_name"]) ?> </li>
         </ol>

@@ -47,6 +47,7 @@ $(document).on('click', '#btnSubmit', function (event) {
         } else if(response.status == 0){
             displayError(response.message);
         } else{
+            console.log(response);
             displayError('Internal Server error')
         }
     });

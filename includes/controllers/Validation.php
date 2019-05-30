@@ -53,6 +53,22 @@ class Validation {
         $Newdata = filter_var($data, FILTER_SANITIZE_STRING);
         return $data;
     }
+
+    public static function checkUploadedImage($file){
+        $allowedTypes = ['jpeg', 'jpg', 'png'];
+        $fileName = $file['name'];
+        $fileExtension = pathinfo($fileName, PATHINFO_EXTENSION);
+        $ini_max = ini_get('upload_max_filesize');
+        $maxUploadSize = (int)strstr($ini_max, 'M', true); 
+        if(!in_array($fileExtension,$allowedTypes)){
+            echo '{"status": 0, "message": "Please upload a .png, .jpg or .jpeg file."}';
+            exit();
+        }
+        if($file['size'] == 0){
+            echo '{"status": 0, "message": "Maximum image file size is '.$maxUploadSize.'MB."}';
+            exit();
+        }
+    }
 }
 // $input = 'a@a.com';
 // Validation::checkInput($input,'email',5,10);

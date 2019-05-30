@@ -110,7 +110,11 @@ class SingleTopic extends Controller
         // echo $aTopicData['topic_name']; works
         if(isset($_POST)){
             if(!empty($_FILES['image_upload'])){
-               $aTopicData['image'] = $_FILES['image_upload'];
+                Validation::checkUploadedImage($_FILES['image_upload']);
+                $fileExtension = pathinfo($_FILES['image_upload']['name'], PATHINFO_EXTENSION);
+                $newFileName = 'featured-'.uniqid().'.'.$fileExtension;
+                $_FILES['image_upload']['name'] = $newFileName;
+                $aTopicData['image'] = $_FILES['image_upload'];
               }
         }
 
