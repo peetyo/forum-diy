@@ -5,7 +5,14 @@
 // Should be disccussed
 session_start();
 // ini_set('display_errors', 1);
+
+// we check if the route exist or not. If doesn't we redirect to 404 page;
+if(Route::check_route_exist() === false ){
+    Controller::NotExistingPage();
+    exit;
+}
 Route::set('index.php', function (){
+
     Home::CreateView('home','');
 
 // MORTY: i left this for testing purpose
@@ -89,3 +96,5 @@ Route::set('api-edit-topic', function (){
        die();
    }
 });
+
+

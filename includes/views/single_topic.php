@@ -5,7 +5,7 @@ $Parsedown = new Parsedown();
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-            <li class="breadcrumb-item"><a href="category?cat=<?= $data->topicData["category_id"] ?>"><?= $data->topicData["category_name"] ?></a></li>
+            <li class="breadcrumb-item"><a href="category?cat=<?=  $data->topicData["category_id"] ?>"><?= $data->topicData["category_name"] ?></a></li>
             <li class="breadcrumb-item active" aria-current="page"><?=  htmlentities($data->topicData["topic_name"]) ?> </li>
         </ol>
     </nav>
@@ -20,19 +20,21 @@ $Parsedown = new Parsedown();
                 <div class="card topic">
                     <div class="card-header bg-dark text-white">
                         <img src="https://via.placeholder.com/25" alt="User's profile picture">
-                        <span class="username"> <?= htmlentities($data->topicData["username"]) ?></span> posted on
+                        <span class="username"> <?=  htmlentities($data->topicData["username"]) ?></span> posted on
                         <span class="comment-date"><?= $data->topicData["date_created"] ?></li>
                         </span>
                     </div>
                     <div class="card-body">
                         <p class="card-text">
-                            <?= $Parsedown->text(htmlentities($data->topicData["content"])) ?>
+                            <?=
+                            $Parsedown->text(htmlentities($data->topicData["content"])) ?>
                         </p>
                     </div>
                     <div class="text-right card-footer text-muted bg-dark">
                         <div class="btn-group" role="group" aria-label="Basic example">
                             <button type="button" class="btn btn-primary">Reply</button>
                             <?php
+
                             /*
                              * Display edit button only if allowed
                              */
