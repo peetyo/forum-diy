@@ -12,7 +12,12 @@ a:hover{
     text-decoration: none;
 }
 
-
+div.title-container{
+    margin-bottom: 0px !important;
+    p{
+     margin-bottom: 10px;
+    }
+}
 
 .thread-info{
     margin-top: 7px;

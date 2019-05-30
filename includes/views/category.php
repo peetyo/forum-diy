@@ -5,34 +5,16 @@ $Parsedown = new Parsedown();
    
    <!-- Not sure we need this row section, could be deleted -->
     <div class="row justify-content-center">
-        <div class="col-9">
+        <div class="col-md-9 pl-3 mb-5 title-container">
             <h1><?= $data['category-name']; ?></h1>
 
             <p> <?= $data['category-description']; ?></h1></p>
-        </div>
-        <div class="col-lg-3 mt-3">
-            <div id="create-button-wrapper">
-                <?php
-                if(isset($_SESSION['User'])){
-                    echo '<a href="create-topic" class="btn create-topic mb-2">Create topic</a>';
-                }
-                ?>
-            </div>
-
-
         </div>
     </div>
 
 
 
     <div class="row justify-content-center">
-
-
-<!-- PETER: Not sure why this is here. -->
-<!-- <div class="row">
-
-
-</div> -->
 
     <div class="col-md-9 pl-3 mb-5">
         
@@ -56,9 +38,16 @@ $Parsedown = new Parsedown();
                 </div>
             </div>
         </div> -->
-        
+        <div id="create-button-wrapper">
+                <?php
+                if(isset($_SESSION['User'])){
+                    echo '<a href="create-topic" class="btn create-topic mb-2">Create topic</a>';
+                }
+                ?>
+            </div>
         <?php 
                 // print_r($data); 
+                
                 foreach ($data['topics'] as $topic) { ?>
 
                     <a href="topic?id=<?=$topic['id']?>">

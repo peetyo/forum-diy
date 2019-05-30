@@ -16,6 +16,14 @@ a:hover {
   text-decoration: none;
 }
 
+div.title-container {
+  margin-bottom: 0px !important;
+}
+
+div.title-container p {
+  margin-bottom: 10px;
+}
+
 .thread-info {
   margin-top: 7px;
   display: -webkit-box;
