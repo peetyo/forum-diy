@@ -20,10 +20,8 @@ class SingleTopic extends Controller
              * Server is redirecting to the correct page number. s
              */
             $url = $_SERVER['REQUEST_URI'];
-            echo  $_SERVER['REQUEST_URI'];
             header("location:$url&page=1");
         } else {
-            //echo  $_GET['page'];
             $iPageNumber = $_GET['page'] - 1;
             $iOffset = 5 * $iPageNumber;
         }

@@ -24,7 +24,8 @@ class Category extends Controller
             self::CreateView('error', '');
         }
         $data = array();
-        $data['category'] = $iCategoryId;
+        $data['category-name'] = $aTopics[0]['category_name'];
+        $data['category-description'] = $aTopics[0]['category_description'];
         $data['topics'] = $aTopics;
         self::CreateView('category', $data);
         
