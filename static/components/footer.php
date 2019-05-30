@@ -15,7 +15,7 @@
 
                 <!-- Grid column -->
                 <div class="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0">
-                    <h6 class="mb-0">Get connected with us on social networks!</h6>
+                    <!-- <h6 class="mb-0">Get connected with us on social networks!</h6> -->
                 </div>
                 <!-- Grid column -->
 
@@ -59,7 +59,7 @@
         <div class="row mt-3">
 
             <!-- Grid column -->
-            <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+            <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mb-4">
 
                 <!-- Content -->
                 <h6 class="text-uppercase font-weight-bold">Project made by:</h6>
@@ -84,20 +84,18 @@
                     if (!isset($_SESSION['User'])) {
                         ?>
                         <div id="guestActions">
-                            <p>
-                                <a href="sign-up">Sign up</a>
-                            </p>
-                            <p>
-                                <a href="index.php">Log in</a>
-                            </p>
+                            <ul>
+                                <li><a href="sign-up">Sign up</a></li>
+                                <li><a href="index.php">Log in</a></li>    
+                            </ul>
                         </div>
                         <?php
                     } else {
                         ?>
                         <div id="userActions">
-                            <p>
-                                <a href="logout">Log out</a>
-                            </p>
+                            <ul>
+                                <li><a href="logout">Log out</a></li>
+                            </ul>
                         </div>
                         <?php
                     }
@@ -112,28 +110,15 @@
                 <!-- Links -->
                 <h6 class="text-uppercase font-weight-bold"><?= $appName ?></h6>
                 <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-                <p>
-                    <a href="#!">Back to Home</a>
-                </p>
-                <?php
-                if (isset($_SESSION['User'])) {
-                    ?>
-                    <p>
-                        <a href="create-topic">Create new post</a>
-                    </p>
-                <?php }
-                ?>
-                <p>
-                    <a href="category?cat=3">Category: Home</a>
-                </p>
-                <p>
-                    <a href="category?cat=4">Category: Office</a>
-                </p>
-                <p>
-                    <a href="category?cat=5 ">Category: Travel</a>
-                </p>
-
-
+                <ul>
+                    <li><a href="#!">Back to Home</a></li>
+                    <?php if (isset($_SESSION['User'])) { ?>
+                        <li><a href="create-topic">Create new post</a></li>
+                    <?php } ?>
+                    <li><a href="category?cat=3">Category: Home</a></li>
+                    <li><a href="category?cat=4">Category: Office</a></li>
+                    <li><a href="category?cat=5 ">Category: Travel</a></li>
+                </ul>
             </div>
             <!-- Grid column -->
 
@@ -146,7 +131,7 @@
 
     <!-- Copyright -->
     <div class="footer-copyright text-center py-3">
-        © 2019 Copyrights
+        © 2019 Copyright
     </div>
     <!-- Copyright -->
 

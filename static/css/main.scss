@@ -171,3 +171,12 @@ span#sign-up:hover{
 .footer-social{
   background-color: $secondary;
 }
+footer {
+
+  ul {
+    padding-left: 0;
+  }
+  ul li{
+    list-style: none;
+  }
+}
