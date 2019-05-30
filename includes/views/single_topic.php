@@ -4,7 +4,7 @@ $Parsedown = new Parsedown();
 <div class="container">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+            <li class="breadcrumb-item"><a href="index.php">categories</a></li>
             <li class="breadcrumb-item"><a href="category?cat=<?=  $data->topicData["category_id"] ?>"><?= $data->topicData["category_name"] ?></a></li>
             <li class="breadcrumb-item active" aria-current="page"><?=  htmlentities($data->topicData["topic_name"]) ?> </li>
         </ol>
@@ -133,7 +133,10 @@ $Parsedown = new Parsedown();
         </div>
         <div class="col-md-4">
             <div class="card">
-                <img src="https://via.placeholder.com/200" class="card-img-top" alt="...">
+                <img src="static/images/<?php 
+                    if($data->topicData['featured_image_url'] != ''){
+                    echo $data->topicData['featured_image_url'];
+                    }else{ echo 'default.png';};?>" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">Topic info</h5>
                     <ul>

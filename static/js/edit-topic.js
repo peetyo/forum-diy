@@ -23,14 +23,18 @@ $(document).on('click', '#btnSubmit', function (event) {
         displayError(e)
         return;
     }
-
-    const form = $('#new-topic-form').serialize() + '&content=' + contentTextbox.value()
+    var form = $('#new-topic-form');
+    var formData = new FormData(form[0]);
+    formData.append('content', contentTextbox.value())
     // Make an ajax call
     $.ajax({
         url: 'api-edit-topic',
         type: 'POST',
-        data: form,
-        dataType: 'json'
+        data: formData,
+        dataType: 'json',
+        // cache: false,
+        contentType: false,
+        processData: false
     }).always(function (response) {
         /*
         Response should include the status code

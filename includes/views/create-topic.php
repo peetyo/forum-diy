@@ -14,7 +14,7 @@
                 <p>Your topic was added successfully.
                     You'll be redirected to the main page in a moment...</p>
             </div>
-            <form id="new-topic-form">
+            <form id="new-topic-form" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="topic_name">Title</label>
                     <input type="text" class="form-control" id="topic_name" name="topic_name"
@@ -34,13 +34,18 @@
                         ?>
                     </select>
                 </div>
+                <!-- IMAGE UPLOAD -->
+                <div class="form-group">
+                    <label for="image">Upload a featured image</label>
+                    <input name="image_upload" type="file" accept="image/*" >
+                </div>
                 <div class="form-group">
                     <label for="content">Write your thoughts down...</label>
                     <textarea id="content"></textarea>
                 </div>
                 <div class="form-group">
                     <input type="hidden" name="token" value="<?= $csrf ?>">
-                    <button class="btn btn-primary" id="btnSubmit">Submit
+                    <button class="btn btn-primary" id="btnSubmit" type="submit">Submit
                     </button>
                 </div>
             </form>

@@ -21,14 +21,18 @@ $(document).on('click', '#btnSubmit', function (event) {
         displayError(e)
         return;
     }
+    var form = $('#new-topic-form');
+    var formData = new FormData(form[0]);
+    formData.append('content', contentTextbox.value())
 
-    const form = $('#new-topic-form').serialize() + '&content=' + contentTextbox.value()
-    // Make an ajax call
     $.ajax({
         url: 'api-create-topic',
         type: 'POST',
-        data: form,
-        dataType: 'json'
+        data: formData,
+        dataType: 'json',
+        // cache: false,
+        contentType: false,
+        processData: false
     }).always(function (response) {
         /*
         Response should include the status code
@@ -43,6 +47,7 @@ $(document).on('click', '#btnSubmit', function (event) {
         } else if(response.status == 0){
             displayError(response.message);
         } else{
+            console.log(response);
             displayError('Internal Server error')
         }
     });

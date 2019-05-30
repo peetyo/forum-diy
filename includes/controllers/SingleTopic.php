@@ -110,11 +110,18 @@ class SingleTopic extends Controller
         //$token = $_POST['token'];
         $aTopicData = $_POST;
         // echo $aTopicData['topic_name']; works
-      
-
+        if(isset($_POST)){
+            if(!empty($_FILES['image_upload'])){
+                Validation::checkUploadedImage($_FILES['image_upload']);
+                $fileExtension = pathinfo($_FILES['image_upload']['name'], PATHINFO_EXTENSION);
+                $newFileName = 'featured-'.uniqid().'.'.$fileExtension;
+                $_FILES['image_upload']['name'] = $newFileName;
+                $aTopicData['image'] = $_FILES['image_upload'];
+              }
+        }
 
         /*
-         *  Pass the token in the function below
+         *  TODO: Pass the token in the function below
          */
 
 //        if( BotValidation::Verify($token) == false){
@@ -124,7 +131,7 @@ class SingleTopic extends Controller
         $classTopic = new Topics();
         $classTopic->create_topic($aTopicData);
 
-        /*
+        /* TODO:
          * Please pass id in return as a JSON
          * Structure
          * {"status":1, "message":"optional message", "topic":346}
@@ -143,10 +150,6 @@ class SingleTopic extends Controller
         // $_POST['topic_name'] = 'Test Topic';
         Validation::checkInput($_POST['topic_name'], 'string', 5, 255);
 
-        // $_POST['category_id'] = 3;
-        // NOTE: the form's option values are strings not integers
-        Validation::checkInput($_POST['category_id'], 'string', 1, 2);
-
         $_POST['user_id'] = (int)$_SESSION['User']['id'];
         Validation::checkInput($_POST['user_id'], 'integer', '', '');
 
@@ -155,8 +158,16 @@ class SingleTopic extends Controller
 
         //$token = $_POST['token'];
         $aTopicData = $_POST;
-        // echo $aTopicData['topic_name']; works
+        if(isset($_POST)){
 
+            if($_FILES['image_upload']['name']!==''){
+                Validation::checkUploadedImage($_FILES['image_upload']);
+                $fileExtension = pathinfo($_FILES['image_upload']['name'], PATHINFO_EXTENSION);
+                $newFileName = 'featured-'.uniqid().'.'.$fileExtension;
+                $_FILES['image_upload']['name'] = $newFileName;
+                $aTopicData['image'] = $_FILES['image_upload'];
+            }
+        }
 
         /*
          *  Pass the token in the function below

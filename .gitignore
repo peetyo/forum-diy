@@ -78,3 +78,7 @@ includes/logs
 # Ignore PrePros
 
 prepros-6.config
+
+# Ignore featured images
+
+static/images
