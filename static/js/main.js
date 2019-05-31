@@ -39,3 +39,18 @@ $(document).click(function (e) {
         window.location.href = 'logout'
     }
 })
+
+//function for displaying the error message if the signup is invalid
+function displayError(message) {
+  
+    document.getElementById("err-msg").style.display ="block";
+    if(message){
+      document.querySelector("#err-msg p").textContent = message;
+    }
+}
+
+//function for displaying the success message
+function displaySuccess() {
+    document.getElementById("err-msg").style.display = "none";
+    document.getElementById("succ-msg").style.display = "block";
+}

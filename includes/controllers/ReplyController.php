@@ -17,10 +17,15 @@ class ReplyController extends Controller
             echo '{"status":"0","message":"Invalid token"}';
             exit;
         }
-        echo '{"status":"1","message":"all good so far"}';
-
+        
+        $_POST['user_id'] = (int)$_SESSION['User']['id'] ;
+        Validation::checkInput($_POST['user_id'],'integer','','');
+        
+        Validation::checkInput($_POST['content'],'string',5,'');
+        
+        echo '{"status":"1","message":"Invalid token"}';
         // $replyModel = new Reply();
-        // $aTopics = $topics->getTopicsFromCategory($iCategoryId);
+        // $replyResponse = $replyModel->addReply($replyData);
         // // PETER: Lame check if object topics is actually a string.
         // // the errors are returned as string. the successful response is 
         // // an array. The error responses should be updated and also 
