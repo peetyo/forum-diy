@@ -53,11 +53,13 @@ class Users extends Model
             $sQuery->bindValue(':active', 1);
             $sQuery->bindValue(':token' , $token);
             $sQuery->execute();
-            $returnedID =  $this->db->lastInsertId();if (!$sQuery->rowCount()) {
+            $returnedID =  $this->db->lastInsertId();
+            if (!$sQuery->rowCount()) {
                 echo '{"status":"0","message":"User was not created"}';
                 exit;
             }
-            return $returnedID;
+            echo '{"status":"1","message":"User was created"}';
+            // return $returnedID;
       //  echo '{"status":"1", "message":"User created" ,"id" = '.$returnedID.'}';
         } catch (PDOException $error) {
             LogSaver::save_the_log($error, 'users.txt');
