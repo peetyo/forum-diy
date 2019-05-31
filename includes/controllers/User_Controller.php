@@ -58,7 +58,7 @@ class User_Controller extends Controller {
             $token = bin2hex(openssl_random_pseudo_bytes(16));
             $user_class = new Users;
            $returnedID =  $user_class->sign_up_user($username, $user_password,$email ,$token );
-            mailer::sent_mail($_POST['txtEmail'], $token , $returnedID , $username);
+            // mailer::sent_mail($_POST['txtEmail'], $token , $returnedID , $username);
         }catch( PDOException $e ){
             echo '{"status":"0","message":"Something went wrong, please contact the support"}';
             //Saving the errors in txt file to keep track what happend in case something breaks

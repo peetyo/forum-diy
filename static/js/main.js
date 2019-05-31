@@ -48,7 +48,6 @@ function displayError(message) {
   
     document.getElementById("err-msg").style.display ="block";
     setTimeout(function(){
-        console.log('scroll')
         document.getElementById("err-msg").scrollIntoView({
             behavior: 'smooth',
             block:'start'});

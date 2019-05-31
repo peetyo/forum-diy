@@ -50,7 +50,7 @@ class Users extends Model
             $sQuery->bindValue(':email', $email);
             $sQuery->bindValue(':date_created', date('Y/m/d H:i:s'));
             $sQuery->bindValue(':user_role', 4);
-            $sQuery->bindValue(':active', 0);
+            $sQuery->bindValue(':active', 1);
             $sQuery->bindValue(':token' , $token);
             $sQuery->execute();
             $returnedID =  $this->db->lastInsertId();if (!$sQuery->rowCount()) {
