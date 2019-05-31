@@ -22,9 +22,7 @@ class Model {
             $this->db = new PDO( $this->connection, $this->username, $this->password, $this->aOptions );
         }catch(PDOException $error){
             echo $error;
-            date_default_timezone_set("Europe/Copenhagen");
-            $error_log = '{"DATE":'.date("Y-m-d").', "TIME": '.date("h:i:sa").' ,  "Eror": '.$error.', "line": '.__LINE__.'}';
-            file_put_contents('./includes/logs/database-connection.txt', $error_log , FILE_APPEND );
+            LogSaver::save_the_log($error, 'database-connection.txt');
             die();
         }
     }
