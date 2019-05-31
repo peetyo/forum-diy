@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 // Peter: Now we are looking through the models folder(not classes) and the controllers folder
 
 function __autoload($class_name) {

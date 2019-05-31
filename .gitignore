@@ -73,7 +73,12 @@ includes/config/database.php
 .idea
 .idea/watcherTasks.xml
 static/css/.sass-cache
+includes/logs
 
 # Ignore PrePros
 
 prepros-6.config
+
+# Ignore featured images
+
+static/images

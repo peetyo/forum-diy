@@ -22,6 +22,7 @@ class Model {
             $this->db = new PDO( $this->connection, $this->username, $this->password, $this->aOptions );
         }catch(PDOException $error){
             echo $error;
+            LogSaver::save_the_log($error, 'database-connection.txt');
             die();
         }
     }

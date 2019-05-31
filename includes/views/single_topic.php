@@ -1,37 +1,50 @@
 <?php
+$Parsedown = new Parsedown();
+// Parsedown's built-in encoding
+$Parsedown->setSafeMode(true);
 ?>
 <div class="container">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item"><a href="#"><?= $data->topicData["category_name"] ?></a></li>
+            <li class="breadcrumb-item"><a href="index.php">categories</a></li>
+            <li class="breadcrumb-item"><a href="category?cat=<?=  $data->topicData["category_id"] ?>"><?= $data->topicData["category_name"] ?></a></li>
             <li class="breadcrumb-item active" aria-current="page"><?=  htmlentities($data->topicData["topic_name"]) ?> </li>
         </ol>
     </nav>
     <div class="row">
 
-
         <div class="col-md-8">
-            <div class="col-12">
+            <div class="col-12" id="topic-title" data-comments="<?= $data->numberOfComments ?>">
                 <h1><?= htmlentities($data->topicData["topic_name"]) ?></h1>
             </div>
             <div class="col-12">
                 <div class="card topic">
                     <div class="card-header bg-dark text-white">
-                        <img src="https://via.placeholder.com/25" alt="User's profile picture">
-                        <span class="username"> <?= htmlentities($data->topicData["username"]) ?></span> posted on
+                        <img class="avatar" src="https://www.ukielist.com/wp-content/uploads/2017/03/default-avatar.png" alt="User's profile picture">
+                        <span class="username"> <?=  htmlentities($data->topicData["username"]) ?></span> posted on
                         <span class="comment-date"><?= $data->topicData["date_created"] ?></li>
                         </span>
                     </div>
                     <div class="card-body">
                         <p class="card-text">
-                            <?= htmlentities($data->topicData["content"]) ?>
+                            <?=
+                            $Parsedown->text($data->topicData["content"]) ?>
                         </p>
                     </div>
                     <div class="text-right card-footer text-muted bg-dark">
                         <div class="btn-group" role="group" aria-label="Basic example">
-                            <button type="button" class="btn btn-primary">Reply</button>
-                            <button type="button" class="btn btn-primary">Edit</button>
+                            <?php
+                            if (isset($_SESSION['User'])) {
+                                ?>
+                                <a href="reply?id=<?= $data->topicData['id'].'&title='.$data->topicData["topic_name"].'&com='.$data->numberOfComments ?>" class="btn btn-primary">Reply</a>
+                                <?php
+                            }
+                            if ($data->canEdit == true) {
+                                ?>
+                                <a href="edit-topic?id=<?= $data->topicData['id'] ?>" class="btn btn-primary">Edit</a>
+                                <?php
+                            }
+                            ?>
                         </div>
                     </div>
                 </div>
@@ -46,9 +59,9 @@
                 $comments = $data->commentData;
                 foreach ($comments as $key => $comment) {
                     ?>
-                    <div class="card comment">
+                    <div class="card comment" id="<?=$comment['id']?>">
                         <div class="card-header">
-                            <img src="https://via.placeholder.com/25" alt="User's profile picture">
+                            <img class="avatar" src="https://www.ukielist.com/wp-content/uploads/2017/03/default-avatar.png" alt="User's profile picture">
                             <span class="username">
                             <?= htmlentities($comment["username"] )?>
                         </span>
@@ -59,12 +72,18 @@
                         </div>
                         <div class="card-body">
                             <p class="card-text">
-                                <?= htmlentities($comment["content"]) ?>
+                                <?= $Parsedown->text($comment["content"]) ?>
                             </p>
                         </div>
                         <div class="text-right card-footer text-muted">
                             <div class="btn-group" role="group" aria-label="Basic example">
-                                <button type="button" class="btn btn-primary">Reply</button>
+                                <?php
+                                if (isset($_SESSION['User'])) {
+                                    ?>
+                                    <a href="reply?id=<?= $data->topicData['id'].'&title='.$data->topicData["topic_name"].'&com='.$data->numberOfComments ?>" class="btn btn-primary">Reply</a>
+                                    <?php
+                                }
+                                ?>
                             </div>
                         </div>
                     </div>
@@ -89,7 +108,7 @@
                         if (!($currentPage == 1)) {
                             ?>
                             <li class="page-item">
-                                <a class="page-link" href="<?= $currentUri ?>&page=<?= $currentPage - 1 ?>">
+                                <a class="page-link" href="topic?id=<?= htmlentities($_GET['id']) ?>&page=<?= $currentPage - 1 ?>">
                                     Previous
                                 </a>
                             </li>
@@ -98,7 +117,7 @@
                         for ($page = 1; $page <= $numberOfPages; $page++) {
                             ?>
                             <li class="page-item <?= ($page == $currentPage) ? "active" : "" ?> ">
-                                <a class="page-link" href="<?= $currentUri ?>&page=<?= $page ?>">
+                                <a class="page-link" href="topic?id=<?=  htmlentities($_GET['id']) ?>&page=<?= $page ?>">
                                     <?= $page ?>
                                 </a>
                             </li>
@@ -110,7 +129,7 @@
                         if (!($currentPage == $numberOfPages)) {
                             ?>
                             <li class="page-item">
-                                <a class="page-link" href="<?= $currentUri ?>&page=<?= $currentPage + 1 ?>">Next</a>
+                                <a class="page-link" href="topic?id=<?=  htmlentities($_GET['id']) ?>&page=<?= $currentPage + 1 ?>">Next</a>
                             </li>
                             <?php
                         }
@@ -121,7 +140,10 @@
         </div>
         <div class="col-md-4">
             <div class="card">
-                <img src="https://via.placeholder.com/200" class="card-img-top" alt="...">
+                <img src="static/images/<?php 
+                    if($data->topicData['featured_image_url'] != ''){
+                    echo $data->topicData['featured_image_url'];
+                    }else{ echo 'default.png';};?>" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">Topic info</h5>
                     <ul>

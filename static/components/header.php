@@ -62,20 +62,23 @@ $csrf = CSRFToken::generate_token();
     
 </nav>
 
+<!-- Deleted search bar 
+
 <div class="search-bar">
     <div class="container">
 
-        <!-- Grid row-->
+
         <div class="row py-4 d-flex flex-row-reverse">
 
-            <!-- Old version of search bar
+            Old version of search bar
             <div class="col-md-12 col-lg-12 text-center text-md-right mb-4 mb-md-0">
                 <form class=" form-inline my-2 my-lg-0">
                     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
                 </form>
             </div>
-            -->
+        
+
 
             <div class="search col-md-12 col-lg-12 text-center">
                 <form class="form-inline">
@@ -83,6 +86,7 @@ $csrf = CSRFToken::generate_token();
                     <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
                 </form>
             </div>
+-->
 
 
             <!-- Grid column -->

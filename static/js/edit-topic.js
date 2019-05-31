@@ -1,5 +1,7 @@
 const contentTextbox = new SimpleMDE({element: $("#content")[0]});
-contentTextbox.value("Write down your thoughts here... We support markdown syntax here.");
+const receivedContentValue = $('#currentContent').val();
+
+contentTextbox.value(receivedContentValue);
 
 
 /*
@@ -24,9 +26,9 @@ $(document).on('click', '#btnSubmit', function (event) {
     var form = $('#new-topic-form');
     var formData = new FormData(form[0]);
     formData.append('content', contentTextbox.value())
-
+    // Make an ajax call
     $.ajax({
-        url: 'api-create-topic',
+        url: 'api-edit-topic',
         type: 'POST',
         data: formData,
         dataType: 'json',
@@ -47,7 +49,6 @@ $(document).on('click', '#btnSubmit', function (event) {
         } else if(response.status == 0){
             displayError(response.message);
         } else{
-            console.log(response);
             displayError('Internal Server error')
         }
     });

@@ -7,59 +7,78 @@ For the file watcher, please remember to include --style compressed in the argum
 @import url("https://fonts.googleapis.com/css?family=Lato");
 body {
   background: #f1f1f1;
-  font-family: "Lato", sans-serif; }
+  font-family: "Lato", sans-serif;
+}
 
 .navbar-color {
   background-color: #00897B;
-  color: #f1f1f1; }
+  color: #f1f1f1;
+}
 
 .navbar-brand img {
-  width: 120px; }
+  width: 120px;
+}
 
 .login-form {
-  margin-right: unset !important; }
+  margin-right: unset !important;
+}
 
 .btn-login {
   background-color: transparent;
   border: 1px solid white;
   color: #f1f1f1;
-  margin-right: 5px; }
+  margin-right: 5px;
+}
 
 .btn-logout {
-  background-color: white; }
+  background-color: white;
+}
 
 .btn-signup {
   color: #00897B;
-  background-color: white; }
+  background-color: white;
+}
 
 a {
-  color: black; }
+  color: black;
+}
 
 a:hover {
-  color: black; }
+  color: black;
+}
 
 span#sign-up {
   color: black;
-  text-decoration: none; }
+  text-decoration: none;
+}
 
 span#sign-up:hover {
-  color: black; }
+  color: black;
+}
 
 .search {
   padding: 80px 0 80px 0;
-  justify-content: center;
-  display: inline-flex; }
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
 
 .btn-secondary {
-  background-color: #2c3e50; }
+  background-color: #2c3e50;
+}
 
 .horizontal-line {
   height: 1 px;
   padding-bottom: 24px;
-  margin: 0px; }
+  margin: 0px;
+}
 
 .cards-container {
-  padding: 36px 0 48px 0; }
+  padding: 36px 0 48px 0;
+}
 
 .card-1 {
   background: #fff;
@@ -67,58 +86,81 @@ span#sign-up:hover {
   height: 250px;
   margin: 1rem;
   width: 300px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-content: flex-end;
-  justify-content: center;
+  -ms-flex-line-pack: end;
+      align-content: flex-end;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   padding: 16px;
-  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.25);
-  font-size: 16px; }
-  .card-1:hover {
-    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22); }
+  -webkit-box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.25);
+          box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.25);
+  font-size: 16px;
+}
+
+.card-1:hover {
+  -webkit-box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+          box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
 
 .img-container {
   text-align: center;
-  padding-top: 20px; }
+  padding-top: 20px;
+}
 
 .card-img {
   margin: 0 auto;
-  width: 80px; }
+  width: 80px;
+}
 
 .card-body h4 {
   font-size: 16px;
   font-weight: bold;
-  text-decoration: none; }
-  .card-body h4:hover {
-    cursor: pointer;
-    text-decoration: none; }
+  text-decoration: none;
+}
+
+.card-body h4:hover {
+  cursor: pointer;
+  text-decoration: none;
+}
 
 .card-body p {
   color: #6e6e6e;
-  font-size: 14px; }
+  font-size: 14px;
+}
 
 .cat1-line {
-  background-color: #ffaa00; }
+  background-color: #ffaa00;
+}
 
 .cat1-text {
-  color: #ffaa00; }
+  color: #ffaa00;
+}
 
 .cat2-line {
-  background-color: #1a486f; }
+  background-color: #1a486f;
+}
 
 .cat2-text {
-  color: #1a486f; }
+  color: #1a486f;
+}
 
 .cat3-line {
-  background-color: #409789; }
+  background-color: #409789;
+}
 
 .cat3-text {
-  color: #409789; }
+  color: #409789;
+}
 
 .footer-social {
-  background-color: #2c3e50; }
+  background-color: #2c3e50;
+}
 
 label {
   font-size: 18px;
-  color: #2c3e50; }
-
+  color: #2c3e50;
+}
 /*# sourceMappingURL=sign_up.css.map */
