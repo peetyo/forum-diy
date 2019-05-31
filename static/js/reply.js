@@ -29,7 +29,7 @@ $(document).on('click', '#btnSubmit', function (event) {
             console.log(response);
             // redirect to the proper page
             displaySuccess();
-            // window.location.href = "topic?id=" + response.topic;
+            window.location.href = response.location;
         } else if(response.status == 0){
             displayError(response.message);
         } else{

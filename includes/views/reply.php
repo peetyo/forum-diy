@@ -21,6 +21,8 @@
                 </div>
                 <div class="form-group">
                     <input type="hidden" name="token" value="<?= $csrf ?>">
+                    <input type="hidden" name="topic_id" value="<?= $_GET['id'] ?>">
+                    <input type="hidden" name="number_of_com" value="<?= $_GET['com'] ?>">
                     <button class="btn btn-primary" id="btnSubmit" type="submit">Submit
                     </button>
                 </div>

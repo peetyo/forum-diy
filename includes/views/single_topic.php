@@ -57,7 +57,7 @@ $Parsedown = new Parsedown();
                 $comments = $data->commentData;
                 foreach ($comments as $key => $comment) {
                     ?>
-                    <div class="card comment">
+                    <div class="card comment" id="<?=$comment['id']?>">
                         <div class="card-header">
                             <img src="https://via.placeholder.com/25" alt="User's profile picture">
                             <span class="username">
@@ -78,7 +78,7 @@ $Parsedown = new Parsedown();
                                 <?php
                                 if (isset($_SESSION['User'])) {
                                     ?>
-                                    <a href="reply?id=<?= $data->topicData['id'].'&com='.$data->numberOfComments ?>" class="btn btn-primary">Reply</a>
+                                    <a href="reply?id=<?= $data->topicData['id'].'&title='.$data->topicData["topic_name"].'&com='.$data->numberOfComments ?>" class="btn btn-primary">Reply</a>
                                     <?php
                                 }
                                 ?>
