@@ -1,6 +1,5 @@
 <?php
-// for testing this class we need to include the Model.php
-require_once 'Model.php';
+
 class Reply extends Model {
     public function addReply($replyData) {
         try{
@@ -18,14 +17,15 @@ class Reply extends Model {
         $sQuery->execute();
         if (!$sQuery->rowCount()) {
             echo '{"status": 0, "message": "Sorry, something went wrong when replying."}';
-            exit();
+            exit;
         }
         return $db->lastInsertId();
 
         
         }catch(PDOException $error){
             // TODO: Insert Logger
-            echo '{"status": 0, "message": "'.$error.'"}';
+            echo '{"status": 0, "message": "Are you sure you didn\'t alter the topic ID?"}';
+            exit;
         }      
     }
 }

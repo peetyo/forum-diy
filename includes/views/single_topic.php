@@ -1,5 +1,7 @@
 <?php
 $Parsedown = new Parsedown();
+// Parsedown's built-in encoding
+$Parsedown->setSafeMode(true);
 ?>
 <div class="container">
     <nav aria-label="breadcrumb">
@@ -26,7 +28,7 @@ $Parsedown = new Parsedown();
                     <div class="card-body">
                         <p class="card-text">
                             <?=
-                            $Parsedown->text(htmlentities($data->topicData["content"])) ?>
+                            $Parsedown->text($data->topicData["content"]) ?>
                         </p>
                     </div>
                     <div class="text-right card-footer text-muted bg-dark">
@@ -70,7 +72,7 @@ $Parsedown = new Parsedown();
                         </div>
                         <div class="card-body">
                             <p class="card-text">
-                                <?= $Parsedown->text(htmlentities($comment["content"])) ?>
+                                <?= $Parsedown->text($comment["content"]) ?>
                             </p>
                         </div>
                         <div class="text-right card-footer text-muted">
@@ -106,7 +108,7 @@ $Parsedown = new Parsedown();
                         if (!($currentPage == 1)) {
                             ?>
                             <li class="page-item">
-                                <a class="page-link" href="<?= $currentUri ?>&page=<?= $currentPage - 1 ?>">
+                                <a class="page-link" href="topic?id=<?= $_GET['id'] ?>&page=<?= $currentPage - 1 ?>">
                                     Previous
                                 </a>
                             </li>
@@ -115,7 +117,7 @@ $Parsedown = new Parsedown();
                         for ($page = 1; $page <= $numberOfPages; $page++) {
                             ?>
                             <li class="page-item <?= ($page == $currentPage) ? "active" : "" ?> ">
-                                <a class="page-link" href="<?= $currentUri ?>&page=<?= $page ?>">
+                                <a class="page-link" href="topic?id=<?= $_GET['id'] ?>&page=<?= $page ?>">
                                     <?= $page ?>
                                 </a>
                             </li>
@@ -127,7 +129,7 @@ $Parsedown = new Parsedown();
                         if (!($currentPage == $numberOfPages)) {
                             ?>
                             <li class="page-item">
-                                <a class="page-link" href="<?= $currentUri ?>&page=<?= $currentPage + 1 ?>">Next</a>
+                                <a class="page-link" href="topic?id=<?= $_GET['id'] ?>&page=<?= $currentPage + 1 ?>">Next</a>
                             </li>
                             <?php
                         }
