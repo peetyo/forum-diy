@@ -14,4 +14,9 @@ blockquote {
   border-left: solid 2px black;
   padding-left: 10px;
 }
+
+.avatar {
+  width: 25px;
+  height: 25px;
+}
 /*# sourceMappingURL=single_topic.css.map */
