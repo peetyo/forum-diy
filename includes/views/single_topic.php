@@ -11,9 +11,8 @@ $Parsedown = new Parsedown();
     </nav>
     <div class="row">
 
-
         <div class="col-md-8">
-            <div class="col-12">
+            <div class="col-12" id="topic-title" data-comments="<?= $data->numberOfComments ?>">
                 <h1><?= htmlentities($data->topicData["topic_name"]) ?></h1>
             </div>
             <div class="col-12">
@@ -32,12 +31,12 @@ $Parsedown = new Parsedown();
                     </div>
                     <div class="text-right card-footer text-muted bg-dark">
                         <div class="btn-group" role="group" aria-label="Basic example">
-                            <button type="button" class="btn btn-primary">Reply</button>
                             <?php
-
-                            /*
-                             * Display edit button only if allowed
-                             */
+                            if (isset($_SESSION['User'])) {
+                                ?>
+                                <a href="reply?id=<?= $data->topicData['id'].'&title='.$data->topicData["topic_name"].'&com='.$data->numberOfComments ?>" class="btn btn-primary">Reply</a>
+                                <?php
+                            }
                             if ($data->canEdit == true) {
                                 ?>
                                 <a href="edit-topic?id=<?= $data->topicData['id'] ?>" class="btn btn-primary">Edit</a>
@@ -76,7 +75,13 @@ $Parsedown = new Parsedown();
                         </div>
                         <div class="text-right card-footer text-muted">
                             <div class="btn-group" role="group" aria-label="Basic example">
-                                <button type="button" class="btn btn-primary">Reply</button>
+                                <?php
+                                if (isset($_SESSION['User'])) {
+                                    ?>
+                                    <a href="reply?id=<?= $data->topicData['id'].'&com='.$data->numberOfComments ?>" class="btn btn-primary">Reply</a>
+                                    <?php
+                                }
+                                ?>
                             </div>
                         </div>
                     </div>

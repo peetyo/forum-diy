@@ -97,4 +97,22 @@ Route::set('api-edit-topic', function (){
    }
 });
 
+Route::set('reply', function (){
+    if(isset($_SESSION['User'])){
+        Controller::CreateView('reply', '');
+    }else{
+        echo '{"status":"0","message":"Permission denied"}';
+        die();
+    }
+ });
+ 
+ Route::set('api-reply', function (){
+    if(isset($_SESSION['User'])){
+        ReplyController::addReply();
+    }else{
+        echo '{"status":"0","message":"Permission denied"}';
+        die();
+    }
+ });
+
 
