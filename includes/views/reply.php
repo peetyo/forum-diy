@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h1>Replying to "<?=$_GET['title'] ?>"</h1>
+            <h1>Replying to "<?= htmlentities($_GET['title']) ?>"</h1>
         </div>
         <div class="col-md-8">
             <!-- Error message-->
@@ -21,8 +21,8 @@
                 </div>
                 <div class="form-group">
                     <input type="hidden" name="token" value="<?= $csrf ?>">
-                    <input type="hidden" name="topic_id" value="<?= $_GET['id'] ?>">
-                    <input type="hidden" name="number_of_com" value="<?= $_GET['com'] ?>">
+                    <input type="hidden" name="topic_id" value="<?= htmlentities($_GET['id']) ?>">
+                    <input type="hidden" name="number_of_com" value="<?= htmlentities($_GET['com']) ?>">
                     <button class="btn btn-primary" id="btnSubmit" type="submit">Submit
                     </button>
                 </div>

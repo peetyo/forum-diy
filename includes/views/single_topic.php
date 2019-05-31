@@ -108,7 +108,7 @@ $Parsedown->setSafeMode(true);
                         if (!($currentPage == 1)) {
                             ?>
                             <li class="page-item">
-                                <a class="page-link" href="topic?id=<?= $_GET['id'] ?>&page=<?= $currentPage - 1 ?>">
+                                <a class="page-link" href="topic?id=<?= htmlentities($_GET['id']) ?>&page=<?= $currentPage - 1 ?>">
                                     Previous
                                 </a>
                             </li>
@@ -117,7 +117,7 @@ $Parsedown->setSafeMode(true);
                         for ($page = 1; $page <= $numberOfPages; $page++) {
                             ?>
                             <li class="page-item <?= ($page == $currentPage) ? "active" : "" ?> ">
-                                <a class="page-link" href="topic?id=<?= $_GET['id'] ?>&page=<?= $page ?>">
+                                <a class="page-link" href="topic?id=<?=  htmlentities($_GET['id']) ?>&page=<?= $page ?>">
                                     <?= $page ?>
                                 </a>
                             </li>
@@ -129,7 +129,7 @@ $Parsedown->setSafeMode(true);
                         if (!($currentPage == $numberOfPages)) {
                             ?>
                             <li class="page-item">
-                                <a class="page-link" href="topic?id=<?= $_GET['id'] ?>&page=<?= $currentPage + 1 ?>">Next</a>
+                                <a class="page-link" href="topic?id=<?=  htmlentities($_GET['id']) ?>&page=<?= $currentPage + 1 ?>">Next</a>
                             </li>
                             <?php
                         }
