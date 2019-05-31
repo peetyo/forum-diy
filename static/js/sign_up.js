@@ -45,6 +45,7 @@ $('#frmSignup').submit(function(e){
         //     setTimeout("location.href = './index.php';", 4000)
         // } 
         else{
+            console.log(jData)
           // when we get a php error and pass it in the response text
           displayError('Internal Server error')
         }
