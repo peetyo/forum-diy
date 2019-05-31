@@ -44,19 +44,25 @@ $('#frmSignup').submit(function(e){
       dataType: "JSON"
     }).always(function(jData){
 
-        if(jData.status == 1){
+        if(jData.status === 1){
           console.log('user created successfuly');
           document.getElementById("err-msg").style.display ="none";
           displaySuccess();
           setTimeout("location.href = './index.php';", 2000)
-        }else if(jData.status == 0){
+        }else if(jData.status === 0){
           //TODO create a toast message or something like that ?
           //$('h1').text('Incorrect login')
           displayError(jData.message);
-        }else{
+        }else if(jData.status === 200){
+            console.log(jData);
+            displaySuccess();
+            setTimeout("location.href = './index.php';", 4000)
+        } else{
           // when we get a php error and pass it in the response text
           displayError('Internal Server error')
+            console.log(jData.status )
+            console.log(jData.status )
         }
     })
-  })
+  });
 

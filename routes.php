@@ -5,7 +5,14 @@
 // Should be disccussed
 session_start();
 // ini_set('display_errors', 1);
+
+// we check if the route exist or not. If doesn't we redirect to 404 page;
+if(Route::check_route_exist() === false ){
+    Controller::NotExistingPage();
+    exit;
+}
 Route::set('index.php', function (){
+
     Home::CreateView('home','');
 
 // MORTY: i left this for testing purpose
@@ -20,6 +27,10 @@ Route::set('category', function (){
 Route::set('sign-up', function (){
     User_Controller::CreateView('sign_up','');
    // Sign_up::test();
+});
+
+Route::set('verify', function (){
+    User_Controller::verify_user();
 });
 
 Route::set('create-user', function (){
@@ -45,6 +56,7 @@ Route::set('error', function (){
 Route::set('logout', function(){
     User_Controller::logout();
 });
+
 Route::set('create-topic', function (){
     // execute the create topic controller method
     if(isset($_SESSION['User'])){
@@ -61,7 +73,28 @@ Route::set('api-create-topic', function (){
     if(isset($_SESSION['User'])){
         SingleTopic::crete_topic();
     }else{
+        // TODO: change it to the JSON object with error
         Controller::CreateView('error' , '');
 
     }
 });
+
+Route::set('edit-topic', function (){
+   if(isset($_SESSION['User'])){
+       SingleTopic::edit_topic_view();
+   }else{
+       echo '{"status":"0","message":"Permission denied"}';
+       die();
+   }
+});
+
+Route::set('api-edit-topic', function (){
+   if(isset($_SESSION['User'])){
+       SingleTopic::edit_topic();
+   }else{
+       echo '{"status":"0","message":"Permission denied"}';
+       die();
+   }
+});
+
+

@@ -4,40 +4,29 @@ $Parsedown = new Parsedown();
 <section class="container">
    
    <!-- Not sure we need this row section, could be deleted -->
-    <div class="row">
-        <div class="col-12">
-            <h1>This is category with ID : <?= $data['category'] ?></h1>
-            
-            <p>Here are the topics about XY category.</p>
+    <div class="row justify-content-center">
+        <div class="col-9">
+            <h1><?= $data['category-name']; ?></h1>
+
+            <p> <?= $data['category-description']; ?></h1></p>
+        </div>
+        <div class="col-lg-3 mt-3">
+            <div id="create-button-wrapper">
+                <?php
+                if(isset($_SESSION['User'])){
+                    echo '<a href="create-topic" class="btn create-topic mb-2">Create topic</a>';
+                }
+                ?>
+            </div>
+
+
         </div>
     </div>
 
 
 
-    <div class="row">
-        <div class="col-lg-3">
-       <div id="create-button-wrapper">
-            <?php
-            if(isset($_SESSION['User'])){
-                echo '<a href="create-topic" class="btn create-topic mb-2">Create topic</a>';
-                }
-            ?>
-        </div>
+    <div class="row justify-content-center">
 
-            <h3>Tags</h3>
-            <div class="list-group">
-                <a href="#">All</a>
-                <a href="#">Tag1</a>
-                <a href="#">Tag2</a>
-                <a href="#">Tag2</a>
-                <a href="#">Tag1</a>
-                <a href="#">Tag2</a>
-                <a href="#">Tag1</a>
-                <a href="#">Tag2</a>
-                <a href="#">Tag1</a>
-                <a href="#">Tag2</a>
-            </div>
-        </div>
 
 <!-- PETER: Not sure why this is here. -->
 <!-- <div class="row">

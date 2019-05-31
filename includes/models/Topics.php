@@ -3,7 +3,7 @@
 
 class Topics extends Model
 {
-    public function get_topic($iTopicId, $iOffset)
+    public function get_topic_with_comments($iTopicId, $iOffset)
     {
         try {
             // Make a call to the database
@@ -86,7 +86,38 @@ class Topics extends Model
         }
     }
 
+    public function get_topic($iTopicId)
+    {
+        try {
+            //prepare the statement
+            $sTopicContentQuery = $this->db->prepare('SELECT t.id, t.topic_name, t.date_created, t.category_id,t.user_id, t.content, t.featured_image_url, c.category_name
+                                                                FROM topics as t
+                                                                JOIN categories c on t.category_id = c.id
+                                                                WHERE t.id = :topicId');
+            $sTopicContentQuery->bindValue(':topicId', $iTopicId);
+            $sTopicContentQuery->execute();
+            $topicContent = $sTopicContentQuery->fetch();
+            //check if anything was received
+            if (count($topicContent) == 0) {
+                echo '{"status":"0","message":"Something went wrong, please contact the support"}';
+                die();
+            }
+            $objTopic = new stdClass();
+            $objTopic->topicData = $topicContent;
+            return $objTopic;
+
+        } catch (PDOException $e) {
+            echo '{"status":"0","message":"Something went wrong, please contact the support"}';
+            //Saving the errors in txt file to keep track what happen in case something breaks
+            date_default_timezone_set("Europe/Copenhagen");
+            $error_log = '{"DATE":' . date("Y-m-d") . ', "TIME": ' . date("h:i:sa") . ' ,"Eror": ' . $e . ', "line": ' . __LINE__ . '}';
+            file_put_contents('./includes/logs/database_connection.txt', $error_log, FILE_APPEND);
+        }
+
+    }
+
     public function getTopicsFromCategory($category)
+
     {
         try {
             $sQuery = $this->db->prepare('CALL get_topics_from_category(:categoryId)');
@@ -111,8 +142,13 @@ class Topics extends Model
     {
         // print_r($topicData);    
         try {
-            $db = $this->db;
-            $sQuery = $db->prepare('INSERT INTO `topics` VALUES (NULL,:topic_name,NULL,:category_id,:user,:content)');
+            // TODO: Emit default.png when no image is uploaded
+            if(isset($topicData['image'])){
+                $imagePath = $topicData['image']['name'];
+            }else{
+                $imagePath = 'default.png';
+            }$db = $this->db;
+            $sQuery = $db->prepare('INSERT INTO `topics` VALUES (NULL,:topic_name,NULL,NULL,:category_id,:user,:content,:featured_image)');
             // Could not get the last inserted ID when using the stored procedure
             // The procedure code itself has to be updated somehow, but I didnt manage
             // to make it work. - PETER
@@ -120,19 +156,68 @@ class Topics extends Model
             $sQuery->bindValue(':topic_name', $topicData['topic_name']);
             $sQuery->bindValue(':category_id', $topicData['category_id']);
             $sQuery->bindValue(':user', $topicData['user_id']);
-            $sQuery->bindValue(':content', $topicData['content']);
+            $sQuery->bindValue(':content', $topicData['content']);$sQuery->bindValue(':featured_image', $imagePath);
             $sQuery->execute();
             if (!$sQuery->rowCount()) {
                 echo '{"status": 0, "message": "Sorry, something went wrong when creating topic."}';
                 exit();
             }
-            $id = $db->lastInsertId();
-            // Remember to update this echo once its paired with some AJAX
+            if(isset($topicData['image'])){
+                if(move_uploaded_file($topicData['image']['tmp_name'], 'static/images/'.$topicData['image']['name'])){
+                  $sImage = $topicData['image']['name'];
+                }else{
+                  echo '{"status":0, "message":"Failed to upload photo."}';
+                  exit;
+                }
+            }$id = $db->lastInsertId();
+            // TODO:Remember to update this echo once its paired with some AJAX
             echo '{"status": 1, "message": "topic created", "topic": ' . $id . ' }';
         } catch (PDOException $error) {
-
             echo '{"status": 0, "message": "Sorry, something went wrong. Try again later."}';
             date_default_timezone_set("Europe/Copenhagen");
+            LogSaver::save_the_log($error, 'topics.txt');
+            exit();
+        }
+    }
+
+    public function update_topic($topicData)
+    {
+        try {
+            $db = $this->db;
+            $sQuery = $db->prepare('UPDATE lifehack.topics t
+                                                SET t.topic_name = :topic_name,
+                                                    t.content    = :content,
+                                                    t.featured_image_url = :featured_image
+                                                WHERE t.id = :topic_id AND t.user_id = :user_id');
+
+            $sQuery->bindValue(':topic_name', $topicData['topic_name']);
+            $sQuery->bindValue(':content', $topicData['content']);
+            if(isset($topicData['image'])){
+                $imagePath = $topicData['image']['name'];
+                $sQuery->bindValue(':featured_image', $imagePath);
+            }else{
+                $sQuery->bindValue(':featured_image',  $topicData['image_path_old']);
+            }
+            $sQuery->bindValue(':topic_id', $topicData['topic_id']);
+            $sQuery->bindValue(':user_id', $_SESSION['User']['id']);
+            $sQuery->execute();
+            if (!$sQuery->rowCount()) {
+                echo '{"status": 0, "message": "Nothing was updated"}';
+                exit();
+            }
+            if(isset($topicData['image'])){
+                if(move_uploaded_file($topicData['image']['tmp_name'], 'static/images/'.$topicData['image']['name'])){
+                    $sImage = $topicData['image']['name'];
+                }else{
+                    echo '{"status":0, "message":"Failed to upload photo."}';
+                    exit;
+                }
+            }
+            // TODO: Remember to update this echo once its paired with some AJAX
+            echo '{"status": 1, "message": "topic updated", "topic": ' . $topicData['topic_id'] . ' }';
+        } catch (PDOException $error) {
+
+            echo '{"status": 0, "message": "Sorry, something went wrong updating the topic. Try again later."}';
             LogSaver::save_the_log($error, 'topics.txt');
             exit();
         }
