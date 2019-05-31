@@ -5,9 +5,7 @@ class ReplyController extends Controller
 {
     public static function addReply()
     {
-        //TODO: Catch if the ID is wrong!!!!
 
-        // Get the ID of the topic, sanitize it
         if (!isset($_SESSION['User'])){
             echo '{"status":"0","message":"To add a reply, log in first."}';
             exit;
@@ -27,25 +25,14 @@ class ReplyController extends Controller
         $replyData = $_POST;
         $replyModel = new Reply();
         $newCommentId = $replyModel->addReply($replyData);
-        
+        // We use the number of comments so far plus the new one to 
+        // determine the number of pages of comments the topic would
+        // have then we use the page to navigate to the last page.
+        // We also pass newcommentId in order to scroll to the specific
+        // comment and not arrive just at the top of the page.
         $numberOfComments = $_POST['number_of_com'];
         $numberOfPages = ceil(($numberOfComments + 1) / 5);
         
-        echo '{"status":"1","message":"Reply added", "location":"topic?id='.$_POST['topic_id'].'&page='.$numberOfPages.'&com='.$newCommentId.'"}';
-        
-        // echo '{"status":"0","message":"'.$username.'"}';
-        // // PETER: Lame check if object topics is actually a string.
-        // // the errors are returned as string. the successful response is 
-        // // an array. The error responses should be updated and also 
-        // //the way we handle them.
-        // if(gettype($aTopics)== 'string'){
-        //     self::CreateView('error', '');
-        // }
-        // $data = array();
-        // $data['category-name'] = $aTopics[0]['category_name'];
-        // $data['category-description'] = $aTopics[0]['category_description'];
-        // $data['topics'] = $aTopics;
-        // self::CreateView('category', $data);
-        
+        echo '{"status":"1","message":"Reply added", "location":"topic?id='.$_POST['topic_id'].'&page='.$numberOfPages.'&com='.$newCommentId.'"}';        
     }
 }
