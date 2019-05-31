@@ -13,77 +13,89 @@ class Topics extends Model
             $sTopicContentQuery->execute();
             $topicContent = $sTopicContentQuery->fetch();
             // check if anything was received
-            if (count($topicContent)) {
-                // Michal:  If the topic exists, now we retrieve comments
-                // Closing cursor first is to close connection from above
-                $sTopicContentQuery->closeCursor();
-                $sCommentsQuery = $this->db->prepare('CALL get_comments_for_the_topic(:topicId, :offset)');
-                $sCommentsQuery->bindValue(':topicId', $iTopicId);
-                $sCommentsQuery->bindValue(':offset', $iOffset);
-                $sCommentsQuery->execute();
-                $commentsContent = $sCommentsQuery->fetchAll();
-                // closing the connection
-                // $sCommentsQuery = null;
-                // Creating a passing object
-                $objTopic = new stdClass();
-                $objTopic->topicData = $topicContent;
-                $objTopic->commentData = [];
-                $objTopic->whats = $topicContent;
-                $objTopic->numberOfComments = 0;
-                $objTopic->numberOfPages = 1;
-
-                if (!empty($commentsContent)) {
-
-                    /*
-                    * Currently, we have two objects -> $topicContent and $commentsContent
-                    * Both are arrays
-                    * I suggest merging them into one, so we can pass it as object expected by CreateView
-                    */
-                    $objTopic->commentData = $commentsContent;
-
-
-                    /*
-                     * Calculate number of pages by dividing total
-                     * number of pages by number of results, which is 5
-                     * If you want to change that, please contact
-                     * the database administrator ;)
-                     * AKA change in the routines
-                     *
-                     * So I figured that count($commentsContent) is always returning 5...
-                     * obviously, therefore I need to make another quick call to the database
-                     * to ask how many comments there are
-                     *
-                     * IF YOU HAVE ANOTHER IDEA, YOU'RE WELCOME TO TRY IT OUT
-                     *
-                     */
-
-                    // Again, closing the connection from abote
-                    $sCommentsQuery->closeCursor();
-                    $sNumberOfCommentsQuery = $this->db->prepare('CALL get_number_of_comments(:topicId)');
-                    $sNumberOfCommentsQuery->bindValue(':topicId', $iTopicId);
-                    $sNumberOfCommentsQuery->execute();
-                    /*
-                     * That technically should return something since it passed
-                     * check if any comments already.
-                     */
-                    $numberOfComments = $sNumberOfCommentsQuery->fetch();
-                    $iNumberOfComments = $numberOfComments['totalComments'];
-
-                    $iNumberOfPages = ceil($iNumberOfComments / 5);
-                    $objTopic->numberOfComments = $iNumberOfComments;
-                    $objTopic->numberOfPages = $iNumberOfPages;
-                    // $objTopic->whats = $topicContent;
-
-                }
-
-                return $objTopic;
-
-            } else {
+            if (!count($topicContent)) {
                 return false;
             }
         } catch (PDOException $error) {
             LogSaver::save_the_log($error, 'topics.txt');
+            // die or go o to 404?
+            die();
         }
+        try {
+            // Michal:  If the topic exists, now we retrieve comments
+            // Closing cursor first is to close connection from above
+            $sTopicContentQuery->closeCursor();
+            $sCommentsQuery = $this->db->prepare('CALL get_comments_for_the_topic(:topicId, :offset)');
+            $sCommentsQuery->bindValue(':topicId', $iTopicId);
+            $sCommentsQuery->bindValue(':offset', $iOffset);
+            $sCommentsQuery->execute();
+            $commentsContent = $sCommentsQuery->fetchAll();
+        } catch (PDOException $error) {
+            LogSaver::save_the_log($error, 'topics.txt');
+        }
+        // closing the connection
+        // $sCommentsQuery = null;
+        // Creating a passing object
+        $objTopic = new stdClass();
+        $objTopic->topicData = $topicContent;
+        $objTopic->commentData = [];
+        $objTopic->whats = $topicContent;
+        $objTopic->numberOfComments = 0;
+        $objTopic->numberOfPages = 1;
+
+        if (!empty($commentsContent)) {
+
+            /*
+            * Currently, we have two objects -> $topicContent and $commentsContent
+            * Both are arrays
+            * I suggest merging them into one, so we can pass it as object expected by CreateView
+            */
+            $objTopic->commentData = $commentsContent;
+
+
+            /*
+             * Calculate number of pages by dividing total
+             * number of pages by number of results, which is 5
+             * If you want to change that, please contact
+             * the database administrator ;)
+             * AKA change in the routines
+             *
+             * So I figured that count($commentsContent) is always returning 5...
+             * obviously, therefore I need to make another quick call to the database
+             * to ask how many comments there are
+             *
+             * IF YOU HAVE ANOTHER IDEA, YOU'RE WELCOME TO TRY IT OUT
+             *
+             */
+            try {
+                // Again, closing the connection from abote
+                $sCommentsQuery->closeCursor();
+                $sNumberOfCommentsQuery = $this->db->prepare('CALL get_number_of_comments(:topicId)');
+                $sNumberOfCommentsQuery->bindValue(':topicId', $iTopicId);
+                $sNumberOfCommentsQuery->execute();
+                /*
+                 * That technically should return something since it passed
+                 * check if any comments already.
+                 */
+                $numberOfComments = $sNumberOfCommentsQuery->fetch();
+            } catch (PDOException $error) {
+                LogSaver::save_the_log($error, 'topics.txt');
+            }
+            $iNumberOfComments = $numberOfComments['totalComments'];
+
+            $iNumberOfPages = ceil($iNumberOfComments / 5);
+            $objTopic->numberOfComments = $iNumberOfComments;
+            $objTopic->numberOfPages = $iNumberOfPages;
+            // $objTopic->whats = $topicContent;
+
+        }
+
+        return $objTopic;
+
+
+//        } catch (PDOException $error) {
+//            LogSaver::save_the_log($error, 'topics.txt');
+//        }
     }
 
     public function get_topic($iTopicId)
@@ -109,9 +121,7 @@ class Topics extends Model
         } catch (PDOException $e) {
             echo '{"status":"0","message":"Something went wrong, please contact the support"}';
             //Saving the errors in txt file to keep track what happen in case something breaks
-            date_default_timezone_set("Europe/Copenhagen");
-            $error_log = '{"DATE":' . date("Y-m-d") . ', "TIME": ' . date("h:i:sa") . ' ,"Eror": ' . $e . ', "line": ' . __LINE__ . '}';
-            file_put_contents('./includes/logs/database_connection.txt', $error_log, FILE_APPEND);
+            LogSaver::save_the_log($e, 'topics.txt');
         }
 
     }
@@ -143,11 +153,12 @@ class Topics extends Model
         // print_r($topicData);    
         try {
             // TODO: Emit default.png when no image is uploaded
-            if(isset($topicData['image'])){
+            if (isset($topicData['image'])) {
                 $imagePath = $topicData['image']['name'];
-            }else{
+            } else {
                 $imagePath = 'default.png';
-            }$db = $this->db;
+            }
+            $db = $this->db;
             $sQuery = $db->prepare('INSERT INTO `topics` VALUES (NULL,:topic_name,NULL,NULL,:category_id,:user,:content,:featured_image)');
             // Could not get the last inserted ID when using the stored procedure
             // The procedure code itself has to be updated somehow, but I didnt manage
@@ -156,25 +167,26 @@ class Topics extends Model
             $sQuery->bindValue(':topic_name', $topicData['topic_name']);
             $sQuery->bindValue(':category_id', $topicData['category_id']);
             $sQuery->bindValue(':user', $topicData['user_id']);
-            $sQuery->bindValue(':content', $topicData['content']);$sQuery->bindValue(':featured_image', $imagePath);
+            $sQuery->bindValue(':content', $topicData['content']);
+            $sQuery->bindValue(':featured_image', $imagePath);
             $sQuery->execute();
             if (!$sQuery->rowCount()) {
                 echo '{"status": 0, "message": "Sorry, something went wrong when creating topic."}';
                 exit();
             }
-            if(isset($topicData['image'])){
-                if(move_uploaded_file($topicData['image']['tmp_name'], 'static/images/'.$topicData['image']['name'])){
-                  $sImage = $topicData['image']['name'];
-                }else{
-                  echo '{"status":0, "message":"Failed to upload photo."}';
-                  exit;
+            if (isset($topicData['image'])) {
+                if (move_uploaded_file($topicData['image']['tmp_name'], 'static/images/' . $topicData['image']['name'])) {
+                    $sImage = $topicData['image']['name'];
+                } else {
+                    echo '{"status":0, "message":"Failed to upload photo."}';
+                    exit;
                 }
-            }$id = $db->lastInsertId();
+            }
+            $id = $db->lastInsertId();
             // TODO:Remember to update this echo once its paired with some AJAX
             echo '{"status": 1, "message": "topic created", "topic": ' . $id . ' }';
         } catch (PDOException $error) {
             echo '{"status": 0, "message": "Sorry, something went wrong. Try again later."}';
-            date_default_timezone_set("Europe/Copenhagen");
             LogSaver::save_the_log($error, 'topics.txt');
             exit();
         }
@@ -192,11 +204,11 @@ class Topics extends Model
 
             $sQuery->bindValue(':topic_name', $topicData['topic_name']);
             $sQuery->bindValue(':content', $topicData['content']);
-            if(isset($topicData['image'])){
+            if (isset($topicData['image'])) {
                 $imagePath = $topicData['image']['name'];
                 $sQuery->bindValue(':featured_image', $imagePath);
-            }else{
-                $sQuery->bindValue(':featured_image',  $topicData['image_path_old']);
+            } else {
+                $sQuery->bindValue(':featured_image', $topicData['image_path_old']);
             }
             $sQuery->bindValue(':topic_id', $topicData['topic_id']);
             $sQuery->bindValue(':user_id', $_SESSION['User']['id']);
@@ -205,10 +217,10 @@ class Topics extends Model
                 echo '{"status": 0, "message": "Nothing was updated"}';
                 exit();
             }
-            if(isset($topicData['image'])){
-                if(move_uploaded_file($topicData['image']['tmp_name'], 'static/images/'.$topicData['image']['name'])){
+            if (isset($topicData['image'])) {
+                if (move_uploaded_file($topicData['image']['tmp_name'], 'static/images/' . $topicData['image']['name'])) {
                     $sImage = $topicData['image']['name'];
-                }else{
+                } else {
                     echo '{"status":0, "message":"Failed to upload photo."}';
                     exit;
                 }
