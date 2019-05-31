@@ -6,13 +6,8 @@ class ReplyController extends Controller
     public static function addReply()
     {
 
-        if (!isset($_SESSION['User'])){
-            echo '{"status":"0","message":"To add a reply, log in first."}';
-            exit;
-        }
-
-        if (!hash_equals($_SESSION['key'], $_POST['token'])){
-            echo '{"status":"0","message":"Invalid token"}';
+        if (!isset($_SESSION['User']) || !hash_equals($_SESSION['key'], $_POST['token'])){
+            echo '{"status":"0","message":"Invalid token."}';
             exit;
         }
         
