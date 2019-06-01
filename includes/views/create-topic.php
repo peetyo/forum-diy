@@ -27,7 +27,7 @@
                         foreach ($data as $key => $category) {
                             ?>
                             <option value="<?= $category['id'] ?>">
-                                <?= $category['category_name'] ?>
+                                <?= htmlentities($category['category_name']) ?>
                             </option>
                             <?php
                         }

@@ -7,7 +7,7 @@ $Parsedown->setSafeMode(true);
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="index.php">categories</a></li>
-            <li class="breadcrumb-item"><a href="category?cat=<?=  $data->topicData["category_id"] ?>"><?= $data->topicData["category_name"] ?></a></li>
+            <li class="breadcrumb-item"><a href="category?cat=<?=  $data->topicData["category_id"] ?>"><?= htmlentities($data->topicData["category_name"]) ?></a></li>
             <li class="breadcrumb-item active" aria-current="page"><?=  htmlentities($data->topicData["topic_name"]) ?> </li>
         </ol>
     </nav>
@@ -22,7 +22,7 @@ $Parsedown->setSafeMode(true);
                     <div class="card-header bg-dark text-white">
                         <img class="avatar" src="https://www.ukielist.com/wp-content/uploads/2017/03/default-avatar.png" alt="User's profile picture">
                         <span class="username"> <?=  htmlentities($data->topicData["username"]) ?></span> posted on
-                        <span class="comment-date"><?= $data->topicData["date_created"] ?></li>
+                        <span class="comment-date"><?= htmlentities($data->topicData["date_created"]) ?></li>
                         </span>
                     </div>
                     <div class="card-body">
@@ -36,7 +36,7 @@ $Parsedown->setSafeMode(true);
                             <?php
                             if (isset($_SESSION['User'])) {
                                 ?>
-                                <a href="reply?id=<?= $data->topicData['id'].'&title='.$data->topicData["topic_name"].'&com='.$data->numberOfComments ?>" class="btn btn-primary">Reply</a>
+                                <a href="reply?id=<?= $data->topicData['id'].'&title='.htmlentities($data->topicData["topic_name"]).'&com='.$data->numberOfComments ?>" class="btn btn-primary">Reply</a>
                                 <?php
                             }
                             if ($data->canEdit == true) {
@@ -67,7 +67,7 @@ $Parsedown->setSafeMode(true);
                         </span>
                             posted on
                             <span class="comment-date">
-                            <?= $comment["date_created"] ?>
+                            <?= htmlentities($comment["date_created"]) ?>
                         </span>
                         </div>
                         <div class="card-body">
@@ -80,7 +80,7 @@ $Parsedown->setSafeMode(true);
                                 <?php
                                 if (isset($_SESSION['User'])) {
                                     ?>
-                                    <a href="reply?id=<?= $data->topicData['id'].'&title='.$data->topicData["topic_name"].'&com='.$data->numberOfComments ?>" class="btn btn-primary">Reply</a>
+                                    <a href="reply?id=<?= $data->topicData['id'].'&title='.htmlentities($data->topicData["topic_name"]).'&com='.$data->numberOfComments ?>" class="btn btn-primary">Reply</a>
                                     <?php
                                 }
                                 ?>
@@ -147,7 +147,7 @@ $Parsedown->setSafeMode(true);
                 <div class="card-body">
                     <h5 class="card-title">Topic info</h5>
                     <ul>
-                        <li>Created on <?= $data->topicData["date_created"] ?></li>
+                        <li>Created on <?= htmlentities($data->topicData["date_created"]) ?></li>
                         <?php
                         /* Michal: In the <li> below, system checks if there are any comments.
                          * If yes, it echo 'x replies' else 'No replies'
