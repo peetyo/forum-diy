@@ -13,7 +13,7 @@ class Topics extends Model
             $sTopicContentQuery->execute();
             $topicContent = $sTopicContentQuery->fetch();
             // check if anything was received
-            if (!count($topicContent)) {
+            if ($topicContent['id'] == NULL) {
                 return false;
             }
         } catch (PDOException $error) {
