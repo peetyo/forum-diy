@@ -18,16 +18,16 @@
                 <div class="form-group">
                     <label for="topic_name">Title</label>
                     <input type="text" class="form-control" id="topic_name" name="topic_name"
-                        placeholder="Enter the topic name here" value="<?=$data->topicData['topic_name']?>" required>
+                        placeholder="Enter the topic name here" value="<?= htmlentities($data->topicData['topic_name'])?>" required>
                 </div>
                 <div class="form-group">
                     <label for="category_id">Category</label>
-                    <select class="form-control" id="category_id" name="category_id" required readonly>
+                    <select class="form-control" id="category_id" name="category_id" required readonly disabled>
                         <?php
                         foreach ($data as $key => $category) {
                             ?>
-                            <option value="<?= $category['id'] ?>">
-                                <?= $category['category_name'] ?>
+                            <option value="<?= htmlentities($category['id'])?>">
+                                <?= htmlentities($category['category_name']) ?>
                             </option>
                             <?php
                         }
@@ -45,7 +45,7 @@
                 </div>
                 <div class="form-group">
                     <input type="hidden" name="token" value="<?= $csrf ?>">
-                    <input type="hidden" name="image_path_old" value="<?= $data->topicData['featured_image_url'] ?>">
+                    <input type="hidden" name="image_path_old" value="<?= htmlentities($data->topicData['featured_image_url'])?>">
                     <?php
                     /*
                      *  WARNING
@@ -54,8 +54,8 @@
                      * Therefore it is important to check the user's rights again in the Model
                      */
                     ?>
-                    <input type="hidden" name="topic_id" value="<?=$data->topicData['id']?>">
-                    <input type="hidden" id="currentContent" value="<?=$data->topicData['content']?>">
+                    <input type="hidden" name="topic_id" value="<?= htmlentities($data->topicData['id'])?>">
+                    <input type="hidden" id="currentContent" value="<?=htmlentities($data->topicData['content'])?>">
                     <button class="btn btn-primary" id="btnSubmit" type="submit">Submit
                     </button>
                 </div>
