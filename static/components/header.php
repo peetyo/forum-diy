@@ -45,13 +45,14 @@ $csrf = CSRFToken::generate_token();
 
         if(!isset($_SESSION['User'])){ 
             echo '
-            <form class="form-inline mx-auto login-form" id="loginfrm">
-                <input class="form-control mr-sm-2" name="txtUsername" type="text" placeholder="Username" aria-label="Login">
-                <input class="form-control mr-sm-2" name="txtPassword" type="password" placeholder="Password" aria-label="Password">
-                <input type="hidden" name="token" value="'.$csrf.'">
-                <button class="btn btn-login my-2 my-sm-0" type="submit">Log in</button>
-            </form>
-            <button class="btn btn-signup my-2 my-sm-0" type="submit" id="sign-up">Sign up</button>';
+            <form class="form-inline mx-auto login-form" id="loginfrm" method="post">
+            <p id="login-error" class="alert alert-warning mr-sm-2">Wrong credentials</p>
+            <input class="form-control mr-sm-2" name="txtUsername" type="text" placeholder="Username" aria-label="Login">
+            <input class="form-control mr-sm-2" name="txtPassword" type="password" placeholder="Password" aria-label="Password">
+            <input type="hidden" name="token" value="'.$csrf.'">
+            <button id="login-btn" class="btn btn-login my-2 my-sm-0" type="button">Log in</button>
+            <button class="btn btn-signup my-2 my-sm-0" type="button" id="sign-up">Sign up</button>
+            </form>';
         }else{ 
           echo '<button class="btn btn-logout my-2 my-sm-0" type="submit" id="logout" >Logout</button>';
         }
