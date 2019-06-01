@@ -12,7 +12,7 @@ $('#loginfrm').submit(function (e) {
         dataType: "JSON"
     }).always(function (jData) {
         if (jData.status == 1) {
-            if(window.location.href.includes('forum-diy/topic')){
+            if(window.location.href.includes('/topic')){
                 location.reload();
             }
             $('#sign-up').remove();
@@ -24,7 +24,7 @@ $('#loginfrm').submit(function (e) {
                 '                            </p>\n' +
                 '                        </div>')
             $('#guestActions').remove()
-            if (window.location.href.includes('forum-diy/category')) {
+            if (window.location.href.includes('/category')) {
                 $('#create-button-wrapper').append('<a href="create-topic" class="btn create-topic mb-2">Create topic</a>')
             }
         } else if (jData.status == 0) {
