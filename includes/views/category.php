@@ -64,7 +64,7 @@ $Parsedown = new Parsedown();
                             <img class="img-circle" src="https://www.ukielist.com/wp-content/uploads/2017/03/default-avatar.png" alt="avatar">
                             </div>
                             <div class="thread-info-author">
-                                <p> &nbsp <?= $topic['username'] ?></p>
+                                <p> &nbsp <?= htmlentities($topic['username']) ?></p>
                             </div>
                             <div class="thread-info-tags">
                                 
