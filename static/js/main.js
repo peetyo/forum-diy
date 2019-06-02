@@ -69,3 +69,8 @@ function displaySuccess() {
             block:'start'});
     },500)
 }
+
+//function for hiding the error message
+function hideError() {
+    document.getElementById("err-msg").style.display ="none";
+}

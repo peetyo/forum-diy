@@ -35,6 +35,8 @@
 // });
 
 $(document).on('click', '#btn-find-user', function () {
+    // hide errors if they already shown
+    hideError()
     const userToFind = $('#userToFind').val();
     console.log('lecim', userToFind)
     // send an AJAX request to get the user's info
@@ -70,15 +72,16 @@ function enableEdit(dataToEnable) {
     $('#txtUsername').val(sUserName)
     $('#txtEmail').val(sEmail)
     // activate the checkbox
-    $('#activeCheck').prop("disabled", false);
+    $('#activeCheck').prop("disabled", false)
     // if the user active, select it
     if (iActive == 1) {
-        $('#activeCheck').prop("checked", true);
+        $('#activeCheck').prop("checked", true)
     }
-    $('#moderatorCheck').prop("disabled", false);
+    $('#moderatorCheck').prop("disabled", false)
     if (iRole == 5){
         $('#moderatorCheck').prop("checked", true)
     }
-
-
+    $('#btnSaveUser').prop("disabled", false)
 }
+
+$(document)
