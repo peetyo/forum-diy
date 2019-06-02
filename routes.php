@@ -115,4 +115,13 @@ Route::set('reply', function (){
     }
  });
 
+ // Admin routes start here
 
+Route::set('admin-panel', function (){
+    // if admin is logges in
+    Admin::CreateView('admin/admin-panel', '');
+});
+
+Route::set('admin-panel-users', function (){
+    Admin::CreateView('admin/user-management', '');
+});
