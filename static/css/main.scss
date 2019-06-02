@@ -41,9 +41,16 @@ body {
 }
 
 
-
+p#login-error{
+  padding:5px;
+  margin-bottom: 2px;
+  display: none; 
+}
 .login-form {
   margin-right: unset !important;
+  input{
+    margin-bottom: 3px;
+  }
 }
 
 .btn-login{

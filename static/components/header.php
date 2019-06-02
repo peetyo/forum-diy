@@ -21,13 +21,6 @@ $csrf = CSRFToken::generate_token();
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simplemde@1.11.2/dist/simplemde.min.css"
           integrity="sha256-Is0XNfNX8KF/70J2nv8Qe6BWyiXrtFxKfJBHoDgNAEM=" crossorigin="anonymous">
 
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.19/css/jquery.dataTables.min.css"
-          integrity="sha256-YY1izqyhIj4W3iyJOaGWOpXDSwrHWFL4Nfk+W0LyCHE=" crossorigin="anonymous"/>
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.19/css/dataTables.bootstrap4.min.css"
-          integrity="sha256-F+DaKAClQut87heMIC6oThARMuWne8+WzxIDT7jXuPA=" crossorigin="anonymous"/>
-
 
     <!-- Main CSS -->
     <!-- TODO: Q: Should we include SRI? -->
@@ -53,23 +46,24 @@ $csrf = CSRFToken::generate_token();
         <?php
 
 
-        if (!isset($_SESSION['User'])) {
+        if(!isset($_SESSION['User'])){ 
             echo '
-            <form class="form-inline mx-auto login-form" id="loginfrm">
-                <input class="form-control mr-sm-2" name="txtUsername" type="text" placeholder="Username" aria-label="Login">
-                <input class="form-control mr-sm-2" name="txtPassword" type="password" placeholder="Password" aria-label="Password">
-                <input type="hidden" name="token" value="' . $csrf . '">
-                <button class="btn btn-login my-2 my-sm-0" type="submit">Log in</button>
-            </form>
-            <button class="btn btn-signup my-2 my-sm-0" type="submit" id="sign-up">Sign up</button>';
-        } else {
-            echo '<button class="btn btn-logout my-2 my-sm-0" type="submit" id="logout" >Logout</button>';
+            <form class="form-inline mx-auto login-form" id="loginfrm" method="post">
+            <p id="login-error" class="alert alert-warning mr-sm-2">Wrong credentials</p>
+            <input class="form-control mr-sm-2" name="txtUsername" type="text" placeholder="Username" aria-label="Login">
+            <input class="form-control mr-sm-2" name="txtPassword" type="password" placeholder="Password" aria-label="Password">
+            <input type="hidden" name="token" value="'.$csrf.'">
+            <button id="login-btn" class="btn btn-login my-2 my-sm-0" type="button">Log in</button>
+            <button class="btn btn-signup my-2 my-sm-0" type="button" id="sign-up">Sign up</button>
+            </form>';
+        }else{ 
+          echo '<button class="btn btn-logout my-2 my-sm-0" type="submit" id="logout" >Logout</button>';
         }
         ?>
-
+       
     </div>
-
-
+    
+    
 </nav>
 
 <!-- Grid column -->

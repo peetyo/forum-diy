@@ -45,7 +45,7 @@ Route::set('login', function(){
 // that we are expecting
 // Peter: changed topic.php to topic. Just to have nicer urls
 Route::set('topic', function (){
-    SingleTopic::GetTopic();
+    SingleTopic::get_topic();
 });
 
 // TODO: 404 and other error handling

@@ -3,8 +3,9 @@ $('#sign-up').click(function () {
     window.location.href = 'sign-up'
 })
 // Submit the login form from the header/nav
-$('#loginfrm').submit(function (e) {
+$('#login-btn').click(function (e) {
     e.preventDefault()
+    $('#login-btn').prop("disabled",true);  
     $.ajax({
         url: "login",
         method: "POST",
@@ -17,6 +18,7 @@ $('#loginfrm').submit(function (e) {
             }
             $('#sign-up').remove();
             $('#loginfrm').remove();
+            $('#login-error').remove();
             $('#navbarSupportedContent').append('<button class="btn btn-logout my-2 my-sm-0" type="submit" id="logout" >Logout</button>')
             $('#actions').append('<div id="userActions">\n' +
                 '                            <p>\n' +
@@ -28,9 +30,13 @@ $('#loginfrm').submit(function (e) {
                 $('#create-button-wrapper').append('<a href="create-topic" class="btn create-topic mb-2">Create topic</a>')
             }
         } else if (jData.status == 0) {
-            console.log(jData.message)
+            $('#login-btn').prop("disabled",false);
+            $('#login-error').text(jData.message);
+            $('#login-error').show();
         } else {
-            console.log('Internal Server error')
+            $('#login-btn').prop("disabled",false);
+            $('#login-error').text('Internal Server error');
+            $('#login-error').show();
         }
 
     })

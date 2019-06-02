@@ -2,12 +2,11 @@
 
 
 /*
-* Privileges proposal:
+* Privileges:
 * role id:
-* - 5 - banned user
 * - 4 - normal user
-* - 2 - moderator
-* - 1 - admin
+* - 5 - moderator
+* - 6 - admin
 */
 
 class UserPrivilegesChecker
@@ -22,7 +21,6 @@ class UserPrivilegesChecker
          *
          * Therefore we need to get user's information first
          */
-
 
         // get the logged in user
         if(isset($_SESSION['User']['id'])){
@@ -39,13 +37,40 @@ class UserPrivilegesChecker
         // compare the tole to the user passed
         if (
             ($toCompare != $iUserId) &&
-            ($roleId != 2) &&
-            ($roleId != 1)
+            ($roleId != 5) &&
+            ($roleId != 6)
         ) {
             return false;
             die();
         }
         return true;
+    }
+
+    public static function is_moderator($toCompare){
+        /*
+         * This function only checks if the logged in
+         * user is a moderator
+         */
+
+        // get the logged in user
+        if(isset($_SESSION['User']['id'])){
+            $iUserId = (int)$_SESSION['User']['id'];
+        } else{
+            $iUserId = 0;
+        }
+
+        // get their role
+        $user = new Users();
+        $userRoleId = $user->select_user_role_by_id($iUserId);
+        $roleId = $userRoleId['user_role_id'];
+
+        // compare the tole to the user passed
+        if ($roleId != 5) {
+            return false;
+            die();
+        }
+        return true;
+
     }
 
 }
