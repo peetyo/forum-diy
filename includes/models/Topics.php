@@ -196,14 +196,26 @@ class Topics extends Model
     {
         try {
             $db = $this->db;
-            $sQuery = $db->prepare('UPDATE lifehack.topics t
+
+            /*
+             * For now we need to have two different prepare statements for moderator
+             * and for the privileged user
+             */
+            if(UserPrivilegesChecker::is_moderator($_SESSION['User']['id'])){
+                $sQuery = $db->prepare('UPDATE lifehack.topics t
+                                                SET t.topic_name = :topic_name,
+                                                    t.content    = :content,
+                                                    t.featured_image_url = :featured_image
+                                                WHERE t.id = :topic_id');
+            } else {
+                $sQuery = $db->prepare('UPDATE lifehack.topics t
                                                 SET t.topic_name = :topic_name,
                                                     t.content    = :content,
                                                     t.featured_image_url = :featured_image
                                                 WHERE t.id = :topic_id AND t.user_id = :user_id');
 
+            }
             $sQuery->bindValue(':topic_name', $topicData['topic_name']);
-            $sQuery->bindValue(':content', $topicData['content']);
             if (isset($topicData['image'])) {
                 $imagePath = $topicData['image']['name'];
                 $sQuery->bindValue(':featured_image', $imagePath);
@@ -211,7 +223,18 @@ class Topics extends Model
                 $sQuery->bindValue(':featured_image', $topicData['image_path_old']);
             }
             $sQuery->bindValue(':topic_id', $topicData['topic_id']);
-            $sQuery->bindValue(':user_id', $_SESSION['User']['id']);
+
+            // IF IT'S A USER
+            if(!UserPrivilegesChecker::is_moderator($_SESSION['User']['id'])){
+                $sQuery->bindValue(':user_id', $_SESSION['User']['id']);
+                $sQuery->bindValue(':content', $topicData['content']);
+            } else {
+                // IF IT'S A MODERATOR, APPEND
+                $topicData['content'] = $topicData['content'].
+                    '
+                    > This post has been edited by a moderator '.$_SESSION['User']['username'];
+                $sQuery->bindValue(':content', $topicData['content']);
+            }
             $sQuery->execute();
             if (!$sQuery->rowCount()) {
                 echo '{"status": 0, "message": "Nothing was updated"}';

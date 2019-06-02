@@ -2,7 +2,7 @@
 
 class SingleTopic extends Controller
 {
-    public static function GetTopic()
+    public static function get_topic()
     {
         //TODO: Catch if the ID is wrong!!!!
 
@@ -135,6 +135,7 @@ class SingleTopic extends Controller
          * {"status":0}
          */
     }
+
     public static function edit_topic()
     {
         if (!hash_equals($_SESSION['key'], $_POST['token'])) {
