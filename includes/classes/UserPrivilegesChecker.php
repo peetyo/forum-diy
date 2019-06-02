@@ -2,12 +2,11 @@
 
 
 /*
-* Privileges proposal:
+* Privileges:
 * role id:
-* - 5 - banned user
 * - 4 - normal user
-* - 2 - moderator
-* - 1 - admin
+* - 5 - moderator
+* - 6 - admin
 */
 
 class UserPrivilegesChecker
