@@ -18,7 +18,7 @@ class User_Controller extends Controller
 
         // check length of password
         if(strlen($_POST['txtPassword']) < 8 ){
-            echo '{"status":"0","message":"Password should be between 6 and 20 character"}';
+            echo '{"status":"0","message":"Password should be at least 8 characters"}';
             exit;
         }
 
