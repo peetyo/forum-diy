@@ -29,7 +29,6 @@
         </div>
         <div class="form-group">
             <label>Password</label>
-            <p>Password should be between 6-20 character</p>
             <input name="txtPassword" type="password" class="form-control" placeholder="Password">
             <small class="form-text text-muted">The password should contain at least <b>8 characters</b> with <b>1
                     uppercase
