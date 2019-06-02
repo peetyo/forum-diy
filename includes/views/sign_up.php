@@ -20,8 +20,8 @@
 
         <div class="form-group">
             <label>Username</label>
-            <p>Username should be between 6-20 characters. </p>
             <input name="txtUsername" type="text" class="form-control" placeholder="Enter username">
+            <small class="form-text text-muted">Username must be between <b>6-20 characters</b>.</small>
         </div>
         <div class="form-group">
             <label>Email address</label>
