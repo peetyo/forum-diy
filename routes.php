@@ -129,3 +129,7 @@ Route::set('admin-users', function (){
 Route::set('admin-users-api', function (){
     Admin::get_user();
 });
+
+Route::set('admin-users-update-api', function (){
+    Admin::update_user_basics();
+});

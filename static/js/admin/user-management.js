@@ -1,44 +1,8 @@
-// $(document).ready(function () {
-//     const table = $('#user-list').DataTable({
-//         buttons: [
-//             'selectRows',
-//             'selectColumns',
-//             'selectCells'
-//         ],
-//         "select": true,
-//         "processing": true,
-//         "serverSide": true,
-//         "ajax": "admin-users-api",
-//         "columns": [
-//             { "data": "id" },
-//             { "data": "username" },
-//             { "data": "email" },
-//             { "data": "date_createad" },
-//             { "data": "active" },
-//             { "data": "user_role_id"}
-//         ],
-//         "ordering": false
-//     });
-//     $('#user-list tbody').on( 'click', 'tr', function () {
-//         if ( $(this).hasClass('selected') ) {
-//             $(this).removeClass('selected');
-//         }
-//         else {
-//             table.$('tr.selected').removeClass('selected');
-//             $(this).addClass('selected');
-//         }
-//     } );
-//
-//     $('#button').click( function () {
-//         table.row('.selected').remove().draw( false );
-//     } );
-// });
-
+// Find user
 $(document).on('click', '#btn-find-user', function () {
     // hide errors if they already shown
     hideError()
     const userToFind = $('#userToFind').val();
-    console.log('lecim', userToFind)
     // send an AJAX request to get the user's info
     $.ajax({
         url: 'admin-users-api',
@@ -60,6 +24,33 @@ $(document).on('click', '#btn-find-user', function () {
     })
 });
 
+// Save user data
+$(document).on('click', '#btnSaveUser', function () {
+    const iUserId = $('#userId').val()
+    const iActive = $('#activeCheck').attr('checked') ? 1 : 0;
+    const iRole = $('#moderatorCheck').attr('checked') ? 5 : 4;
+    $.ajax({
+        url: 'admin-users-update-api',
+        type: 'POST',
+        data: {
+            'iUserId' : iUserId,
+            'iActive' : iActive,
+            'iRole' : iRole
+        },
+        dataType: 'json'
+    }).always(function (response) {
+        //append information
+        if (response.status == 1) {
+            // execute function to append
+            displaySuccess();
+        } else if (response.status == 0) {
+            displayError(response.message)
+        } else {
+            displayError('Internal Server Error')
+        }
+    })
+})
+
 function enableEdit(dataToEnable) {
     // bind received values to variables
     const iUserId = dataToEnable['id']
@@ -71,6 +62,7 @@ function enableEdit(dataToEnable) {
     // insert values into the input fields
     $('#txtUsername').val(sUserName)
     $('#txtEmail').val(sEmail)
+    $('#userId').val(iUserId)
     // activate the checkbox
     $('#activeCheck').prop("disabled", false)
     // if the user active, select it
@@ -78,10 +70,16 @@ function enableEdit(dataToEnable) {
         $('#activeCheck').prop("checked", true)
     }
     $('#moderatorCheck').prop("disabled", false)
-    if (iRole == 5){
+    if (iRole == 5) {
         $('#moderatorCheck').prop("checked", true)
     }
     $('#btnSaveUser').prop("disabled", false)
 }
 
-$(document)
+function disableEdit() {
+    // disable current status
+    $('#activeCheck').prop("disabled", true)
+    $('#moderatorCheck').prop("disabled", true)
+    $('#btnSaveUser').prop("disabled", true)
+
+}

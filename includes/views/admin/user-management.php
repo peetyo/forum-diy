@@ -8,7 +8,11 @@
             <div class="row">
                 <!-- Error message-->
                 <div id="err-msg" class="alert alert-warning"  style="display:none;">
-                    <p style="margin: 0">Incorrect sign up, please try again.</p>
+                    <p style="margin: 0"></p>
+                </div>
+                <!-- Successful signup message-->
+                <div id="succ-msg" class="alert alert-success"  style="display:none;">
+                    <p></p>
                 </div>
                 <div class="input-group mb-3">
                     <input type="text" id="userToFind" class="form-control" placeholder="Type username or email address" aria-label="Recipient's username" aria-describedby="button-addon2" value="michal">
@@ -39,6 +43,8 @@
                             <input type="checkbox" class="form-check-input" id="activeCheck" disabled>
                             <label class="form-check-label" for="exampleCheck1">Active</label>
                         </div>
+                        <input type="hidden" id="userId">
+                        <input type="hidden" id="token" value="<?=$csrf?>">
                         <button type="button" id="btnSaveUser" class="btn btn-primary" disabled>Save</button>
                     </div>
                 </div>
