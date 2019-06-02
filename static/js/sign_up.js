@@ -13,7 +13,7 @@ $('#frmSignup').submit(function(e){
         if($('#frmSignup input[name = "txtUsername"]').val().length < 6) throw 'Username should be at least 6 characters';
         if($('#frmSignup input[name = "txtUsername"]').val().length > 20) throw 'Username should be less than 20 characters';
 
-        if($('#frmSignup input[name = "txtPassword"]').val().length < 6) throw 'Password should be at least 6 characters';
+        if($('#frmSignup input[name = "txtPassword"]').val().length < 8) throw 'Password should be at least 8 characters';
         
         if($('#frmSignup input[name = "txtPassword"]').val() != $('input[name = "txtConfirmPassword"]').val()) throw 'Passwords don\'t match';
 
