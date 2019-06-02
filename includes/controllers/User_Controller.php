@@ -15,11 +15,19 @@ class User_Controller extends Controller
             echo '{"status":"0","message":"Passwords don\'t match"}';
             exit;
         }
-        // check length of user name
+
+        // check length of password
+        if(strlen($_POST['txtPassword']) < 8 ){
+            echo '{"status":"0","message":"Password should be between 6 and 20 character"}';
+        }
+
+        // check length of username
         if (strlen($_POST['txtUsername']) < 4 || strlen($_POST['txtUsername']) > 20) {
             echo '{"status":"0","message":"Username should be between 6 and 20 character"}';
             exit;
         }
+
+
         //Preventing the user to create admin or moderator 
         if ($_POST['txtUsername'] === 'admin' ||
             $_POST['txtUsername'] === 'moderator' ||
