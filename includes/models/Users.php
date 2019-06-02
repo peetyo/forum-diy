@@ -51,16 +51,16 @@ class Users extends Model
             $sQuery->bindValue(':date_created', date('Y/m/d H:i:s'));
             $sQuery->bindValue(':user_role', 4);
             $sQuery->bindValue(':active', 1);
-            $sQuery->bindValue(':token' , $token);
+            $sQuery->bindValue(':token', $token);
             $sQuery->execute();
-            $returnedID =  $this->db->lastInsertId();
+            $returnedID = $this->db->lastInsertId();
             if (!$sQuery->rowCount()) {
                 echo '{"status":"0","message":"User was not created"}';
                 exit;
             }
             echo '{"status":"1","message":"User was created"}';
             // return $returnedID;
-      //  echo '{"status":"1", "message":"User created" ,"id" = '.$returnedID.'}';
+            //  echo '{"status":"1", "message":"User created" ,"id" = '.$returnedID.'}';
         } catch (PDOException $error) {
             LogSaver::save_the_log($error, 'users.txt');
         }
@@ -96,26 +96,28 @@ class Users extends Model
         }
     }
 
-   public  function  activate_user($token , $user_id){
-        try{
+    public function activate_user($token, $user_id)
+    {
+        try {
             $sQuery = $this->db->prepare('UPDATE users SET active = 1 WHERE id = :ID AND activation_token = :token ');
-            $sQuery->bindValue(':ID' , $user_id);
-            $sQuery->bindValue(':token' , $token);
+            $sQuery->bindValue(':ID', $user_id);
+            $sQuery->bindValue(':token', $token);
             $sQuery->execute();
-            if(!$sQuery->rowCount()){
-                echo '{"status":"0","message":"User was not'.$token.' activated "';
+            if (!$sQuery->rowCount()) {
+                echo '{"status":"0","message":"User was not' . $token . ' activated "';
                 exit;
             }
             echo '{"status":"1", "message":"User activated" }';
-        }catch(PDOException $e){
+        } catch (PDOException $e) {
             echo '{"status":"0","message":"Something went wrong, please contact the support"}';
             LogSaver::save_the_log($e, 'verify.txt');
         }
 
 
-   }
+    }
 
-    public function select_user_role_by_id($userId){
+    public function select_user_role_by_id($userId)
+    {
         try {
             $sQuery = $this->db->prepare('SELECT user_role_id from users WHERE id=:userId');
             $sQuery->bindValue(':userId', $userId);
@@ -127,7 +129,19 @@ class Users extends Model
             die();
         }
     }
+
+    public function get_user($searchBy)
+    {
+        try {
+            $sQuery = $this->db->prepare('SELECT u.id, u.username, u.email, u.date_createad, u.user_role_id, u.active
+                                                    FROM users u
+                                                    WHERE u.username = :searchTerm OR u.username = :searchTerm');
+            $sQuery->bindValue(':searchTerm', $searchBy);
+            $sQuery->execute();
+            $result = $sQuery->fetch();
+            return $result;
+        } catch (PDOException $error) {
+            LogSaver::save_the_log($error, 'get-user.txt');
+        }
+    }
 }
-// for testing
-// $modeltest = new Users;
-// $modeltest->read_users();

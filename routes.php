@@ -122,6 +122,10 @@ Route::set('admin-panel', function (){
     Admin::CreateView('admin/admin-panel', '');
 });
 
-Route::set('admin-panel-users', function (){
+Route::set('admin-users', function (){
     Admin::CreateView('admin/user-management', '');
+});
+
+Route::set('admin-users-api', function (){
+    Admin::get_user();
 });
