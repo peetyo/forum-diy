@@ -47,10 +47,8 @@ $(document).on('click', '#btnSubmit', function (event) {
             displaySuccess();
             window.location.href = "topic?id=" + response.topic;
         } else if(response.status == 0){
-            console.log(response)
             displayError(response.message);
         } else{
-            console.warn(response)
             displayError('Internal Server error')
         }
     });
