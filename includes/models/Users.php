@@ -151,17 +151,18 @@ class Users extends Model
             $sQuery = $this->db->prepare('UPDATE users
                                                     SET active = :iActive, user_role_id = :iRole
                                                     WHERE id = :iUserId');
-            $sQuery->bindValue(':iActivate', $iActive);
+            $sQuery->bindValue(':iActive', $iActive);
             $sQuery->bindValue(':iRole', $iRole);
             $sQuery->bindValue(':iUserId', $userId);
             $sQuery->execute();
             if (!$sQuery->rowCount()) {
-                echo '{"status":"0","message":"Internal Server Error. Nothing was changed"';
+                return false;
                 exit;
             }
-            echo '{"status":"1", "message":"User updated" }';
+            return true;
         } catch (PDOException $error){
             LogSaver::save_the_log($error, 'update-user-basics.txt');
+            return false;
             die();
         }
     }

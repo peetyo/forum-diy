@@ -115,21 +115,37 @@ Route::set('reply', function (){
     }
  });
 
- // Admin routes start here
+ // AdminController routes start here
 
 Route::set('admin-panel', function (){
     // if admin is logges in
-    Admin::CreateView('admin/admin-panel', '');
+    AdminController::CreateView('admin/admin-panel', '');
 });
 
 Route::set('admin-users', function (){
-    Admin::CreateView('admin/user-management', '');
+    if(UserPrivilegesChecker::is_admin()){
+        AdminController::CreateView('admin/user-management', '');
+    } else {
+        AdminController::CreateView('error', '');
+        die();
+    }
+
 });
 
 Route::set('admin-users-api', function (){
-    Admin::get_user();
+    if(UserPrivilegesChecker::is_admin()){
+        AdminController::get_user();
+    } else {
+        echo '{"status":"0","message":"Permission denied"}';
+        die();
+    }
 });
 
 Route::set('admin-users-update-api', function (){
-    Admin::update_user_basics();
+    if(UserPrivilegesChecker::is_admin()){
+        AdminController::update_user_basics();
+    } else {
+        echo '{"status":"0","message":"Permission denied"}';
+        die();
+    }
 });

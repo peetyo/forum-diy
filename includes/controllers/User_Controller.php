@@ -25,7 +25,7 @@ class User_Controller extends Controller {
             exit;
         }
         //Preventing the user to create admin or moderator 
-        if($_POST['txtUsername'] === 'admin' || $_POST['txtUsername'] === 'moderator' ){
+        if($_POST['txtUsername'] === 'AdminController' || $_POST['txtUsername'] === 'moderator' ){
             echo '{"status":"0","message":"Reservated usernames"}';
             exit;
         }

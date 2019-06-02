@@ -29,20 +29,23 @@ $(document).on('click', '#btnSaveUser', function () {
     const iUserId = $('#userId').val()
     const iActive = $('#activeCheck').attr('checked') ? 1 : 0;
     const iRole = $('#moderatorCheck').attr('checked') ? 5 : 4;
+    const token = $('#token').val()
     $.ajax({
         url: 'admin-users-update-api',
         type: 'POST',
         data: {
             'iUserId' : iUserId,
             'iActive' : iActive,
-            'iRole' : iRole
+            'iRole' : iRole,
+            'token': token
         },
         dataType: 'json'
     }).always(function (response) {
         //append information
         if (response.status == 1) {
             // execute function to append
-            displaySuccess();
+            displaySuccess()
+            disableEdit()
         } else if (response.status == 0) {
             displayError(response.message)
         } else {
