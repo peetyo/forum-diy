@@ -27,9 +27,10 @@ $(document).on('click', '#btn-find-user', function () {
 // Save user data
 $(document).on('click', '#btnSaveUser', function () {
     const iUserId = $('#userId').val()
-    const iActive = $('#activeCheck').attr('checked') ? 1 : 0;
-    const iRole = $('#moderatorCheck').attr('checked') ? 5 : 4;
+    const iActive = document.getElementById('activeCheck').checked == true ? 1 : 0;
+    const iRole = document.getElementById('moderatorCheck').checked == true ? 5 : 4;
     const token = $('#token').val()
+    console.log('iRole', iRole)
     $.ajax({
         url: 'admin-users-update-api',
         type: 'POST',

@@ -12,7 +12,7 @@
                 </div>
                 <!-- Successful signup message-->
                 <div id="succ-msg" class="alert alert-success"  style="display:none;">
-                    <p></p>
+                    <p>User updated</p>
                 </div>
                 <div class="input-group mb-3">
                     <input type="text" id="userToFind" class="form-control" placeholder="Type username or email address" aria-label="Recipient's username" aria-describedby="button-addon2" value="michal">
