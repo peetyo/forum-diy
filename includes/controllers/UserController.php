@@ -1,6 +1,6 @@
 <?php
 ini_set('display_errors', 1);
-class User_Controller extends Controller {
+class UserController extends Controller {
    public static function create_user(){
        // check the token integrity
        if (!hash_equals($_SESSION['key'], $_POST['token'])){
@@ -133,7 +133,6 @@ class User_Controller extends Controller {
         $used_Id = $_GET['id'];
         $user_model = new Users;
         $user_model->activate_user($token,$used_Id);
-
     }
 
     public static function logout(){
