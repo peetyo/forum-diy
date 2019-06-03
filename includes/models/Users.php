@@ -18,7 +18,7 @@ class Users extends Model
         }
     }
 
-    //prepared insert stament, which is used in sign_up controller
+    //prepared insert statement, which is used in sign_up controller
     public function sign_up_user($username, $hashed_pass, $email, $token)
     {
         try {
@@ -26,7 +26,7 @@ class Users extends Model
             $checkUserQuery->bindValue(':email', $email);
             $checkUserQuery->bindValue(':username', $username);
             $checkUserQuery->execute();
-            // check if the user exists in the dabase
+            // check if the user exists in the database
             if (!empty($checkUserQuery->fetch())) {
                 // return false to the controllers
                 // return false;
