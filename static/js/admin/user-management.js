@@ -1,6 +1,16 @@
-let UsersInfo;
+let gUsersInfo;
 // Find user
 $(document).on('click', '#btn-find-user', function () {
+    searchRequest()
+});
+
+// on key up
+$("#userToFind").on('keyup', function (e) {
+    searchRequest()
+});
+
+// search request
+function searchRequest(){
     // hide errors if they already shown
     hideError()
     const userToFind = $('#userToFind').val();
@@ -21,11 +31,12 @@ $(document).on('click', '#btn-find-user', function () {
             displayError(response.message)
             removeList()
         } else {
-            displayError('Internal Server Error')
+            //displayError('Internal Server Error')
             removeList()
         }
     })
-});
+}
+
 
 // Save user data
 $(document).on('click', '#btnSaveUser', function () {
@@ -50,6 +61,8 @@ $(document).on('click', '#btnSaveUser', function () {
             // execute function to append
             displaySuccess()
             disableEdit()
+            removeList()
+            resetgUsersInfo
         } else if (response.status == 0) {
             displayError(response.message)
         } else {
@@ -58,13 +71,12 @@ $(document).on('click', '#btnSaveUser', function () {
     })
 })
 
-
 // click user to edit.
 $(document).on('click', '.user-on-list', function () {
     const userId = $(this).attr('data-userId')
     console.log(userId)
-    console.log('here are all the users again', UsersInfo)
-    const userInfo = UsersInfo.find(user => user.id === userId)
+    console.log('here are all the users again', gUsersInfo)
+    const userInfo = gUsersInfo.find(user => user.id === userId)
     enableEdit(userInfo)
 })
 
@@ -86,10 +98,14 @@ function enableEdit(dataToEnable) {
     // if the user active, select it
     if (iActive == 1) {
         $('#activeCheck').prop("checked", true)
+    } else {
+        $('#activeCheck').prop("checked", false)
     }
     $('#moderatorCheck').prop("disabled", false)
     if (iRole == 5) {
         $('#moderatorCheck').prop("checked", true)
+    } else if (iRole == 4) {
+        $('#moderatorCheck').prop("checked", false)
     }
     $('#btnSaveUser').prop("disabled", false)
 }
@@ -103,7 +119,7 @@ function disableEdit() {
 }
 
 function displayList(users) {
-    UsersInfo = users
+    gUsersInfo = users
     // first, remove whatever is lest
     //$('#usersResult').empty()
     $('#usersResult').children().fadeOut(200).promise().then(function () {
@@ -134,4 +150,8 @@ function removeList() {
     $('#usersResult').children().fadeOut(200).promise().then(function () {
         $('#usersResult').empty();
     })
+}
+
+function resetgUsersInfo() {
+    gUsersInfo = ''
 }
