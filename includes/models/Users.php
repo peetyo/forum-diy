@@ -135,10 +135,10 @@ class Users extends Model
         try {
             $sQuery = $this->db->prepare('SELECT u.id, u.username, u.email, u.date_createad, u.user_role_id, u.active
                                                     FROM users u
-                                                    WHERE u.username = :searchTerm OR u.username = :searchTerm');
+                                                    WHERE u.username REGEXP :searchTerm OR u.username REGEXP :searchTerm');
             $sQuery->bindValue(':searchTerm', $searchBy);
             $sQuery->execute();
-            $result = $sQuery->fetch();
+            $result = $sQuery->fetchAll();
             return $result;
         } catch (PDOException $error) {
             LogSaver::save_the_log($error, 'get-user.txt');

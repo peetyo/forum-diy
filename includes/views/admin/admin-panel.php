@@ -3,10 +3,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-3">
-            This is a menu
-        </div>
-        <div class="col-9">
+        <div class="col-5">
             <div class="row">
                 <div class="d-flex">
                     <div class="card" style="width: 18rem;">
@@ -26,7 +23,7 @@
                             <h5 class="card-title">Users</h5>
                             <h6 class="card-subtitle mb-2 text-muted">Manage users. Gain privileges, ban accounts, recover passwords.</h6>
                             <p class="card-text"></p>
-                            <a href="admin-panel/users" class="card-link">Go</a>
+                            <a href="admin-users" class="card-link">Go</a>
                         </div>
                     </div>
                 </div>

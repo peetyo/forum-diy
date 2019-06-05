@@ -15,7 +15,7 @@ $(document).on('click', '#btn-find-user', function () {
         //append information
         if (response.status == 1) {
             // execute function to append
-            enableEdit(response.data)
+            displayList(response.data)
         } else if (response.status == 0) {
             displayError(response.message)
         } else {
@@ -86,4 +86,31 @@ function disableEdit() {
     $('#moderatorCheck').prop("disabled", true)
     $('#btnSaveUser').prop("disabled", true)
 
+}
+
+function displayList(users) {
+    // first, remove whatever is lest
+    //$('#usersResult').empty()
+    $('#usersResult').children().fadeOut(200).promise().then(function() {
+        $('#usersResult').empty();
+        // then insert new results
+        let fadeInTime = 200
+        users.forEach(function (user) {
+            console.warn(fadeInTime)
+            console.log(user.id)
+            let txtRole = '';
+            if(user.user_role_id == 5){
+                txtRole = 'Moderator'
+            } else if (user.user_role_id == 6){
+                txtRole = 'Administrator'
+            }
+            $('#usersResult').append('<li class="list-group-item d-flex justify-content-between align-items-center">\n' +
+                '                    '+user.username+
+                '                    <span class="badge badge-primary badge-pill">'+txtRole+'</span>\n' +
+                '                </li>').hide().fadeIn(fadeInTime)
+            fadeInTime = fadeInTime + 100
+        })
+    });
+
+    //$('#usersResult').append()
 }
