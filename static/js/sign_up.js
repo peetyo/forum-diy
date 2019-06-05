@@ -13,8 +13,7 @@ $('#frmSignup').submit(function(e){
         if($('#frmSignup input[name = "txtUsername"]').val().length < 6) throw 'Username should be at least 6 characters';
         if($('#frmSignup input[name = "txtUsername"]').val().length > 20) throw 'Username should be less than 20 characters';
 
-        if($('#frmSignup input[name = "txtPassword"]').val().length < 6) throw 'Password should be at least 6 characters';
-        if($('#frmSignup input[name = "txtPassword"]').val().length > 20) throw 'Password should be less than 20 characters';
+        if($('#frmSignup input[name = "txtPassword"]').val().length < 8) throw 'Password should be at least 8 characters';
         
         if($('#frmSignup input[name = "txtPassword"]').val() != $('input[name = "txtConfirmPassword"]').val()) throw 'Passwords don\'t match';
 
@@ -38,6 +37,7 @@ $('#frmSignup').submit(function(e){
         }else if(jData.status == 0){
           //TODO create a toast message or something like that ?
           //$('h1').text('Incorrect login')
+            console.log(jData)
           displayError(jData.message);
         }
         // else if(jData.status === 200){
@@ -45,6 +45,7 @@ $('#frmSignup').submit(function(e){
         //     setTimeout("location.href = './index.php';", 4000)
         // } 
         else{
+            console.warn(jData)
           // when we get a php error and pass it in the response text
           displayError('Internal Server error')
         }
