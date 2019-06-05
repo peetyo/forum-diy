@@ -20,18 +20,6 @@
             </div>
             <h3>Results</h3>
             <ul class="list-group" id="usersResult">
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    Michał.P
-                    <span class="badge badge-primary badge-pill">Moderator</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    admin
-                    <span class="badge badge-primary badge-pill">Administrator</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    Peter
-                    <span class="badge badge-primary badge-pill">1</span>
-                </li>
             </ul>
         </div>
         <div class="col-6">
