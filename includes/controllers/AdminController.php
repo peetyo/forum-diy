@@ -11,7 +11,7 @@ class AdminController extends Controller
         }
         $sUserToFind = $_POST['txtSearch'];
         $query = new Users;
-        $searchResults = $query->get_user($sUserToFind);
+        $searchResults = $query->get_users($sUserToFind);
         $return = new stdClass();
         if (!$searchResults) {
             $return->status = 0;
@@ -39,6 +39,8 @@ class AdminController extends Controller
 
         $user = new Users();
         $userUpdate = $user->update_user_basics($iUserId, $iActiveStatus, $iRole);
+        die();
+
         if($userUpdate === true) {
             echo '{"status":"1", "message":"User updated" }';
         } else {

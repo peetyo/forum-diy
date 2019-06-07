@@ -130,7 +130,7 @@ class Users extends Model
         }
     }
 
-    public function get_user($searchBy)
+    public function get_users($searchBy)
     {
         try {
             $sQuery = $this->db->prepare('SELECT u.id, u.username, u.email, u.date_createad, u.user_role_id, u.active
@@ -146,8 +146,37 @@ class Users extends Model
         }
     }
 
-    public function update_user_basics($userId, $iActive, $iRole){
-        try{
+    public function update_user_basics($userId, $iActive, $iRole)
+    {
+        /*
+         * Michal: Admin can't grant another admin! At least for now.
+         * Therefore system won't allow to change role to 6
+         */
+        if ($iRole == 6) {
+            return false;
+            die();
+        }
+        /*
+         * So now we cannot gain the admin rights. But we also don't want to
+         * denied admin rights. Therefore the idea is to check the user rights beforehand again
+         */
+        try {
+            $sQuery = $this->db->prepare('SELECT user_role_id
+                                                    FROM users
+                                                    WHERE id = :iUserId');
+            $sQuery->bindValue(':iUserId', $userId);
+            $sQuery->execute();
+            $userRole = $sQuery->fetch();
+            if($userRole['user_role_id'] == 6){
+                return false;
+                die();
+            }
+        } catch (PDOException $error) {
+            LogSaver::save_the_log($error, 'update-user-basics.txt');
+            return false;
+            die();
+        }
+        try {
             $sQuery = $this->db->prepare('UPDATE users
                                                     SET active = :iActive, user_role_id = :iRole
                                                     WHERE id = :iUserId');
@@ -160,7 +189,7 @@ class Users extends Model
                 exit;
             }
             return true;
-        } catch (PDOException $error){
+        } catch (PDOException $error) {
             LogSaver::save_the_log($error, 'update-user-basics.txt');
             return false;
             die();

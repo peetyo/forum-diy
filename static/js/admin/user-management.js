@@ -44,7 +44,6 @@ $(document).on('click', '#btnSaveUser', function () {
     const iActive = document.getElementById('activeCheck').checked == true ? 1 : 0;
     const iRole = document.getElementById('moderatorCheck').checked == true ? 5 : 4;
     const token = $('#token').val()
-    console.log('iRole', iRole)
     $.ajax({
         url: 'admin-users-update-api',
         type: 'POST',
@@ -74,8 +73,6 @@ $(document).on('click', '#btnSaveUser', function () {
 // click user to edit.
 $(document).on('click', '.user-on-list', function () {
     const userId = $(this).attr('data-userId')
-    console.log(userId)
-    console.log('here are all the users again', gUsersInfo)
     const userInfo = gUsersInfo.find(user => user.id === userId)
     enableEdit(userInfo)
 })
@@ -127,8 +124,6 @@ function displayList(users) {
         // then insert new results
         let fadeInTime = 200
         users.forEach(function (user) {
-            console.warn(fadeInTime)
-            console.log(user.id)
             let txtRole = '';
             if (user.user_role_id == 5) {
                 txtRole = 'Moderator'
