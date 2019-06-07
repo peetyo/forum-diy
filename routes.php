@@ -118,8 +118,12 @@ Route::set('reply', function (){
  // AdminController routes start here
 
 Route::set('admin-panel', function (){
-    // if admin is logges in
-    AdminController::CreateView('admin/admin-panel', '');
+    if(UserPrivilegesChecker::is_admin()){
+        AdminController::CreateView('admin/admin-panel', '');
+    } else {
+        AdminController::CreateView('error', '');
+        die();
+    }
 });
 
 Route::set('admin-users', function (){
