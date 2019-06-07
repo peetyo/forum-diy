@@ -74,15 +74,15 @@ class mailer{
               body { height: 100% !important; margin: 0 !important; padding: 0 !important; width: 100% !important; }
           </style>
         </head>
-        <body style="background-color: #1b2a49; margin: 0 !important; padding: 60px 0 60px 0 !important;">
+        <body style="background-color:#00897B; margin: 0 !important; padding: 60px 0 60px 0 !important;">
           <table border="0" cellspacing="0" cellpadding="0" role="presentation" width="100%">
             <tr>
-                <td bgcolor="#1b2a49" style="font-size: 0;">&​nbsp;</td>
+                <td bgcolor="#00897B" style="font-size: 0;">&​nbsp;</td>
                 <td bgcolor="white" width="600" style="border-radius: 4px; color: grey; font-family: sans-serif; font-size: 18px; line-height: 28px; padding: 40px 40px;">
                   <h1 style="color: black; font-size: 32px; font-weight: bold; line-height: 36px; margin: 0 0 30px 0;">Hi '.$username.' thank you registering at Forum-diy.</h1>
                   <p style="margin: 0 0 30px 0;"> <em style="color: black;"> You can activate your account '.$url.' </em> </p>
                 </td>
-                <td bgcolor="#1b2a49" style="font-size: 0;">&​nbsp;</td>
+                <td bgcolor="#00897B" style="font-size: 0;">&​nbsp;</td>
             </tr>
           </table>
         </body>
