@@ -136,7 +136,7 @@ Route::set('admin-users-api', function (){
     if(UserPrivilegesChecker::is_admin()){
         AdminController::get_user();
     } else {
-        echo '{"status":"0","message":"Permission denied"}';
+        AdminController::CreateView('error', '');
         die();
     }
 });
@@ -145,7 +145,7 @@ Route::set('admin-users-update-api', function (){
     if(UserPrivilegesChecker::is_admin()){
         AdminController::update_user_basics();
     } else {
-        echo '{"status":"0","message":"Permission denied"}';
+        AdminController::CreateView('error', '');
         die();
     }
 });
