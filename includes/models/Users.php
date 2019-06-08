@@ -71,12 +71,31 @@ class Users extends Model
     public function select_username($username)
     {
         try {
-            $sQuery = $this->db->prepare('SELECT username from users WHERE username = :username AND active = 1');
+            $sQuery = $this->db->prepare('SELECT username from users WHERE username = :username');
             $sQuery->bindValue(':username', $username);
             $sQuery->execute();
-            $aUser = $sQuery->fetchAll();
+            $sQuery->fetch();
 
-            return $aUser;
+            if(!$sQuery->rowCount()){
+                echo '{"status":"0","message":"Wrong username or password"}';
+                exit;
+            }
+        } catch (PDOException $error) {
+            LogSaver::save_the_log($error, 'users.txt');
+        }
+    }
+    // is the user account activated?
+    public function select_active_status($username)
+    {
+        try {
+            $sQuery = $this->db->prepare('SELECT active from users WHERE username = :username');
+            $sQuery->bindValue(':username', $username);
+            $sQuery->execute();
+            $aData = $sQuery->fetch();
+            if(!$aData['active']){
+                echo '{"status":"0","message":"This account is not activated"}';
+                exit;
+            }
         } catch (PDOException $error) {
             LogSaver::save_the_log($error, 'users.txt');
         }

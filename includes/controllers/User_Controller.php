@@ -97,19 +97,19 @@ class User_Controller extends Controller
         $username = $_POST['txtUsername'];
         $user_model = new Users;
 
-
-        $selected_user = $user_model->select_username($username);
-
-        //we are checking if the size of the array is zero or and doesn't match the user is not verifed 
-        if (sizeof($selected_user) === 0 || $selected_user[0]['username'] != $username) {
-            echo '{"status":"0","message":"Wrong username or password"}';
-            exit;
-        }
-
+        // check if the username exists
+        $user_model->select_username($username);
+        // check if the user is active
+        $user_model->select_active_status($username);
+        
+        //verify password
+        // TODO: refactor this code
         $verified_user = $user_model->select_username_and_password($username);
         if (!password_verify($_POST['txtPassword'], $verified_user[0]['password_hashed'])) {
-            echo '{"status":"0","message":"Wrong user name or password"}';
+            // save failed attempt
+            WrongPass::save_attempt($username);  
             exit;
+
         }
 
         $_SESSION['User'] = $verified_user[0];
