@@ -3,7 +3,7 @@
 class Route {
     // ACHTUNG !!! Declare all routes in the array below otherwise it you won't be able to load the routes
     // An array with all existing routes which will be checked on autoload
-    public static $validRoutes = array('index.php', 'category', 'sign-up', 'verify', 'create-user', 'login', 'topic', 'error', 'logout', 'create-topic', 'api-create-topic', 'edit-topic', 'api-edit-topic', 'reply', 'api-reply');
+    public static $validRoutes = array('index.php', 'category', 'sign-up', 'verify', 'create-user', 'login', 'topic', 'error', 'logout', 'create-topic', 'api-create-topic', 'edit-topic', 'api-edit-topic', 'reply', 'api-reply', 'reactivate');
 
     public static function set($route, $function) {
 

@@ -98,21 +98,28 @@ class User_Controller extends Controller
         $user_model = new Users;
 
         // check if the username exists
-        $user_model->select_username($username);
-        // check if the user is active
-        $user_model->select_active_status($username);
+        if(!$user_model->select_username($username)){
+            echo '{"status":"0","message":"Wrong username or password"}';
+            exit;
+        }
         
+        // check if the user is active
+        if(!$user_model->select_active_status($username)){
+            echo '{"status":"0","message":"This account is not activated"}';
+            exit;
+        }
+
         //verify password
         // TODO: refactor this code
         $verified_user = $user_model->select_username_and_password($username);
-        if (!password_verify($_POST['txtPassword'], $verified_user[0]['password_hashed'])) {
+        if (!password_verify($_POST['txtPassword'], $verified_user['password_hashed'])) {
             // save failed attempt
-            WrongPass::save_attempt($username);  
+            FailedLogin::save_attempt($username);  
             exit;
 
         }
 
-        $_SESSION['User'] = $verified_user[0];
+        $_SESSION['User'] = $verified_user;
         echo '{"status":"1","message":"User logged in"}';
         // print_r($_SESSION['User']);
     }
@@ -121,10 +128,23 @@ class User_Controller extends Controller
     {
         require_once("./includes/views/verify_user.php");
         $token = $_GET['token'];
-        $used_Id = $_GET['id'];
+        $user_id = $_GET['id'];
         $user_model = new Users;
-        $user_model->activate_user($token, $used_Id);
+        $user_model->activate_user($token, $user_id);
 
+    }
+
+    public static function reactivate_user()
+    {
+        if(isset($_GET['token']) && isset($_GET['id'])){
+            $token = $_GET['token'];
+            $userId = $_GET['id'];
+            FailedLogin::reactivate_user($token,$userId);
+
+        }else{
+            Controller::CreateView('error', '');
+        }
+        
     }
 
     public static function logout()

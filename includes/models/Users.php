@@ -77,9 +77,9 @@ class Users extends Model
             $sQuery->fetch();
 
             if(!$sQuery->rowCount()){
-                echo '{"status":"0","message":"Wrong username or password"}';
-                exit;
+                return false;
             }
+            return true;
         } catch (PDOException $error) {
             LogSaver::save_the_log($error, 'users.txt');
         }
@@ -93,9 +93,9 @@ class Users extends Model
             $sQuery->execute();
             $aData = $sQuery->fetch();
             if(!$aData['active']){
-                echo '{"status":"0","message":"This account is not activated"}';
-                exit;
+                return false;
             }
+            return true;
         } catch (PDOException $error) {
             LogSaver::save_the_log($error, 'users.txt');
         }
@@ -107,7 +107,7 @@ class Users extends Model
             $sQuery = $this->db->prepare('SELECT id,username,password_hashed,email  from users WHERE username = :usersname ');
             $sQuery->bindValue(':usersname', $username);
             $sQuery->execute();
-            $aUser = $sQuery->fetchAll();
+            $aUser = $sQuery->fetch();
 
             return $aUser;
         } catch (PDOException $error) {
@@ -122,10 +122,9 @@ class Users extends Model
             $sQuery->bindValue(':token' , $token);
             $sQuery->execute();
             if(!$sQuery->rowCount()){
-                echo '{"status":"0","message":"User was not'.$token.' activated "';
-                exit;
+                return false;
             }
-            echo '{"status":"1", "message":"User activated" }';
+            return true;
         }catch(PDOException $e){
             echo '{"status":"0","message":"Something went wrong, please contact the support"}';
             LogSaver::save_the_log($e, 'verify.txt');
@@ -146,6 +145,23 @@ class Users extends Model
             die();
         }
     }
+
+    public function select_username_by_id($userId){
+        try {
+            $sQuery = $this->db->prepare('SELECT username from users WHERE id=:userId');
+            $sQuery->bindValue(':userId', $userId);
+            $sQuery->execute();
+            $user = $sQuery->fetch();
+            if(!$sQuery->rowCount()){
+                return false;
+            }
+            return $user;
+        } catch (PDOException $error) {
+            LogSaver::save_the_log($error, 'failed-login.txt');
+            die();
+        }
+    }
+
 }
 // for testing
 // $modeltest = new Users;
