@@ -1,5 +1,15 @@
 # Hey, before you start!
 ## Read this one.
+
+Users to login:
+Moderator:
+username: peter
+password: 123456
+
+
+
+
+## Introduction 
 Here is a quick explanation of what 
 tis small MVC app does and how to start using it. 
 

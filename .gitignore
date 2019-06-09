@@ -74,6 +74,7 @@ includes/config/database.php
 .idea/watcherTasks.xml
 static/css/.sass-cache
 includes/logs
+../../includes/logs/
 
 # Ignore PrePros
 

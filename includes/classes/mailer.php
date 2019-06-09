@@ -6,10 +6,10 @@ require_once('SMTP.php');
 //require_once ('Exception.php');
 class mailer{
 
-     public  static  function sent_mail($sent_mail_to, $token , $UserID , $username){
+     public  static  function sent_mail($sent_mail_to, $token , $UserID , $username , $location=0){
          date_default_timezone_set('Etc/UTC');
          //require '../../vendor/phpmailer/phpmailer/src/PHPMailer.php';
-echo  require_once('PHPMailer.php');
+
 //Create a new PHPMailer instance
          $mail = new PHPMailer;
 //Tell PHPMailer to use SMTP
@@ -18,7 +18,7 @@ echo  require_once('PHPMailer.php');
 // 0 = off (for production use)
 // 1 = client messages
 // 2 = client and server messages
-         $mail->SMTPDebug = 2;
+         $mail->SMTPDebug = 0;
 //Ask for HTML-friendly debug output
          $mail->Debugoutput = 'html';
 //Set the hostname of the mail server
@@ -51,10 +51,23 @@ echo  require_once('PHPMailer.php');
 
          // output: localhost
          $hostName = $_SERVER['HTTP_HOST'];
+        if($location === 0){
+            $url = "165.22.78.2/verify?token=$token&id=$UserID";
+            // Set email format to HTML
+            $template= file_get_contents("includes/templates/mail-activate.html");
+            $template = str_replace('sUsername', $username, $template);
+            $template = str_replace('HOSTURL', $url, $template);
+        }else{
+            $url = "165.22.78.2/reactivate?token=$token&id=$UserID";
+            $reportURL = "165.22.78.2/report";
+            $template= file_get_contents("includes/templates/mail-reactivate.html");
+            $template = str_replace('sUsername', $username, $template);
+            $template = str_replace('LocationIP', $location, $template);
+            $template = str_replace('HOSTURL', $url, $template);
+            $template = str_replace('ReportURL', $reportURL, $template);
+        }
 
-         $url = "$hostName/forum-diy/verify?token=".$token."&id=$UserID";
-         // Set email format to HTML
-         $mail->Body    = "Hi $username thank you registering at Forum-diy. You can activate your account $url </a> ";
+         $mail->Body    = $template;
 
 
          // $mail->msgHTML(file_get_contents('contents.html'), dirname(__FILE__));
@@ -65,8 +78,6 @@ echo  require_once('PHPMailer.php');
 //send the message, check for errors
          if (!$mail->send()) {
              echo "Mailer Error: " . $mail->ErrorInfo;
-         } else {
-             echo "Message sent!";
          }
      }
 }
