@@ -50,7 +50,7 @@ class Users extends Model
             $sQuery->bindValue(':email', $email);
             $sQuery->bindValue(':date_created', date('Y/m/d H:i:s'));
             $sQuery->bindValue(':user_role', 4);
-            $sQuery->bindValue(':active', 1);
+            $sQuery->bindValue(':active', 0);
             $sQuery->bindValue(':token', $token);
             $sQuery->execute();
             $returnedID = $this->db->lastInsertId();
@@ -155,6 +155,22 @@ class Users extends Model
                 return false;
             }
             return $user;
+        } catch (PDOException $error) {
+            LogSaver::save_the_log($error, 'failed-login.txt');
+            die();
+        }
+    }
+
+    public function select_user_by_username($username){
+        try {
+            $sQuery = $this->db->prepare('SELECT id, email from users WHERE username=:username');
+            $sQuery->bindValue(':username', $username);
+            $sQuery->execute();
+            $data = $sQuery->fetch();
+            if(!$sQuery->rowCount()){
+                return false;
+            }
+            return $data;
         } catch (PDOException $error) {
             LogSaver::save_the_log($error, 'failed-login.txt');
             die();

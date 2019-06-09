@@ -34,7 +34,7 @@ Route::set('verify', function (){
 });
 
 Route::set('reactivate', function (){
-    User_Controller::reactivate_user();
+    UserController::reactivate_user();
 });
 
 Route::set('report', function (){

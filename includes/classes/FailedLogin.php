@@ -5,30 +5,41 @@ class FailedLogin {
     public static function save_attempt($username){
         $ipAddress = self::get_ip_address();
         $ipLocation = self::get_ip_location($ipAddress);
+        $newToken = bin2hex(openssl_random_pseudo_bytes(16));
 
-        $model = new Model;
-
-        try {
-            $sQuery = $model->db->prepare('INSERT INTO failed_login 
-            VALUES(null, :username, null , :ip, :location, 0)');
-            $sQuery->bindValue(':username', $username);
-            $sQuery->bindValue(':ip', $ipAddress);
-            $sQuery->bindValue(':location', $ipLocation);
-            $sQuery->execute();
-
-            if (!$sQuery->rowCount()) {
-                echo '{"status":"0","message":"attempt not saved"}';
+        $model = new Users;
+        $queryResponse = $model->select_user_by_username($username);
+        if($queryResponse){
+            $email = $queryResponse['email'];
+            $userId = $queryResponse['id'];
+            try {
+                $sQuery = $model->db->prepare('INSERT INTO failed_login 
+                VALUES(null, :username, null , :ip, :location, 0)');
+                $sQuery->bindValue(':username', $username);
+                $sQuery->bindValue(':ip', $ipAddress);
+                $sQuery->bindValue(':location', $ipLocation);
+                $sQuery->execute();
+    
+                if (!$sQuery->rowCount()) {
+                    echo '{"status":"0","message":"Wrong username or password"}';
+                    exit;
+                }
+    
+                self::count_attempts($username, $newToken, $email, $userId, $ipLocation);
+    
+                
+            } catch (PDOException $error) {
+                LogSaver::save_the_log($error, 'failed-login.txt');
                 exit;
             }
-
-            self::count_attempts($username);
-        } catch (PDOException $error) {
-            LogSaver::save_the_log($error, 'failed-login.txt');
+        }else{
+            echo '{"status":"0","message":"Wrong username or password"}';
             exit;
         }
+        
     }
 
-    public static function count_attempts($username){
+    public static function count_attempts($username, $newToken, $email, $userId, $ipLocation){
         $model = new Model;
         try {
             $sQuery = $model->db->prepare('SELECT COUNT(username) AS failed_attempts
@@ -37,7 +48,8 @@ class FailedLogin {
             $sQuery->execute();
             $result = $sQuery->fetch();
             if($result['failed_attempts']>4){
-               self::deactivate_user($username);
+               self::deactivate_user($username, $newToken);
+               mailer::sent_mail($email, $newToken , $userId , $username, $ipLocation);
             }else{
                 echo '{"status":"0","message":"Wrong user name or password"}';
             }
@@ -48,9 +60,8 @@ class FailedLogin {
         }
     }
 
-    public static function deactivate_user($username){
+    public static function deactivate_user($username, $newToken){
         $model = new Model;
-        $newToken = bin2hex(openssl_random_pseudo_bytes(16));
         try{
             $sQuery = $model->db->prepare('UPDATE users SET active = 0, activation_token = :token WHERE username = :username;');
             $sQuery->bindValue(':username', $username);
