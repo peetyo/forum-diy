@@ -96,19 +96,18 @@ class Users extends Model
         }
     }
 
-    public function activate_user($token, $user_id)
-    {
-        try {
+   public  function  activate_user($token , $user_id){
+        try{
             $sQuery = $this->db->prepare('UPDATE users SET active = 1 WHERE id = :ID AND activation_token = :token ');
-            $sQuery->bindValue(':ID', $user_id);
-            $sQuery->bindValue(':token', $token);
+            $sQuery->bindValue(':ID' , $user_id);
+            $sQuery->bindValue(':token' , $token);
             $sQuery->execute();
-            if (!$sQuery->rowCount()) {
-                echo '{"status":"0","message":"User was not' . $token . ' activated "';
+            if(!$sQuery->rowCount()){
+               return false;
                 exit;
             }
-            echo '{"status":"1", "message":"User activated" }';
-        } catch (PDOException $e) {
+           return true;
+        }catch(PDOException $e){
             echo '{"status":"0","message":"Something went wrong, please contact the support"}';
             LogSaver::save_the_log($e, 'verify.txt');
         }
@@ -196,3 +195,6 @@ class Users extends Model
         }
     }
 }
+// for testing
+// $modeltest = new Users;
+// $modeltest->read_users();
