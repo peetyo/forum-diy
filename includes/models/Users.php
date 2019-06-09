@@ -59,9 +59,7 @@ class Users extends Model
                 exit;
             }
             echo '{"status":"1","message":"User was created"}';
-            // return $returnedID;
             mailer::sent_mail($_POST['txtEmail'], $token , $returnedID , $username);
-      //  echo '{"status":"1", "message":"User created" ,"id" = '.$returnedID.'}';
         } catch (PDOException $error) {
             LogSaver::save_the_log($error, 'users.txt');
         }
