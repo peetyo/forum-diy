@@ -1,17 +1,16 @@
 <?php
 ini_set('display_errors', 1);
+class UserController extends Controller {
+   public static function create_user(){
+       // check the token integrity
+       if (!hash_equals($_SESSION['key'], $_POST['token'])){
+           echo '{"status":"0","message":"Invalid token"}';
+           exit;
+       }
 
-class User_Controller extends Controller
-{
-    public static function create_user()
-    {
-        // check the token integrity
-        if (!hash_equals($_SESSION['key'], $_POST['token'])) {
-            echo '{"status":"0","message":"Invalid token"}';
-            exit;
-        }
-        // check if passwords matches
-        if ($_POST['txtPassword'] != $_POST['txtConfirmPassword']) {
+
+        // check if passwords mathces
+        if($_POST['txtPassword'] != $_POST['txtConfirmPassword']){
             echo '{"status":"0","message":"Passwords don\'t match"}';
             exit;
         }
@@ -27,14 +26,9 @@ class User_Controller extends Controller
             echo '{"status":"0","message":"Username should be between 6 and 20 character"}';
             exit;
         }
-
-
         //Preventing the user to create admin or moderator 
-        if ($_POST['txtUsername'] === 'admin' ||
-            $_POST['txtUsername'] === 'moderator' ||
-            strpos($_POST['txtUsername'], 'admin') !== false ||
-            strpos($_POST['txtUsername'], 'moderator') !== false) {
-            echo '{"status":"0","message":"Reserved username"}';
+        if($_POST['txtUsername'] === 'admin' || $_POST['txtUsername'] === 'moderator' ){
+            echo '{"status":"0","message":"Reservated usernames"}';
             exit;
         }
         // check if it valid email
