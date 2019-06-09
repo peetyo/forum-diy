@@ -70,11 +70,7 @@ class User_Controller extends Controller
 
         $token = bin2hex(openssl_random_pseudo_bytes(16));
         $user_class = new Users;
-        // Mortimus have commented out this for testing the mailer on production
-      // $returnedID = $user_class->sign_up_user($username, $user_password, $email, $token);
-        $returnedID = 2;
-         mailer::sent_mail($_POST['txtEmail'], $token , $returnedID , $username);
-
+       $user_class->sign_up_user($username, $user_password, $email, $token);
     }
 
     public static function login_user()
