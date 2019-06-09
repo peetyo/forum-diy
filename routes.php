@@ -37,6 +37,10 @@ Route::set('reactivate', function (){
     User_Controller::reactivate_user();
 });
 
+Route::set('report', function (){
+    FailedLogin::report();
+});
+
 Route::set('create-user', function (){
     User_Controller::create_user();
 });

@@ -142,4 +142,13 @@ class FailedLogin {
 
     }
 
+    public static function report(){
+        
+        $tittle = "Thank you for your response";
+        $message = "We are investigating the situation and 
+        we will notify you as soon as we have more details.";
+        require_once("./includes/views/verify_user.php");
+        exit;       
+        
+    }
 }
