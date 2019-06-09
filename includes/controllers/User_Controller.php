@@ -70,8 +70,10 @@ class User_Controller extends Controller
 
         $token = bin2hex(openssl_random_pseudo_bytes(16));
         $user_class = new Users;
-        $returnedID = $user_class->sign_up_user($username, $user_password, $email, $token);
-        // mailer::sent_mail($_POST['txtEmail'], $token , $returnedID , $username);
+        // Mortimus have commented out this for testing the mailer on production
+      // $returnedID = $user_class->sign_up_user($username, $user_password, $email, $token);
+        $returnedID = 2;
+         mailer::sent_mail($_POST['txtEmail'], $token , $returnedID , $username);
 
     }
 
@@ -119,11 +121,20 @@ class User_Controller extends Controller
 
     public static function verify_user()
     {
-        require_once("./includes/views/verify_user.php");
+
         $token = $_GET['token'];
         $used_Id = $_GET['id'];
         $user_model = new Users;
-        $user_model->activate_user($token, $used_Id);
+        $response_activate_user = $user_model->activate_user($token, $used_Id);
+        if($response_activate_user === true){
+            $tittle = "Success";
+            $message = "User activated";
+            require_once("./includes/views/verify_user.php");
+        }else{
+            $tittle = "Failure";
+            $message = "User was not activated";
+            require_once("./includes/views/verify_user.php");
+        }
 
     }
 
