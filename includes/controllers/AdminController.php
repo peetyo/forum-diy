@@ -39,7 +39,6 @@ class AdminController extends Controller
 
         $user = new Users();
         $userUpdate = $user->update_user_basics($iUserId, $iActiveStatus, $iRole);
-        die();
 
         if($userUpdate === true) {
             echo '{"status":"1", "message":"User updated" }';
