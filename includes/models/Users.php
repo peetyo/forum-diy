@@ -103,10 +103,10 @@ class Users extends Model
             $sQuery->bindValue(':token' , $token);
             $sQuery->execute();
             if(!$sQuery->rowCount()){
-                echo '{"status":"0","message":"User was not'.$token.' activated "';
+               return false;
                 exit;
             }
-            echo '{"status":"1", "message":"User activated" }';
+           return true;
         }catch(PDOException $e){
             echo '{"status":"0","message":"Something went wrong, please contact the support"}';
             LogSaver::save_the_log($e, 'verify.txt');
