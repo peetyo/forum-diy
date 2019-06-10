@@ -94,7 +94,7 @@ class FailedLogin {
     // source: https://stackoverflow.com/questions/409999/getting-the-location-from-an-ip-address
     public static function get_ip_location($ip){
         // TODO: get rid of placeholder, Peter: localhost ip is ::1 and doesnt return any location I added an ip here for testing
-        if($ip == '::1'){
+        if($ip == '::1' || $ip == 'localhost' || $ip == '127.0.0.1'){
             return 'localhost';
         }
         $details = json_decode(file_get_contents("http://ipinfo.io/{$ip}/json"));
