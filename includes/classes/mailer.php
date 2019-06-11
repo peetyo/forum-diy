@@ -52,15 +52,15 @@ $mail->isHTML(true);
 $hostName = $_SERVER['HTTP_HOST'];
 if($location === 0){
             $mail->Subject = 'Activate user account on Forum-diy';
-            $url = "https://165.22.78.2/verify?token=$token&id=$UserID";
+            $url = "http://localhost/forum-diy/verify?token=$token&id=$UserID";
             // Set email format to HTML
             $template= file_get_contents("includes/templates/mail-activate.html");
             $template = str_replace('sUsername', $username, $template);
             $template = str_replace('HOSTURL', $url, $template);
         }else{
             $mail->Subject = 'Login attempts on Forum-diy';
-            $url = "https://165.22.78.2/reactivate?token=$token&id=$UserID";
-            $reportURL = "https://165.22.78.2/report";
+            $url = "http://localhost/forum-diy/reactivate?token=$token&id=$UserID";
+            $reportURL = "http://localhost/report";
             $template= file_get_contents("includes/templates/mail-reactivate.html");
             $template = str_replace('sUsername', $username, $template);
             $template = str_replace('LocationIP', $location, $template);
